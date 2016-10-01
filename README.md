@@ -1,10 +1,11 @@
 # ember-shell [![Build Status](https://travis-ci.org/marcemira/ember-shell.svg?branch=master)](https://travis-ci.org/marcemira/ember-shell)
 
-This Ember addon provides a set of components, services and blueprints that enables a fully customizable OS-like shell, powered by ember-engines.
+This Ember addon provides a set of components, services and blueprints that enables a fully customizable OS-like shell environment and window manager to run your own [ember-engines](https://github.com/dgeb/ember-engines) apps
 
-# Specs in progress:
 
-## Components:
+# Specs in progress
+
+## Components
 
 Inside an app with ember ember-shell, you may use the `{{shell.desktop-area}}` component to init a ember-shell desktop area where other shell-apps engines will be contained.
 This component includes a number of sub-components needed to have a suitable working environment:
@@ -19,15 +20,14 @@ This component includes a number of sub-components needed to have a suitable wor
   - `{{shell.notification-area}} it's a container that allows to shows several types of notifications at shell level.
 
 
-
-## Services.
+## Services
 
   - `shell-manager` is responsible for every shell-app engine life-cycle.
   - `shell-registy` uses local-storage to store key-value data related to each available app and shell configuration. It should be able to sync with external sources as well.
   - `shell-auth` provides basic user/groups authentication and authorization to the shell session and it's running apps.
 
 
-## Blueprints.
+## Blueprints
 
   - `ember-shell-app` Creates new shell-app (in-repo-engine) with a set of basic presets for a quick start.
   - `ember-shell-theme` Creates new shell-theme that let you customize your shell styles.
