@@ -1,6 +1,6 @@
-# Ember-shell
+# ember-shell [![Build Status](https://travis-ci.org/marcemira/ember-shell.svg?branch=master)](https://travis-ci.org/marcemira/ember-shell)
 
-An ember-cli add-on that provides a set of components, services and blueprints that enables a fully customizable OS-like shell, powered by ember-engines.
+This Ember addon provides a set of components, services and blueprints that enables a fully customizable OS-like shell, powered by ember-engines.
 
 # Specs in progress:
 
