@@ -4,7 +4,30 @@ var EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
 module.exports = function(defaults) {
   var app = new EmberAddon(defaults, {
-    // Add options here
+    'babel': {
+      optional: ['es7.decorators']
+    },
+   
+    'ember-cli-mocha': {
+      useLintTree: false
+    },
+
+    styleProcessorOptions: {
+      processors: [{
+        type: 'postcss',
+        sourcemaps: true,
+        plugins: [
+          { module: require('postcss-easy-import') },
+          { module: require('postcss-cssnext') },
+          { module: require('postcss-discard-comments') },
+          { module: require('css-mqpacker') }
+        ]        
+      }],
+      extension: 'css',
+      inputPaths: [
+        'addon/styles'
+      ]
+    }
   });
 
   /*
@@ -16,3 +39,4 @@ module.exports = function(defaults) {
 
   return app.toTree();
 };
+
