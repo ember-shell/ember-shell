@@ -1,0 +1,26 @@
+/* Variables */
+
+:root{
+
+  /* Diezpe Colors */
+  --c-default:    #FFFFFF;
+  --c-primary:    #526e82;
+  --c-success:    #4cd9c0;
+  --c-warning:    #e8e0c5;
+  --c-danger:     #ec747d;
+
+  --c-whitesmoke: #F5F5F5;
+  --c-background: #efefef;
+  --c-lightgray:  #EEEEEE;
+  --c-gray:       #CCCCCC;
+  --c-darkgray:   #999999;
+  --c-dark:       #666666;
+  --c-darker:     #333333;
+
+  /* Font Sizes */
+  --f-standard: 'Source Sans Pro', sans-serif;
+  --fs-normal: 16px;
+  --fs-small: 12px;
+  --fs-large: 20px;
+
+}

@@ -1,0 +1,11 @@
+/* Embser-shell Base Theme */
+body {
+  background-color: var(--c-background);
+  margin: 0;
+  padding: 0;
+  font-size: var(--fs-normal);
+  font-family: var(--f-standard);
+  line-height: 1.4;
+  @media (--isMobile) { pading-top: 52px; }
+  @media (--isTablet) { pading-top: 64px; }
+}
