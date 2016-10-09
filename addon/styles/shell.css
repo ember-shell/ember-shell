@@ -1,4 +1,6 @@
-/* diezpe-styles */
-@import 'core/variables.css';
+/* base theme */
+@import 'core/base-theme.css';
 @import 'core/media-queries.css';
-@import 'core/base.css';
+
+/* components */
+@import 'components/desktop-area.css';
