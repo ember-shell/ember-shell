@@ -1,20 +1,14 @@
 /* jshint expr:true */
 import { expect } from 'chai';
-import {
-  describeComponent,
-  it
-} from 'ember-mocha';
+import { describeComponent, it } from 'ember-mocha';
 
 describeComponent(
-  'shell/desktop-panel',
-  'ShellDesktopPanelComponent',
-  {
-    // Specify the other units that are required for this test
-    // needs: ['component:foo', 'helper:bar'],
-    unit: true
-  },
+  'shell/desktop-panel', 
+  'ShellDesktopPanelComponent', 
+  { unit: true },
   function() {
-    it('renders', function() {
+    
+    it('should have a position mixin', function() {
       // creates the component instance
       let component = this.subject();
       // renders the component on the page
@@ -22,5 +16,6 @@ describeComponent(
       expect(component).to.be.ok;
       expect(this.$()).to.have.length(1);
     });
+
   }
 );

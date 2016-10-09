@@ -1,22 +1,28 @@
-import { moduleFor, test } from 'ember-qunit';
+/* jshint expr:true */
+import { expect } from 'chai';
+import { beforeEach } from 'mocha';
+import { describeModule, it } from 'ember-mocha';
 
-let manager;
+describeModule(
+  'service:shell-manager',
+  'ShellManagerService',
+  {
+    // Specify the other units that are required for this test.
+    // needs: ['service:foo']
+  },
+  function() {
 
-moduleFor('service:shell-manager', 'Unit | Service | shell manager', {
-  beforeEach() {
-    manager = this.subject();
+    beforeEach(function(){
+      this.manager = this.subject();
+    });
+    
+    it('exists', function() {
+      expect(this.manager).to.be.ok;
+    });
+
+    it('it starts with an empty list of running apps', function() {
+      expect(this.manager.get('running.length')).to.equal(0);
+    });
+
   }
-});
-
-test('it exists', function(assert) {
-  assert.ok(manager);
-});
-
-test('it starts with an empty list of running apps', function(assert) {
-  assert.equal(manager.get('running.length'), 0);
-});
-
-test('it can retrieve a list of available apps', function(assert) {
-  manager.get('available');
-  assert.ok(manager);
-});
+);

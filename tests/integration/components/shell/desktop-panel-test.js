@@ -6,10 +6,9 @@ import hbs from 'htmlbars-inline-precompile';
 describeComponent(
   'shell/desktop-panel',
   'Integration: ShellDesktopPanelComponent',
-  {
-    integration: true
-  },
+  { integration: true },
   function() {
+
     it('renders', function() {
       // Set any properties with this.set('myProperty', 'value');
       // Handle any actions with this.on('myAction', function(val) { ... });
@@ -23,5 +22,6 @@ describeComponent(
       this.render(hbs`{{shell/desktop-panel}}`);
       expect(this.$()).to.have.length(1);
     });
+    
   }
 );

@@ -1,16 +1,27 @@
-import { moduleForComponent, test } from 'ember-qunit';
+/* jshint expr:true */
+import { expect } from 'chai';
+import { describeComponent, it } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('shell/desktop-area', 'Integration | Component | shell/desktop area', {
-  integration: true
-});
+describeComponent(
+  'shell/desktop-area',
+  'Integration: ShellDesktopAreaComponent',
+  { integration: true },
+  function() {
 
-test('it renders', function(assert) {
-  this.render(hbs`{{shell/desktop-area}}`);
-  assert.equal(this.$('.esh-desktop-area').length, 1);
-});
+    it('renders', function() {
+      // Set any properties with this.set('myProperty', 'value');
+      // Handle any actions with this.on('myAction', function(val) { ... });
+      // Template block usage:
+      // this.render(hbs`
+      //   {{#shell/desktop-area}}
+      //     template content
+      //   {{/shell/desktop-area}}
+      // `);
 
-test('there is at least one panel component inside it', function(assert) {
-  this.render(hbs`{{shell/desktop-area}}`);
-  assert.equal(this.$('.esh-desktop-panel').length, 1);
-});
+      this.render(hbs`{{shell/desktop-area}}`);
+      expect(this.$()).to.have.length(1);
+    });
+    
+  }
+);
