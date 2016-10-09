@@ -12,6 +12,7 @@
     "ember": "canary"
   },
   "devDependencies": {
-    "url.js": "jillix/url.js#^2.4.0"
+    "url.js": "jillix/url.js#^2.4.0",
+    "blanket": "5e94fc30f2e694bb5c3718ddcbf60d467f4b4d26"
   }
 }
