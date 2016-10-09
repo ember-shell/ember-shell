@@ -1,8 +1,8 @@
 {{#unless yield}}
 
-  {{#each panels as |panel|}}
-    {{shell/desktop-panel panel=panel}}
-  {{/each}}
+  {{!-- {{#each workspaces as |workspace|}} --}}
+    {{shell/desktop-workspace}}
+  {{!-- {{/each}} --}}
 
 {{else}}
   {{yield}}
