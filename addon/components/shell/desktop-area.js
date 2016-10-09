@@ -4,6 +4,6 @@ import UiSizeableMixin from 'ember-shell/mixins/ui/sizeable';
 import UiPositionableMixin from 'ember-shell/mixins/ui/positionable';
 
 export default Ember.Component.extend(UiSizeableMixin, UiPositionableMixin, {
-  layout,  
+  layout,
   classNames: ['esh-desktop-area'],
 });
