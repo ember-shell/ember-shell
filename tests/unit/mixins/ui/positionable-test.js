@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import { describe, beforeEach, it } from 'mocha';
 import Ember from 'ember';
 import UiPositionableMixin from 'ember-shell/mixins/ui/positionable';
+import UIStyleableMixin from 'ember-shell/mixins/ui/styleable';
 
 describe('UiPositionableMixin', function() {
 
@@ -30,5 +31,20 @@ describe('UiPositionableMixin', function() {
     expect(this.positionable.get('position.x')).to.be.equal(newPositions.x);
     expect(this.positionable.get('position.y')).to.be.equal(newPositions.y);
   });
+
+  it('should extend from styleable and have a style property', function() {
+    expect(UIStyleableMixin.detect(this.positionable)).to.be.ok;
+    expect(this.positionable.style).to.be.ok;
+  });
+
+  it('should have a inlineStyle css string that updates on position change', function() {
+    this.positionable.setStyle('transform: translate({{position.x}}px, {{position.y}}px);');
+    this.positionable.setPosition([50, 50]);
+
+    let newStyles = this.positionable.get('inlineStyle');
+
+    expect(newStyles).to.equal('transform: translate(50px, 50px);');
+  });
+
 
 });

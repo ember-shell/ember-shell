@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import { describe, beforeEach, it } from 'mocha';
 import Ember from 'ember';
 import UiSizeableMixin from 'ember-shell/mixins/ui/sizeable';
+import UIStyleableMixin from 'ember-shell/mixins/ui/styleable';
 
 describe('UiSizeableMixin', function() {
   
@@ -32,6 +33,20 @@ describe('UiSizeableMixin', function() {
 
     expect(this.sizeable.get('size.width')).to.be.equal(newSize.width);
     expect(this.sizeable.get('size.height')).to.be.equal(newSize.height);
+  });
+
+  it('should extend from styleable and have a style property', function() {
+    expect(UIStyleableMixin.detect(this.sizeable)).to.be.ok;
+    expect(this.sizeable.style).to.be.ok;
+  });
+
+  it('should have a inlineStyle css string that updates on size change', function() {
+    this.sizeable.setStyle('width: {{size.width}}px; height: {{size.height}}px;');
+    this.sizeable.setSize([200, 200]);
+
+    let newStyles = this.sizeable.get('inlineStyle');
+
+    expect(newStyles).to.equal('width: 200px; height: 200px;');
   });
 
 });
