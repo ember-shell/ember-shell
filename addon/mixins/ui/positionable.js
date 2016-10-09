@@ -8,12 +8,12 @@ export default Ember.Mixin.create({
   
   position: Ember.Object.create(defaults),
 
-  setPositions([x, y]){
+  setPosition([x, y]){
     this.get('position').setProperties({ x, y });
-    return this.getPositions();
+    return this.getPosition();
   },
 
-  getPositions(){
+  getPosition(){
     return this.get('position').getProperties('x','y');
   }
 
