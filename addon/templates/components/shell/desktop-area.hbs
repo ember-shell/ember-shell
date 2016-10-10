@@ -1,8 +1,8 @@
 {{#unless yield}}
 
-  {{!-- {{#each workspaces as |workspace|}} --}}
-    {{shell/desktop-workspace}}
-  {{!-- {{/each}} --}}
+  {{#each workspaces.workspaces as |ws|}}
+    {{shell/desktop-workspace workspace=ws}}
+  {{/each}}
 
 {{else}}
   {{yield}}

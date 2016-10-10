@@ -1,1 +1,9 @@
-{{yield}}
+{{#unless yield}}
+
+  {{#each manager.apps as |workspace|}}
+    {{shell/desktop-workspace}}
+  {{/each}}
+
+{{else}}
+  {{yield}}
+{{/unless}}
