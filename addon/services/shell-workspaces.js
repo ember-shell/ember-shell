@@ -12,7 +12,6 @@ export default Ember.Service.extend({
   currentWorkspaceNumber: 1,
 
   currentWorkspace: Ember.computed('workspaces.@each', 'currentWorkspaceNumber', function() {
-    debugger;
     return this.get('workspaces').objectAt(this.get('currentWorkspaceNumber') - 1);
   }),
 
@@ -35,6 +34,7 @@ export default Ember.Service.extend({
     //TODO: add workspace limit
     this.get('workspaces').addObject(workspace);
     this.setCurrentWorkspace(workspace);
+    return workspace;
   },
 
   remove(workspace){

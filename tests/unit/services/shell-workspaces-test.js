@@ -1,17 +1,22 @@
 /* jshint expr:true */
 import { expect } from 'chai';
-import { beforeEach } from 'mocha';
-import Workspace from 'ember-shell/lib/workspace';
+import Ember from 'ember';
+import { beforeEach, afterEach } from 'mocha';
 import { describeModule, it } from 'ember-mocha';
+import Workspace from 'ember-shell/lib/workspace';
 
 describeModule(
   'service:shell-workspaces',
   'ShellWorkspacesService',
-  { },
+  { unit: true },
   function() {
     
     beforeEach(function() {
       this.workspaces = this.subject();
+    });
+
+    afterEach(function() {
+      this.workspaces.destroy();
     });
 
     it('should not have 0 workspaces', function() {
@@ -19,13 +24,11 @@ describeModule(
       expect(workspacesLenght).to.not.equal(0);
     });
 
-    it('should be able to set a workspace as current workspace', function() {
-      this.workspaces.add();
-      let workspaceTwo = this.workspaces.getByNumber(2);
+    it('should be able to set an added workspace as current workspace', function() {
+      let workspace = this.workspaces.add();
+      this.workspaces.setCurrentWorkspace(workspace);
 
-      this.workspaces.setCurrentWorkspace(workspaceTwo);
-
-      expect(this.workspaces.get('currentWorkspace')).to.eql(workspaceTwo);
+      expect(this.workspaces.get('currentWorkspace')).to.eql(workspace);
     });
 
     it('should not allow to set a workspace that is not created using the add method', function() {
@@ -35,7 +38,7 @@ describeModule(
 
     it('should be able to return the current workspace', function() {
       let current = this.workspaces.get('currentWorkspace');
-      expect(Workspace.detect(current)).to.be.ok;
+      expect(current).to.exist;
     });
 
     it('should be able to return a given workspaces by number', function() {
@@ -68,10 +71,14 @@ describeModule(
     });
 
     it('should not be able to remove a workspace if there is only one', function(){
+      this.workspaces.set('workspaces', Ember.A());
+      this.workspaces.set('currentWorkspaceNumber', 0);
+      this.workspaces.add();
+
       let currentWorkspace = this.workspaces.get('currentWorkspace');
 
       expect(() => { this.workspaces.remove(currentWorkspace); }).to.throw(Error);
-      expect(this.workspaces.get('workspaces.lenght')).to.equal(1);
+      expect(this.workspaces.get('workspaces.length')).to.equal(1);
     });
 
   }
