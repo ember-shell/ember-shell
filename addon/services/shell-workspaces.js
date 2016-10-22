@@ -25,11 +25,15 @@ export default Ember.Service.extend({
   getByNumber(number){
     let workspaces = this.get('workspaces');
     Ember.assert("Cannot get the workspace", typeof number === 'number' && number >= 1 && number <= workspaces.get('length'));
-    return workspaces.objectAt(number);
+    return workspaces.objectAt(number - 1);
   },
 
   add(){
-    let workspace = Workspace.create();
+    let nextLength = this.get('workspaces.length') + 1;
+    let workspace = Workspace.create({
+      id: nextLength,
+      position: nextLength
+    });
     
     //TODO: add workspace limit
     this.get('workspaces').addObject(workspace);

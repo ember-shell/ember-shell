@@ -15,10 +15,6 @@ describeModule(
     beforeEach(function(){
       this.manager = this.subject();
     });
-    
-    it('exists', function() {
-      expect(this.manager).to.be.ok;
-    });
 
     it('it starts with an empty list of running apps', function() {
       expect(this.manager.get('running.length')).to.equal(0);

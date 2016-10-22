@@ -1,7 +1,7 @@
 {{#unless yield}}
 
-  {{#each manager.apps as |workspace|}}
-    {{shell/desktop-workspace}}
+  {{#each apps as |app|}}
+    {{shell/desktop-window app=app}}
   {{/each}}
 
 {{else}}

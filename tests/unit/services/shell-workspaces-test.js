@@ -32,18 +32,22 @@ describeModule(
     });
 
     it('should not allow to set a workspace that is not created using the add method', function() {
-      let workspace = Workspace.create();      
+      let workspace = Workspace.create();
       expect(() => { this.workspaces.setCurrentWorkspace(workspace);}).to.throw(Error);
     });
 
     it('should be able to return the current workspace', function() {
-      let current = this.workspaces.get('currentWorkspace');
+      let current = this.workspaces.get('currentWorkspace'),
+          currentNumber = this.workspaces.get('currentWorkspaceNumber');
+
       expect(current).to.exist;
+      expect(current.get('id')).to.equal(currentNumber);
     });
 
     it('should be able to return a given workspaces by number', function() {
-      let workspaceOne = this.workspaces.getByNumber(1);
-      expect(workspaceOne).to.be.an.instanceof(Workspace);
+      let workspace = this.workspaces.getByNumber(1);
+
+      expect(workspace.get('id')).to.equal(1);
     });
 
     it('should have an array of workspaces', function() {

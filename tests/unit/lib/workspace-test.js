@@ -1,17 +1,13 @@
 /* jshint expr:true */
-/*import { expect } from 'chai';
+import { expect } from 'chai';
+import { it } from 'ember-mocha';
 import { describe, beforeEach } from 'mocha';
-import { describeModule, it } from 'ember-mocha';
 import Workspace from 'ember-shell/lib/workspace';
 
-describeModule(
-  'lib:workspaces',
-  'LibWorkspaces',
-  { unit: true },
-  function() {
+describe('EmberShellWorkspace', function() {
     
     beforeEach(function() {
-      this.workspace = this.subject();
+      this.workspace = Workspace.create();
     });
 
     it('should have a numerical id', function(){
@@ -21,4 +17,3 @@ describeModule(
 
   }
 );
-*/
