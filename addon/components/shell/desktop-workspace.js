@@ -7,4 +7,8 @@ export default Ember.Component.extend(UiSizeableMixin, UiPositionableMixin, {
   layout,
   workspace: null,
   classNames: ['esh-desktop-workspace'],
+
+  manager: Ember.inject.service('shell-manager'),
+  apps: Ember.computed.alias('manager.running')
+
 });

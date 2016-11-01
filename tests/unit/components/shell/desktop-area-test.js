@@ -24,9 +24,5 @@ describeComponent(
       expect(this.desktopArea.get('position')).to.exist;
     });
 
-    it('should have a shell-workspaces service injected on it', function() {
-      expect(this.desktopArea.workspaces).to.exist;
-    });
-
   }
 );

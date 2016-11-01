@@ -1,6 +1,6 @@
 {{#unless yield}}
 
-  {{#each workspaces.workspaces as |ws|}}
+  {{#each manager.workspaces as |ws|}}
     {{shell/desktop-workspace workspace=ws}}
   {{/each}}
 

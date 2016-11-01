@@ -60,7 +60,6 @@
     "postcss-easy-import": "^1.0.1"
   },
   "ember-addon": {
-    "configPath": "tests/dummy/config",
-    "paths": []
+    "configPath": "tests/dummy/config"
   }
 }

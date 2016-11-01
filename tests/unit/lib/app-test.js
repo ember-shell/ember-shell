@@ -2,7 +2,7 @@
 import { expect } from 'chai';
 import { it } from 'ember-mocha';
 import { describe, beforeEach } from 'mocha';
-import App from 'ember-shell/lib/app';
+import App from 'ember-shell/-private/app';
 
 describe('EmberShellApp', function() {
     
