@@ -4,11 +4,6 @@ import Workspace from 'ember-shell/-private/workspace';
 
 export default Ember.Service.extend({
 
-  /*init(){
-    this._super(...arguments);
-    this.addWorkspace();
-  },*/
-
   running: Ember.A(),
   workspaces: Ember.A(),
   currentWorkspaceNumber: 1,
@@ -19,7 +14,7 @@ export default Ember.Service.extend({
 
   appsAvailable: Ember.computed(function(){
     /*let owner = Ember.getOwner(this);*/
-    return [];
+    return Ember.A();
   }),
 
   isAppAvailable(/*name*/){
@@ -29,9 +24,9 @@ export default Ember.Service.extend({
   },
 
   isAppRunning(name){
-    return this.get('running').filter( app => {
+    return this.get('running').any( app => {
       return app.get('name') === name;
-    }).length;
+    });
   },
 
   exec(name){
@@ -45,8 +40,32 @@ export default Ember.Service.extend({
     return app;
   },
 
-  kill(name){
-    Ember.assert(`Application "${name}" is not running.`, this.isRunning(name));
+  terminate(name, kill){
+    let app = this.getAppByName(name);
+    Ember.assert(`Application "${name}" is not running.`, this.get('running').includes(app));
+
+    if(kill){
+      this.get('running').removeObject(app);
+      return -1;
+    }
+
+    return app.close().then( code => {
+      this.get('running').removeObject(app);
+      return code;
+    }).catch( err => {
+      console.error(err);
+    });
+  },
+
+  getAppByName(name){
+    let app = this.get('running').filter( app => {
+      return app.get('name') === name;
+    })[0];
+
+    Ember.assert(`The application name should be a non-empty string`, typeof name === 'string' && name.length);
+    Ember.assert(`Application "${name}" is not running.`, app !== undefined);
+
+    return app;
   },
 
   setCurrentWorkspace(workspace){

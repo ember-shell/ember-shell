@@ -1,9 +1,12 @@
 /* jshint expr:true */
+/* global: Promise */
 import { expect } from 'chai';
 import Ember from 'ember';
 import { beforeEach } from 'mocha';
 import { describeModule, it } from 'ember-mocha';
 import Workspace from 'ember-shell/-private/workspace';
+
+const TEST_APP_NAME = 'test-app';
 
 let manager;
 
@@ -19,7 +22,7 @@ describeModule(
     beforeEach(function() {
       manager = this.subject();
       // Reset? ¯\_(⌣̯̀ ⌣́)_/¯
-      manager.set('running', []);
+      manager.set('running', Ember.A());
       manager.set('workspaces', Ember.A());
       manager.set('currentWorkspaceNumber', 0);
     });
@@ -29,17 +32,48 @@ describeModule(
     });
 
     it('should be able to start a new app instance by name', function() {
-      let appInstance = manager.exec('test-app');
+      let appInstance = manager.exec(TEST_APP_NAME);
       expect(manager.get('running').includes(appInstance)).to.be.ok;
     });
 
-    it('should be able to tell that an application is available', function (){
-      manager.exec('test-app');
-      expect(manager.isAppAvailable('test-app')).to.be.true;
+    it.skip('should be able to list available applications', function() {
+      expect(0);
+    });
+
+    it.skip('should be able to tell that an application is available', function (){
+      manager.exec(TEST_APP_NAME);
+      expect(manager.isAppAvailable(TEST_APP_NAME)).to.be.true;
+    });
+
+    it('should be able to tell that an application is running', function (){
+      manager.exec(TEST_APP_NAME);
+      expect(manager.isAppRunning(TEST_APP_NAME)).to.be.true;
+    });
+
+    it('should be able to close a running application', function() {
+      manager.exec(TEST_APP_NAME);
+      manager.terminate(TEST_APP_NAME).then( exitCode => {
+        expect(exitCode).to.equal(0); // EXIT_OK code number
+        expect(manager.isAppRunning(TEST_APP_NAME)).to.be.false;
+      });
+    });
+
+    it('should be able to kill a running application', function() {
+      manager.exec(TEST_APP_NAME);
+      expect(manager.terminate(TEST_APP_NAME, true)).to.equal(-1); // EXIT_KILL code number
+      expect(manager.isAppRunning(TEST_APP_NAME)).to.be.false;
     });
 
     it('should initialize with an empty array workspaces', function() {
       expect(manager.get('workspaces.length')).to.equal(0);
+    });
+
+    it('should be able to return a running application by name', function() {
+      manager.exec(TEST_APP_NAME);
+      let app = manager.getAppByName(TEST_APP_NAME);
+
+      expect(app).to.exist;
+      expect(app.get('name')).to.equal(TEST_APP_NAME);
     });
 
     it('should be able to set an added workspace as current workspace', function() {
