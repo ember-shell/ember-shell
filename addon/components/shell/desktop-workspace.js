@@ -8,7 +8,7 @@ export default Ember.Component.extend(ElementBoxMixin, {
   classNames: ['esh-desktop-workspace'],
 
   manager: Ember.inject.service('shell-manager'),
-  apps: Ember.computed.alias('manager.running'),
+  apps: Ember.computed.alias('manager.apps'),
 
   sizeableCSS: 'width: {{size.width}}%; height: {{size.height}}%;',
 

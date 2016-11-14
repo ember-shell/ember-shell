@@ -25,7 +25,7 @@ export default Ember.Component.extend(ElementWindowMixin, {
 
   moveToFront(){
     const appPid = this.get('app.pid');
-    this.get('manager.running').forEach( app => {
+    this.get('manager.apps').forEach( app => {
       if(appPid !== app.get('pid')) {
         app.get('window').updateStyleRenderPersist('positionable', 'position.z', 1);
       }
