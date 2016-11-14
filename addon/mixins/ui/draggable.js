@@ -19,7 +19,7 @@ export default Ember.Mixin.create(UiPositionableMixin, {
       this.set('draggableHandler', this.$('.' + this.get('draggableHandleClassName')));
       this.set('draggableParent', this.$().parent());
 
-      //Ember.assert('There should be just one child element with a draggable-handle class, none or more than one has been provided', this.get('draggableHandler.length') === 1);
+      Ember.assert('There should be just one child element with a draggable-handle class, none or more than one has been provided', this.get('draggableHandler.length') === 1);
     });
   },
 
@@ -35,6 +35,8 @@ export default Ember.Mixin.create(UiPositionableMixin, {
 
     this.set('dragOffset.x', event.pageX - offset.left);
     this.set('dragOffset.y', event.pageY - offset.top);
+    this.set('dragOffset.width', parseInt(element[0].style.width));
+    this.set('dragOffset.height', parseInt(element[0].style.height));
   },
 
   mouseUp(){
@@ -53,19 +55,25 @@ export default Ember.Mixin.create(UiPositionableMixin, {
     if (this.get('isDragReady')) {
       let offsetX, offsetY;
       const parent = this.get('draggableParent'),
-        dragOffset = this.get('dragOffset');
+            dragOffset = this.get('dragOffset'),
+            rightOffset = parent.innerWidth() - dragOffset.width,
+            bottomOffset = parent.innerHeight() - dragOffset.height;
 
       event.pageX = event.pageX || event.clientX + parent.scrollLeft;
       event.pageY = event.pageY || event.clientY + parent.scrollTop;
 
       if (event.pageX - dragOffset.x < 0) {
         offsetX = 0;
+      } else if (event.pageX - dragOffset.x > rightOffset) {
+        offsetX = rightOffset;
       } else {
         offsetX = event.pageX - dragOffset.x;
       }
 
       if (event.pageY - dragOffset.y < 0) {
         offsetY = 0;
+      } else if (event.pageY - dragOffset.y > bottomOffset) {
+        offsetY = bottomOffset;
       } else {
         offsetY = event.pageY - dragOffset.y;
       }

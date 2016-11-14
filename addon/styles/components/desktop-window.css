@@ -10,3 +10,10 @@
       -ms-user-select: none;
           user-select: none;
 }
+
+/* esh-window-title-bar */
+.esh-window-title-bar{
+  border-bottom: 1px solid var(--c-lightgray);
+  min-height: 32px;
+  line-height: 32px;
+}

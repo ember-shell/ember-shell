@@ -11,4 +11,5 @@
   font-size: var(--fs-normal);
   font-family: var(--f-standard);
   line-height: 1.4;
+  overflow: hidden;
 }
