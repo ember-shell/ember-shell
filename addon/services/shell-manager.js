@@ -4,6 +4,7 @@ import Workspace from 'ember-shell/-private/workspace';
 
 export default Ember.Service.extend({
 
+  lastPid: 1,
   running: Ember.A(),
   workspaces: Ember.A(),
   currentWorkspaceNumber: 1,
@@ -34,7 +35,11 @@ export default Ember.Service.extend({
     Ember.assert(`Application "${name}" is not available.`, this.isAppAvailable(name));
     Ember.assert(`Application "${name}" is already running.`, !this.isAppRunning(name));
 
-    let app = App.create({name});
+    let app = App.create({
+      id: this.incrementProperty('lastPid'),
+      name
+    });
+
     this.get('running').addObject(app);
 
     return app;
@@ -87,7 +92,7 @@ export default Ember.Service.extend({
       id: nextLength,
       position: nextLength
     });
-    
+
     //TODO: add workspace limit
     this.get('workspaces').push(workspace);
     return workspace;
