@@ -18,7 +18,7 @@ This component includes a number of sub-components needed to have a suitable wor
       - `{{shell/panel.shortcuts-list}}` lists apps icons as shortcut access.
       - `{{shell/panel.widgets-list}}` it's a container for third-party shell panel widgets.
   - `{{shell/main-menu}}` it's a container for all available apps shortcuts. It also has a tab that holds shell configurations.
-  - `{{shell/notification-area}} it's a container that allows to shows several types of notifications at shell level.
+  - `{{shell/notification-area}}` it's a container that allows to shows several types of notifications at shell level.
   - `{{shell/debug-toolbar}}` provides shortcuts for several actions, as well as a list of running applications
 
 #### Core Objects
@@ -28,7 +28,7 @@ This component includes a number of sub-components needed to have a suitable wor
 
 #### Mixins
 
-  - `ui/styleable` handles css styling on a mixed element (also a dependency of most of the mixin below).
+  - ~~`ui/styleable` handles css styling on a mixed element (also a dependency of most of the mixin below).~~ (moved to this new addon: https://github.com/marcemira/ember-variable-styles )
   - `ui/positionable` handles everything about the 2D positioning of a mixed element on a container.
   - `ui/draggable` handles drag/drop events of a mixed element on a container.
   - `ui/sizeable` handles everything about 2D size of a mixed element.
