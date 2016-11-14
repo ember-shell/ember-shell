@@ -1,0 +1,33 @@
+.esh-debug-toolbar{
+  display: block;
+  position: fixed;
+  width: calc(100vw - 2px);
+  height: auto;
+  min-height: 100px;
+  border: 1px solid #666;
+  background-color: #FFF;
+  bottom: 0;
+  left: 0;
+}
+
+.tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc;width: 100%;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#aabcfe;color:#669;background-color:#e8edff;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#aabcfe;color:#039;background-color:#b9c9fe;}
+.tg .tg-baqh{text-align:center;vertical-align:top}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;border-top-width:1px;border-bottom-width:1px;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#f0f0f0;border-top-width:1px;border-bottom-width:1px;}
+.tg .tg-yw4l{vertical-align:top}
+th.tg-sort-header::-moz-selection { background:transparent; }
+th.tg-sort-header::selection      { background:transparent; }
+th.tg-sort-header { cursor:pointer; }
+table th.tg-sort-header:after {  content:'';  float:right;  margin-top:7px;  border-width:0 4px 4px;  border-style:solid;  border-color:#404040 transparent;  visibility:hidden;  }
+table th.tg-sort-header:hover:after {  visibility:visible;  }
+table th.tg-sort-desc:after,
+table th.tg-sort-asc:after,
+table th.tg-sort-asc:hover:after {  visibility:visible;  opacity:0.4;  }
+table th.tg-sort-desc:after {  border-bottom:none;  border-width:4px 4px 0;  }
+
+@media screen and (max-width: 767px) {.tg {width: auto !important;}
+
+.tg col {width: auto !important;}
+.tg-wrap {overflow-x: auto;-webkit-overflow-scrolling: touch;margin: auto 0px;}}

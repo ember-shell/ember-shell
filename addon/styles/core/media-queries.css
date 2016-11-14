@@ -1,0 +1,4 @@
+@custom-media --isMobile (width >= 0);
+@custom-media --isTablet (width >= 768px);
+@custom-media --isDesktop (width >= 1240px);
+@custom-media --isJumbo (width >= 1600px);

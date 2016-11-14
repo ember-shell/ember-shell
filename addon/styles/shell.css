@@ -1,0 +1,7 @@
+/* base theme */
+@import 'core/base-theme.css';
+@import 'core/media-queries.css';
+
+/* components */
+@import 'components/desktop-area.css';
+@import 'components/debug-toolbar.css';

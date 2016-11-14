@@ -1,0 +1,9 @@
+{{#unless yield}}
+
+  {{#each apps as |app|}}
+    {{shell/desktop-window app=app}}
+  {{/each}}
+
+{{else}}
+  {{yield}}
+{{/unless}}
