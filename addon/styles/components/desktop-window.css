@@ -1,0 +1,12 @@
+.esh-desktop-window {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: var(--c-default);
+  box-shadow: 0 0 30px 2px rgba(0,0,0,.25);
+  border: 1px solid var(--c-lightgray);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}

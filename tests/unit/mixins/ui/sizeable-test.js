@@ -3,10 +3,10 @@ import { expect } from 'chai';
 import { describe, beforeEach, it } from 'mocha';
 import Ember from 'ember';
 import UiSizeableMixin from 'ember-shell/mixins/ui/sizeable';
-import UIStyleableMixin from 'ember-shell/mixins/ui/styleable';
+import Styleable from 'ember-variable-styles/mixins/styleable';
 
 describe('UiSizeableMixin', function() {
-  
+
   beforeEach(function() {
     this.UiSizeableObject = Ember.Object.extend(UiSizeableMixin);
     this.sizeable = this.UiSizeableObject.create();
@@ -19,7 +19,7 @@ describe('UiSizeableMixin', function() {
   it('should have a size object', function() {
     expect(this.sizeable.get('size')).to.exist;
   });
-  
+
   it('should have "width" and "height" values inside size object', function() {
     expect(this.sizeable.get('size.width')).to.exist;
     expect(this.sizeable.get('size.height')).to.exist;
@@ -36,17 +36,20 @@ describe('UiSizeableMixin', function() {
   });
 
   it('should extend from styleable and have a style property', function() {
-    expect(UIStyleableMixin.detect(this.sizeable)).to.be.ok;
-    expect(this.sizeable.style).to.be.ok;
+    expect(Styleable.detect(this.sizeable)).to.be.true;
+    expect(this.sizeable.get('sizeableCSS')).to.exist;
   });
 
   it('should have a inlineStyle css string that updates on size change', function() {
-    this.sizeable.setStyle('width: {{size.width}}px; height: {{size.height}}px;');
+    this.sizeable.set('sizeableCSS','width: {{size.width}}px; height: {{size.height}}px;');
     this.sizeable.setSize([200, 200]);
 
-    let newStyles = this.sizeable.get('inlineStyle');
+    this.sizeable.rebuildStyle('sizeable');
+    this.sizeable.renderStylePersist('sizeable');
 
-    expect(newStyles).to.equal('width: 200px; height: 200px;');
+    let newStyles = this.sizeable.get('style');
+
+    expect(newStyles.string).to.equal('width: 200px; height: 200px;');
   });
 
 });

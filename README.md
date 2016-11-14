@@ -7,18 +7,19 @@ It consist of a set of core objects, components, mixins, services and blueprints
 
 #### Components
 
-Inside an app with ember ember-shell, you may use the `{{shell.desktop-area}}` component to init a ember-shell desktop area where other shell-apps engines will be contained.
+Inside an app with ember ember-shell, you may use the `{{shell/desktop-area}}` component to init a ember-shell desktop area where other shell-apps engines will be contained.
 This component includes a number of sub-components needed to have a suitable working environment:
 
-  - `{{shell.desktop-workspace}}` it's the container for window components(apps), there's at least one on a desktop-area container
-  - `{{shell.desktop-window}}` it's the container for every shell-app engine, looks and behaves like a classic OS-like window and is highly customizable
-  - `{{shell.desktop-panel}}` component can be placed fixed on any edge of the rectangle or just floating. This will act as a container for the following sub-component:
-      - `{{shell.panel.main-menu}}` opens the shell's main menu.
-      - `{{shell.panel.apps-list}}` that displays y manages a list of running shell-app engines.
-      - `{{shell.panel.shortcuts-list}}` lists apps icons as shortcut access.
-      - `{{shell.panel.widgets-list}}` it's a container for third-party shell panel widgets.
-  - `{{shell.main-menu}}` it's a container for all available apps shortcuts. It also has a tab that holds shell configurations.
-  - `{{shell.notification-area}} it's a container that allows to shows several types of notifications at shell level.
+  - `{{shell/desktop-workspace}}` it's the container for window components(apps), there's at least one on a desktop-area container
+  - `{{shell/desktop-window}}` it's the container for every shell-app engine, looks and behaves like a classic OS-like window and is highly customizable
+  - `{{shell/desktop-panel}}` component can be placed fixed on any edge of the rectangle or just floating. This will act as a container for the following sub-component:
+      - `{{shell/panel.main-menu}}` opens the shell's main menu.
+      - `{{shell/panel.apps-list}}` that displays y manages a list of running shell-app engines.
+      - `{{shell/panel.shortcuts-list}}` lists apps icons as shortcut access.
+      - `{{shell/panel.widgets-list}}` it's a container for third-party shell panel widgets.
+  - `{{shell/main-menu}}` it's a container for all available apps shortcuts. It also has a tab that holds shell configurations.
+  - `{{shell/notification-area}} it's a container that allows to shows several types of notifications at shell level.
+  - `{{shell/debug-toolbar}}` provides shortcuts for several actions, as well as a list of running applications
 
 #### Core Objects
 
@@ -43,7 +44,7 @@ This component includes a number of sub-components needed to have a suitable wor
 
 #### Services
 
-  - `shell-manager` is responsible for every shell-app engine life-cycle.
+  - `shell-manager` is responsible of managing the core aspects, such as application life-cycles, workspaces, and more...
   - `shell-registry` uses local-storage to store key-value data related to each available app and shell configuration. It should be able to sync with external sources as well.
   - `shell-auth` provides basic user/groups authentication and authorization to the shell session and it's running apps.
 

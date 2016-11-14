@@ -1,9 +1,8 @@
 import Ember from 'ember';
 import layout from '../../templates/components/shell/desktop-panel';
-import UiSizeableMixin from 'ember-shell/mixins/ui/sizeable';
-import UiPositionableMixin from 'ember-shell/mixins/ui/positionable';
+import ElementPanelMixin from 'ember-shell/mixins/element/panel';
 
-export default Ember.Component.extend(UiSizeableMixin, UiPositionableMixin, {
+export default Ember.Component.extend(ElementPanelMixin, {
   layout,
   classNames: ['esh-desktop-panel'],
 });

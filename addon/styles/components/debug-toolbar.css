@@ -1,8 +1,7 @@
 .esh-debug-toolbar{
   display: block;
   position: fixed;
-  width: calc(100vw - 2px);
-  height: auto;
+  width: 100vw;
   min-height: 100px;
   border: 1px solid #666;
   background-color: #FFF;

@@ -1,6 +1,6 @@
 {
   "name": "ember-shell",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An Ember addon that enables you to have a fully customizable OS-like shell, where you can run your own ember apps powered by ember-engines",
   "directories": {
     "doc": "doc",
@@ -43,6 +43,7 @@
     "ember-export-application-global": "^1.0.5",
     "ember-load-initializers": "^0.5.1",
     "ember-resolver": "^2.0.3",
+    "ember-run-raf": "1.1.2",
     "flexi": "1.2.0",
     "loader.js": "^4.0.10",
     "urljs": "2.3.1"
@@ -58,7 +59,8 @@
     "ember-cli-htmlbars": "^1.0.10",
     "postcss-cssnext": "^2.8.0",
     "postcss-discard-comments": "^2.0.4",
-    "postcss-easy-import": "^1.0.1"
+    "postcss-easy-import": "^1.0.1",
+    "ember-variable-styles": "^0.0.3"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"

@@ -6,7 +6,8 @@
     "mocha": "~2.2.4",
     "chai": "~2.3.0",
     "ember-mocha-adapter": "~0.3.1",
-    "url.js": "jillix/url.js#^2.4.0"
+    "url.js": "jillix/url.js#^2.4.0",
+    "animation-frame": "~0.2.4"
   },
   "resolutions": {
     "ember": "canary"

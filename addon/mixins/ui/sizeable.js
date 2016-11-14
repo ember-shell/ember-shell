@@ -1,11 +1,11 @@
 import Ember from 'ember';
-import UiStyleableMixin from './styleable';
+import Styleable from 'ember-variable-styles/mixins/styleable';
 
-const defaults = { width: 240, height: 320 };
+const defaults = { width: 0, height: 0 };
 
-export default Ember.Mixin.create(UiStyleableMixin, {
-    
-  style: 'width: {{size.width}}px; height: {{size.height}}px;',
+export default Ember.Mixin.create(Styleable, {
+
+  sizeableCSS: 'width: {{size.width}}px; height: {{size.height}}px;',
 
   size: Ember.Object.create(defaults),
 

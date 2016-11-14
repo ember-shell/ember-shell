@@ -1,27 +1,20 @@
 /* jshint expr:true */
 import { expect } from 'chai';
 import { describeComponent, it } from 'ember-mocha';
-import { beforeEach } from 'mocha';
-//import ShellWorkspaces from 'ember-shell/services/shell-workspaces';
-import UiSizeableMixin from 'ember-shell/mixins/ui/sizeable';
-import UiPositionableMixin from 'ember-shell/mixins/ui/positionable';
 
 describeComponent(
   'shell/desktop-area',
   'ShellDesktopAreaComponent',
   { unit: true },
-  function() {    
+  function() {
 
-    beforeEach(function(){
-      this.desktopArea = this.subject();
+    it('renders', function() {
+      // creates the component instance
+      let component = this.subject();
+      // renders the component on the page
       this.render();
-    });
-    
-    it('should extend from sizeable and positionable mixins', function() {
-      expect(UiSizeableMixin.detect(this.desktopArea)).to.be.ok;
-      expect(this.desktopArea.get('size')).to.exist;
-      expect(UiPositionableMixin.detect(this.desktopArea)).to.be.ok;
-      expect(this.desktopArea.get('position')).to.exist;
+      expect(component).to.be.ok;
+      expect(this.$()).to.have.length(1);
     });
 
   }
