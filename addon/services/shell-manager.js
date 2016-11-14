@@ -1,12 +1,15 @@
 import Ember from 'ember';
 import App from 'ember-shell/-private/app';
+import Panel from 'ember-shell/-private/panel';
 import Workspace from 'ember-shell/-private/workspace';
 
 export default Ember.Service.extend({
 
-  lastPid: 1,
-  running: Ember.A(),
+  apps: Ember.A(),
+  panels: Ember.A(),
   workspaces: Ember.A(),
+
+  lastPID: 0,
   currentWorkspaceNumber: 1,
 
   currentWorkspace: Ember.computed('workspaces.@each', 'currentWorkspaceNumber', function() {
@@ -25,7 +28,7 @@ export default Ember.Service.extend({
   },
 
   isAppRunning(name){
-    return this.get('running').any( app => {
+    return this.get('apps').any( app => {
       return app.get('name') === name;
     });
   },
@@ -36,26 +39,26 @@ export default Ember.Service.extend({
     Ember.assert(`Application "${name}" is already running.`, !this.isAppRunning(name));
 
     let app = App.create({
-      id: this.incrementProperty('lastPid'),
+      pid: this.incrementProperty('lastPID'),
       name
     });
 
-    this.get('running').addObject(app);
+    this.get('apps').addObject(app);
 
     return app;
   },
 
   terminate(name, kill){
     let app = this.getAppByName(name);
-    Ember.assert(`Application "${name}" is not running.`, this.get('running').includes(app));
+    Ember.assert(`Application "${name}" is not running.`, this.get('apps').includes(app));
 
     if(kill){
-      this.get('running').removeObject(app);
+      this.get('apps').removeObject(app);
       return -1;
     }
 
     return app.close().then( code => {
-      this.get('running').removeObject(app);
+      this.get('apps').removeObject(app);
       return code;
     }).catch( err => {
       console.error(err);
@@ -63,7 +66,7 @@ export default Ember.Service.extend({
   },
 
   getAppByName(name){
-    let app = this.get('running').filter( app => {
+    let app = this.get('apps').filter( app => {
       return app.get('name') === name;
     })[0];
 
