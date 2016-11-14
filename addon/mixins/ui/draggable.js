@@ -1,92 +1,158 @@
+/* global window */
 import Ember from 'ember';
 import UiPositionableMixin from 'ember-shell/mixins/ui/positionable';
+
+class Draggable {
+
+  constructor(target, options){
+    this.target = target;
+    this.runraf = null;
+    this.isDragging = false;
+    this.offset = { x: 0, y: 0, r: 0, b: 0 };
+    this.elSize = { w: 0, h: 0 };
+    this.parent = target.parentNode;
+
+    this.options = {
+      handlerClass: 'esh-ui-draggable-handle',
+      updateFn: () => {},
+      startCallback: null,
+      endCallback: null,
+      moveCallback: null
+    };
+
+    if(options){
+      Object.assign(this.options, options);
+    }
+
+    this.draggStartHandler = event => {
+      this.draggStart(event);
+    };
+
+    this.draggEndHandler = event => {
+      this.draggEnd(event);
+    };
+
+    this.draggMoveHandler = event => {
+      this.draggMove(event);
+    };
+
+    target.addEventListener('mousedown', this.draggStartHandler, false);
+    target.addEventListener('touchstart', this.draggStartHandler, false);
+  }
+
+  draggStart(event){
+
+    if(event.target.className.indexOf(this.options.handlerClass) === -1 || event.button !== 0){
+      return false;
+    }
+
+    const $offset = Ember.$(this.target).offset();
+
+    this.isDragging = true;
+    document.body.style.cursor = 'move';
+
+    const pageX = event.pageX || event.clientX + this.parent.scrollLeft;
+    const pageY = event.pageY || event.clientY + this.parent.scrollTop;
+
+    this.offset.x = pageX - $offset.left;
+    this.offset.y = pageY - $offset.top;
+
+    this.elSize.w = parseInt(this.target.style.width);
+    this.elSize.h = parseInt(this.target.style.height);
+    this.offset.r = this.parent.offsetWidth - this.elSize.w;
+    this.offset.b = this.parent.offsetHeight - this.elSize.h;
+
+    window.addEventListener('mousemove', this.draggMoveHandler, false);
+    window.addEventListener('touchmove', this.draggMoveHandler, false);
+    window.addEventListener('mouseup', this.draggEndHandler, false);
+    window.addEventListener('touchend', this.draggEndHandler, false);
+    window.addEventListener('touchcancel', this.draggEndHandler, false);
+
+    if(this.options.startCallback && typeof this.options.startCallback === 'function'){
+      this.options.startCallback.call();
+    }
+  }
+
+  draggEnd(){
+    this.isDragging = false;
+    cancelAnimationFrame(this.runraf);
+    document.body.style.cursor = 'auto';
+
+    window.removeEventListener('mousemove', this.draggMoveHandler, false);
+    window.removeEventListener('touchmove', this.draggMoveHandler, false);
+    window.removeEventListener('mouseup', this.draggEndHandler, false);
+    window.removeEventListener('touchend', this.draggEndHandler, false);
+    window.removeEventListener('touchcancel', this.draggEndHandler, false);
+
+    if(this.options.endCallback && typeof this.options.endCallback === 'function'){
+      this.options.endCallback.call();
+    }
+  }
+
+  draggMove(event){
+    if (this.isDragging) {
+
+      let posX, posY;
+
+      const pageX = event.pageX || event.clientX + this.parent.scrollLeft;
+      const pageY = event.pageY || event.clientY + this.parent.scrollTop;
+
+      if (pageX - this.offset.x < 0) {
+        posX = 0;
+      } else if (pageX - this.offset.x > this.offset.r) {
+        posX = this.offset.r;
+      } else {
+        posX = pageX - this.offset.x;
+      }
+
+      if (pageY - this.offset.y < 0) {
+        posY = 0;
+      } else if (pageY - this.offset.y > this.offset.b) {
+        posY = this.offset.b;
+      } else {
+        posY = pageY - this.offset.y;
+      }
+
+      this.runraf = requestAnimationFrame(
+        () => this.options.updateFn(posX, posY)
+      );
+
+      if(this.options.moveCallback && typeof this.options.moveCallback === 'function'){
+        this.options.moveCallback.call();
+      }
+    }
+  }
+
+}
 
 export default Ember.Mixin.create(UiPositionableMixin, {
 
   draggableHandleClassName: 'esh-ui-draggable-handle',
 
-  isDragReady: false,
-  draggableElement: null,
-  draggableHandler: null,
-  draggableParent: null,
-  dragOffset: { x: 0,  y: 0 },
-  draggingAnimationFrame: null,
+  draggUpdateFn: null,
 
   init(){
     this._super(...arguments);
+
     Ember.run.schedule('afterRender', this, () => {
-      this.set('draggableElement', this.$());
-      this.set('draggableHandler', this.$('.' + this.get('draggableHandleClassName')));
-      this.set('draggableParent', this.$().parent());
+      const target = this.$()[0];
+      const updateFn = this.get('draggUpdateFn') ? this.get('draggUpdateFn') : (x, y) => {
+        this.updateStylesRender([
+          {declaration: 'positionable', property: 'position.x', value: x},
+          {declaration: 'positionable', property: 'position.y', value: y},
+        ]);
+      };
 
-      Ember.assert('There should be just one child element with a draggable-handle class, none or more than one has been provided', this.get('draggableHandler.length') === 1);
+      const options = {
+        updateFn,
+        handlerClass: this.get('draggableHandleClassName'),
+        startCallback: this.get('draggStartCallback') ? this.get('draggStartCallback').bind(this) : null,
+        endCallback: this.get('draggEndCallback') ? this.get('draggEndCallback').bind(this) : null,
+        moveCallback: this.get('draggMoveCallback') ? this.get('draggMoveCallback').bind(this) : null
+      };
+
+      this.set('_draggable', new Draggable(target, options));
     });
-  },
-
-  mouseDown(event) {
-    this.set('isDragReady', true);
-
-    const element = this.get('draggableElement'),
-          parent = this.get('draggableParent'),
-          offset = element.offset();
-
-    event.pageX = event.pageX || event.clientX + parent.scrollLeft;
-    event.pageY = event.pageY || event.clientY + parent.scrollTop;
-
-    this.set('dragOffset.x', event.pageX - offset.left);
-    this.set('dragOffset.y', event.pageY - offset.top);
-    this.set('dragOffset.width', parseInt(element[0].style.width));
-    this.set('dragOffset.height', parseInt(element[0].style.height));
-  },
-
-  mouseUp(){
-    this.set('isDragReady', false);
-    cancelAnimationFrame(this.get('draggingAnimationFrame'));
-  },
-
-  mouseLeave(){
-    if (this.get('isDragReady')) {
-      this.set('isDragReady', false);
-      cancelAnimationFrame(this.get('draggingAnimationFrame'));
-    }
-  },
-
-  mouseMove(event){
-    if (this.get('isDragReady')) {
-      let offsetX, offsetY;
-      const parent = this.get('draggableParent'),
-            dragOffset = this.get('dragOffset'),
-            rightOffset = parent.innerWidth() - dragOffset.width,
-            bottomOffset = parent.innerHeight() - dragOffset.height;
-
-      event.pageX = event.pageX || event.clientX + parent.scrollLeft;
-      event.pageY = event.pageY || event.clientY + parent.scrollTop;
-
-      if (event.pageX - dragOffset.x < 0) {
-        offsetX = 0;
-      } else if (event.pageX - dragOffset.x > rightOffset) {
-        offsetX = rightOffset;
-      } else {
-        offsetX = event.pageX - dragOffset.x;
-      }
-
-      if (event.pageY - dragOffset.y < 0) {
-        offsetY = 0;
-      } else if (event.pageY - dragOffset.y > bottomOffset) {
-        offsetY = bottomOffset;
-      } else {
-        offsetY = event.pageY - dragOffset.y;
-      }
-
-      this.set('draggingAnimationFrame', requestAnimationFrame( () =>
-        {
-          this.updateStylesRender([
-            {declaration: 'positionable', property: 'position.x', value: offsetX},
-            {declaration: 'positionable', property: 'position.y', value: offsetY},
-          ]);
-        }
-      ));
-    }
   }
 
 });
