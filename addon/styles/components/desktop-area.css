@@ -1,0 +1,14 @@
+.esh-desktop-area{
+  display: block;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: var(--c-default);
+  margin: 0;
+  padding: 0;
+  font-size: var(--fs-normal);
+  font-family: var(--f-standard);
+  line-height: 1.4;
+}

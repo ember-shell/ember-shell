@@ -1,0 +1,1 @@
+export { default } from 'ember-shell/components/shell/desktop-area';

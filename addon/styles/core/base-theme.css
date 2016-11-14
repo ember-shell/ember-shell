@@ -1,0 +1,26 @@
+/* Variables */
+
+:root{
+
+  /* Ember-shell Colors */
+  --c-default:    #FFFFFF;
+  --c-primary:    #526e82;
+  --c-success:    #4cd9c0;
+  --c-warning:    #e8e0c5;
+  --c-danger:     #ec747d;
+
+  --c-background: #242424;
+  --c-whitesmoke: #F5F5F5;
+  --c-lightgray:  #EEEEEE;
+  --c-gray:       #CCCCCC;
+  --c-darkgray:   #999999;
+  --c-dark:       #666666;
+  --c-darker:     #333333;
+
+  /* Font Sizes */
+  --f-standard: 'Source Sans Pro', sans-serif;
+  --fs-normal: 16px;
+  --fs-small: 12px;
+  --fs-large: 20px;
+
+}

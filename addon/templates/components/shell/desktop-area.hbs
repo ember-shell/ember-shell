@@ -1,0 +1,13 @@
+{{#unless yield}}
+
+  {{#each manager.workspaces as |ws|}}
+    {{shell/desktop-workspace workspace=ws}}
+  {{/each}}
+
+  {{#each panels.panels as |panel|}}
+    {{shell/desktop-panel panel=panel}}
+  {{/each}}
+
+{{else}}
+  {{yield}}
+{{/unless}}
