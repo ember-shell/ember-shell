@@ -76,6 +76,13 @@ export default Ember.Service.extend({
     return app;
   },
 
+  addPanel(options){
+    options = options ? options : {};
+    let panel = Panel.create(options);
+    this.get('panels').addObject(panel);
+    return panel;
+  },
+
   setCurrentWorkspace(workspace){
     Ember.assert("Not a workspace instance", workspace instanceof Workspace);
     Ember.assert("Not currently on available workspaces", this.get('workspaces').includes(workspace));

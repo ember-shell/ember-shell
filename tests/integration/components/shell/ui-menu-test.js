@@ -1,12 +1,14 @@
 /* jshint expr:true */
 import { expect } from 'chai';
-import Ember from 'ember';
-import { describeComponent, it } from 'ember-mocha';
+import {
+  describeComponent,
+  it
+} from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 
 describeComponent(
-  'shell/desktop-window',
-  'Integration: ShellDesktopWindowComponent',
+  'shell/ui-menu',
+  'Integration: ShellUiMenuComponent',
   {
     integration: true
   },
@@ -16,12 +18,12 @@ describeComponent(
       // Handle any actions with this.on('myAction', function(val) { ... });
       // Template block usage:
       // this.render(hbs`
-      //   {{#shell/desktop-window}}
+      //   {{#shell/ui-menu}}
       //     template content
-      //   {{/shell/desktop-window}}
+      //   {{/shell/ui-menu}}
       // `);
-      this.set('app', Ember.Object.create({ pid: 1, name: 'test'}));
-      this.render(hbs`{{shell/desktop-window app=app}}`);
+
+      this.render(hbs`{{shell/ui-menu}}`);
       expect(this.$()).to.have.length(1);
     });
   }
