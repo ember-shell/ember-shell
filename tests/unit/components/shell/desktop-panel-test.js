@@ -8,7 +8,7 @@ describeComponent(
   { unit: true },
   function() {
     
-    it('should have a position mixin', function() {
+    it('it renders', function() {
       // creates the component instance
       let component = this.subject();
       // renders the component on the page

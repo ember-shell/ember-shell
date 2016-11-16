@@ -14,16 +14,12 @@ export default Ember.Component.extend(ElementBoxMixin, {
 
   init(){
     this._super(...arguments);
-
-    Ember.run.next(this, () => {
-      this.updateStylesRenderPersist([
-        { declaration: 'sizeable', property: 'size.width', value: 100 },
-        { declaration: 'sizeable', property: 'size.height', value: 100 },
-        { declaration: 'positionable', property: 'position.x', value: 0 },
-        { declaration: 'positionable', property: 'position.y', value: 0 }
-      ]);
-    });
-
-  }
+    this.updateStylesRenderPersist([
+      { declaration: 'sizeable', property: 'size.width', value: 100 },
+      { declaration: 'sizeable', property: 'size.height', value: 100 },
+      { declaration: 'positionable', property: 'position.x', value: 0 },
+      { declaration: 'positionable', property: 'position.y', value: 0 }
+    ]);
+  },
 
 });

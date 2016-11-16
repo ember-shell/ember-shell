@@ -9,7 +9,7 @@ export default Ember.Component.extend({
   manager: Ember.inject.service('shell-manager'),
 
   actions: {
-    toggle
+    
   }
 
 });
