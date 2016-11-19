@@ -42,8 +42,6 @@ module.exports = {
 
     var postCssTree = broccoliPostcss(inputTree, options);
 
-    debugger;
-
     return node ? mergeTrees([ node, postCssTree ]) : postCssTree;
   },
 

@@ -23,6 +23,7 @@ describeModule(
       manager = this.subject();
       // Reset? ¯\_(⌣̯̀ ⌣́)_/¯
       manager.set('apps', Ember.A());
+      manager.set('panels', Ember.A());
       manager.set('workspaces', Ember.A());
       manager.set('currentWorkspaceNumber', 0);
     });

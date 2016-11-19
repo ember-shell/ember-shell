@@ -3,6 +3,27 @@
 This Ember addon provides a fully customizable OS-like shell environment and window manager to run your own [ember-engines](https://github.com/dgeb/ember-engines) apps.
 It consist of a set of core objects, components, mixins, services and blueprints that you can extend, customize and implement as you want.
 
+# Contributing
+
+If you would like to contribute, you can fork the project, edit, and make a pull request.
+
+### Tests
+
+This project uses TDD/BDD style, written with Mocha/Chai.
+If you wrote a new functionality, add tests for it.
+Please make sure that the test pass by running `ember test`.
+
+### Demo
+
+A simple ember-shell demo lives under `tests/dummy`, you can run it by doing:
+
+```
+npm install
+bower install
+ember serve
+# visit localhost:4200
+```
+
 ## Specs in progress:
 
 #### Core Components
@@ -69,22 +90,4 @@ This component includes a number of sub-components needed to have a suitable wor
   - `ember-shell-app` Creates new shell-app (in-repo-engine) with a set of basic presets for a quick start.
   - `ember-shell-theme` Creates new shell-theme that let you customize your shell styles.
 
-# Contributing
-
-If you would like to contribute, you can fork the project, edit, and make a pull request.
-
-### Tests
-
-This is a sort of TDD/BDD type of development that uses Mocha/Chai. 
-Please make sure that the test pass by running `ember test`. If you had a new functionality, add tests for it.
-
-### Update the website & documentation
-
-The documentation website lives under `tests/dummy`. It is a simple ember app. You can run the website locally:
-
-```
-npm install
-bower install
-ember serve
-# visit localhost:4200
-```
+#### ( more to come ... )
