@@ -3,7 +3,7 @@ import layout from '../../templates/components/shell/debug-toolbar';
 
 export default Ember.Component.extend({
   layout,
-  classNames: ['esh-debug-toolbar'],
+  tagName: 'debug-toolbar',
   manager: Ember.inject.service('shell-manager'),
 
   actions: {

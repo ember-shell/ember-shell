@@ -1,9 +1,7 @@
 /* jshint expr:true */
 import { expect } from 'chai';
-import {
-  describeComponent,
-  it
-} from 'ember-mocha';
+import Ember from 'ember';
+import { describeComponent, it } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 
 describeComponent(
@@ -22,8 +20,8 @@ describeComponent(
       //     template content
       //   {{/shell/desktop-window}}
       // `);
-
-      this.render(hbs`{{shell/desktop-window}}`);
+      this.set('app', Ember.Object.create({ pid: 1, name: 'test'}));
+      this.render(hbs`{{shell/desktop-window app=app}}`);
       expect(this.$()).to.have.length(1);
     });
   }

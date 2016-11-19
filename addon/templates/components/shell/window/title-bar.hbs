@@ -1,8 +1,6 @@
 {{#unless yield}}
-<box justify="start" align="center" fill horizontal nowrap>
   {{shell/ui-icon path=app.icon size="24"}}
   <div class="esh-window-title-bar-title esh-ui-draggable-handle">{{app.name}}</div>
-</box>
 {{else}}
   {{yield}}
 {{/unless}}

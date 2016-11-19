@@ -3,6 +3,6 @@ import layout from '../../templates/components/shell/desktop-area';
 
 export default Ember.Component.extend({
   layout,
-  classNames: ['esh-desktop-area'],
+  tagName: 'shell-desktop',
   manager: Ember.inject.service('shell-manager')
 });

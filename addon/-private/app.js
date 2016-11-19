@@ -5,6 +5,7 @@ const EXIT_OK = 0/*,
 
 export default Ember.Object.extend({
 
+  pid: null,
   name: null,
   title: null,
 
@@ -13,5 +14,5 @@ export default Ember.Object.extend({
       resolve(EXIT_OK);
     });
   }
-  
+
 });

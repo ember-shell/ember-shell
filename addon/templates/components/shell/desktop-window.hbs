@@ -1,7 +1,7 @@
 {{#unless yield}}
-
-  {{shell/window/title-bar app=app}}
-
+  {{shell/window/title-bar app=app window=this}}
+  {{shell/window/app-container app=app window=this}}
+  {{shell/window/status-bar app=app window=this}}
 {{else}}
   {{yield}}
 {{/unless}}

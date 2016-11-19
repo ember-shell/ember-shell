@@ -22,18 +22,19 @@ describeModule(
     beforeEach(function() {
       manager = this.subject();
       // Reset? ¯\_(⌣̯̀ ⌣́)_/¯
-      manager.set('running', Ember.A());
+      manager.set('apps', Ember.A());
+      manager.set('panels', Ember.A());
       manager.set('workspaces', Ember.A());
       manager.set('currentWorkspaceNumber', 0);
     });
 
     it('should initialize with an empty array of running apps', function() {
-      expect(manager.get('running.length')).to.equal(0);
+      expect(manager.get('apps.length')).to.equal(0);
     });
 
     it('should be able to start a new app instance by name', function() {
       let appInstance = manager.exec(TEST_APP_NAME);
-      expect(manager.get('running').includes(appInstance)).to.be.ok;
+      expect(manager.get('apps').includes(appInstance)).to.be.ok;
     });
 
     it.skip('should be able to list available applications', function() {

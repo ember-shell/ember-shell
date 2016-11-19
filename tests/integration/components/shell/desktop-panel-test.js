@@ -1,5 +1,6 @@
 /* jshint expr:true */
 import { expect } from 'chai';
+import Panel from 'ember-shell/-private/panel';
 import { describeComponent, it } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -18,8 +19,12 @@ describeComponent(
       //     template content
       //   {{/shell/desktop-panel}}
       // `);
+      // 
+      //
 
-      this.render(hbs`{{shell/desktop-panel}}`);
+      this.set('panel', Panel.create());
+
+      this.render(hbs`{{shell/desktop-panel panel=panel}}`);
       expect(this.$()).to.have.length(1);
     });
     

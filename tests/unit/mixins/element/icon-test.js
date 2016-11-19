@@ -5,13 +5,13 @@ import {
   it
 } from 'mocha';
 import Ember from 'ember';
-import ElementBoxMixin from 'ember-shell/mixins/element/box';
+import ElementIconMixin from 'ember-shell/mixins/element/icon';
 
-describe('ElementBoxMixin', function() {
+describe('ElementIconMixin', function() {
   // Replace this with your real tests.
   it('works', function() {
-    let ElementBoxObject = Ember.Object.extend(ElementBoxMixin);
-    let subject = ElementBoxObject.create();
+    let ElementIconObject = Ember.Object.extend(ElementIconMixin);
+    let subject = ElementIconObject.create();
     expect(subject).to.be.ok;
   });
 });

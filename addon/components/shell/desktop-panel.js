@@ -4,5 +4,6 @@ import ElementPanelMixin from 'ember-shell/mixins/element/panel';
 
 export default Ember.Component.extend(ElementPanelMixin, {
   layout,
-  classNames: ['esh-desktop-panel'],
+  tagName: 'shell-panel',
+  manager: Ember.inject.service('shell-manager')
 });
