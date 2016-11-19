@@ -1,6 +1,6 @@
 import Ember from 'ember';
-import ElementBoxMixin from 'ember-shell/mixins/element/box';
+import UiSizeableMixin from 'ember-shell/mixins/ui/sizeable';
 import UiDraggableMixin from 'ember-shell/mixins/ui/draggable';
 
-export default Ember.Mixin.create(ElementBoxMixin, UiDraggableMixin, {
+export default Ember.Mixin.create(UiSizeableMixin, UiDraggableMixin, {
 });

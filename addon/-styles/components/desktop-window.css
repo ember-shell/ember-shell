@@ -1,0 +1,18 @@
+/* Desktop Window Variables */
+shell-window {
+    --background-color: var(--esh-default-background);
+}
+
+shell-window {
+    background-color: var(--background-color);
+    box-shadow: 0 0 30px 2px rgba(0, 0, 0, .25);
+    border: 1px solid var(--c-lightgray);
+}
+
+
+/* esh-window-title-bar */
+shell-window window-title-bar {
+    border-bottom: 1px solid var(--c-lightgray);
+    min-height: 32px;
+    line-height: 32px;
+}

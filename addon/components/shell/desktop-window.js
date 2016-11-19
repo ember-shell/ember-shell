@@ -4,8 +4,7 @@ import ElementWindowMixin from 'ember-shell/mixins/element/window';
 
 export default Ember.Component.extend(ElementWindowMixin, {
   layout,
-  classNames: ['esh-desktop-window'],
-
+  tagName: 'shell-window',
   manager: Ember.inject.service('shell-manager'),
 
   init(){

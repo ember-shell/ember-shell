@@ -1,0 +1,14 @@
+body, body > .ember-view {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  left: 0;
+  top: 0;
+}
+shell-desktop {
+  background-image: url("/img/default-background.png");
+  /*background-image: url("/img/ember-shell-big.png");*/
+  background-repeat: no-repeat;
+  background-size: cover;
+}

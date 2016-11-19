@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import ElementBoxMixin from 'ember-shell/mixins/element/box';
+import UiSizeableMixin from 'ember-shell/mixins/ui/sizeable';
 
-export default Ember.Mixin.create(ElementBoxMixin, {
+export default Ember.Mixin.create(UiSizeableMixin, {
 
   iconCSS: 'background-image: url({{imgUrl}});'
 
