@@ -5,16 +5,21 @@ import Workspace from 'ember-shell/-private/workspace';
 
 export default Ember.Service.extend({
 
-  apps: Ember.A(),
-  panels: Ember.A(),
-  workspaces: Ember.A(),
+  init(){
+    this._super(...arguments);
 
-  lastPID: 0,
-  currentWorkspaceNumber: 1,
+    this.apps = Ember.A();
+    this.panels = Ember.A();
+    this.workspaces = Ember.A();
 
-  currentWorkspace: Ember.computed('workspaces.@each', 'currentWorkspaceNumber', function() {
-    return this.get('workspaces').objectAt(this.get('currentWorkspaceNumber') - 1);
-  }),
+    this.lastPID = 0;
+    this.currentWorkspaceNumber = 0;
+
+    this.addPanel({ isPrimary: true });
+    this.addWorkspace();
+  },
+
+  /* Apps */
 
   appsAvailable: Ember.computed(function(){
     /*let owner = Ember.getOwner(this);*/
@@ -76,12 +81,27 @@ export default Ember.Service.extend({
     return app;
   },
 
+  /* Panels */
+
   addPanel(options){
     options = options ? options : {};
     let panel = Panel.create(options);
     this.get('panels').addObject(panel);
     return panel;
   },
+
+  removePanel(panel){
+    let panels = this.get('panels');
+    Ember.assert("Can't remove the primary panel", panel.get('isPrimary') === false );
+
+    panels.removeObject(panel);
+  },
+
+  /* Workspaces */
+
+  currentWorkspace: Ember.computed('workspaces.@each', 'currentWorkspaceNumber', function() {
+    return this.get('workspaces').objectAt(this.get('currentWorkspaceNumber') - 1);
+  }),
 
   setCurrentWorkspace(workspace){
     Ember.assert("Not a workspace instance", workspace instanceof Workspace);
