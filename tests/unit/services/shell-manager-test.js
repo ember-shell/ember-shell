@@ -1,7 +1,6 @@
 /* jshint expr:true */
 /* global: Promise */
 import { expect } from 'chai';
-import Ember from 'ember';
 import { beforeEach } from 'mocha';
 import { describeModule, it } from 'ember-mocha';
 import Workspace from 'ember-shell/-private/workspace';
@@ -21,19 +20,16 @@ describeModule(
 
     beforeEach(function() {
       manager = this.subject();
-      // Reset? ¯\_(⌣̯̀ ⌣́)_/¯
-      manager.set('apps', Ember.A());
-      manager.set('panels', Ember.A());
-      manager.set('workspaces', Ember.A());
-      manager.set('currentWorkspaceNumber', 0);
     });
+
+    /* Apps */
 
     it('should initialize with an empty array of running apps', function() {
       expect(manager.get('apps.length')).to.equal(0);
     });
 
     it('should be able to start a new app instance by name', function() {
-      let appInstance = manager.exec(TEST_APP_NAME);
+      const appInstance = manager.exec(TEST_APP_NAME);
       expect(manager.get('apps').includes(appInstance)).to.be.ok;
     });
 
@@ -65,39 +61,62 @@ describeModule(
       expect(manager.isAppRunning(TEST_APP_NAME)).to.be.false;
     });
 
-    it('should initialize with an empty array workspaces', function() {
-      expect(manager.get('workspaces.length')).to.equal(0);
+    /* Panels */
+
+    it('should initialize with only one primary panel', function() {
+      const panel = manager.get('panels.firstObject');
+
+      expect(panel.get('isPrimary')).to.be.true;
+      expect(manager.get('panels.length')).to.equal(1);
+    });
+
+    it('should be able to add and remove a non-primary panel', function() {
+      const panel = manager.addPanel();
+
+      expect(panel.get('isPrimary')).to.be.false;
+      expect(manager.get('panels.length')).to.equal(2);
+
+      manager.removePanel(panel);
+
+      expect(manager.get('panels').includes(panel)).to.be.false;
+      expect(manager.get('panels.length')).to.equal(1);
+    });
+
+    /* Workspaces */
+
+    it('should initialize with at least one workspace', function() {
+      expect(manager.get('workspaces.length')).to.equal(1);
     });
 
     it('should be able to return a running application by name', function() {
       manager.exec(TEST_APP_NAME);
-      let app = manager.getAppByName(TEST_APP_NAME);
+      const app = manager.getAppByName(TEST_APP_NAME);
 
       expect(app).to.exist;
       expect(app.get('name')).to.equal(TEST_APP_NAME);
     });
 
     it('should be able to set an added workspace as current workspace', function() {
-      let workspace = manager.addWorkspace();
+      const workspace = manager.addWorkspace();
       manager.setCurrentWorkspace(workspace);
 
       expect(manager.get('currentWorkspace')).to.eql(workspace);
     });
 
     it('should not allow to set a workspace that is not created using the add method', function() {
-      let workspace = Workspace.create();
+      const workspace = Workspace.create();
       expect(() => { manager.setCurrentWorkspace(workspace);}).to.throw(Error);
     });
 
     it('should be able to return the current workspace', function() {
-      var workspace = manager.addWorkspace();
+      const workspace = manager.addWorkspace();
       manager.setCurrentWorkspace(workspace);
 
       expect(manager.get('currentWorkspace')).to.eql(workspace);
     });
 
     it('should be able to return a given workspaces by number', function() {
-      var workspace = manager.addWorkspace();
+      const workspace = manager.addWorkspace();
       manager.setCurrentWorkspace(workspace);
 
       expect(manager.getWorkspaceByNumber(workspace.get('id'))).to.eql(workspace);
@@ -108,7 +127,7 @@ describeModule(
     });
 
     it('should be able to add a workspace', function() {
-      let workspace = manager.addWorkspace();
+      const workspace = manager.addWorkspace();
       expect(manager.get('workspaces').includes(workspace)).to.be.true;
     });
 
@@ -116,13 +135,13 @@ describeModule(
       //Adds first workspace:
       manager.addWorkspace();
 
-      let workspace = manager.addWorkspace();
+      const workspace = manager.addWorkspace();
       manager.removeWorkspace(workspace);
       expect(manager.get('workspaces').includes(workspace)).to.be.false;
     });
 
     it('should not be able to remove a workspace if there is only one', function(){
-      let workspace = manager.addWorkspace();
+      const workspace = manager.get('workspaces.firstObject');
 
       expect(() => { manager.removeWorkspace(workspace); }).to.throw(Error);
       expect(manager.get('workspaces.length')).to.equal(1);
