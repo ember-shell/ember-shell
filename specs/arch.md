@@ -1,4 +1,4 @@
-### Architecture
+### Architecture (WIP)
 
 #### Packages
 
@@ -8,13 +8,15 @@
   - EmberShellComponent
 
   - shell-app
-    - ShellApplication
-    - EngineInstance
-    - EngineLoader
-    - EngineStateful
-    - EngineAssetsLoader
-    - EnginePersistance
-    - EngineRegistry
+    - Application
+
+    - engine-driver (not sure)
+      - EngineInstance
+      - EngineLoader
+      - EngineAssetsLoader
+      - EnginePersistance
+      - EngineRouter
+      - EngineRegistry
 
   - shell-bus
     - UserBus
@@ -27,17 +29,20 @@
     - User
     - Session
     - Group
-    - 
+    - Privilege
     - AuthAdapter
+    - UacService
+    - UacBlockComponent
 
   - shell-store
     - Store
     - Package
-    - UpdaterService
+    - Registry
+    - UpdateNotifier
 
   - shell-server
 
-    - fastboot-middlewar
+    - fastboot-middleware
 
       - ServerBus
       - Upstreams
@@ -48,12 +53,27 @@
 
   - shell-registry
     - LocalStorage
+    - ServerAdapter
 
   - shell-desktop
     - Panel
+    - PanelComponent
     - Widget
+    - WidgetComponent
     - Window
+    - WindowComponent
     - Workspace
+    - Workspace
+    - LockScreen
+    - LockScreenComponent
+    - DesktopAreaComponent
+    - AppBoxComponent
+
+    - shell-panel
+      - Indicator
+      - Tasks
+      - Shortcuts
+      - MenuButtonComponent
 
   - shell-ui
 
@@ -75,4 +95,12 @@
       - Scalable
       - Sizeable
       - Styleable
-- ember-shell-
+
+- ember-shell-apps
+  - shell-store
+  - shell-settings
+  - shell-calendar
+  - shell-tweaks
+  - shell-themer
+  - shell-calculator
+  - shell-code
