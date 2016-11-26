@@ -1,1 +1,1 @@
-export { default } from 'ember-shell/services/shell-manager';
+import { Manager } from 'ember-shell/main';
