@@ -3,98 +3,112 @@
 #### Packages
 
 - ember-shell
+  - BoostrapInitializer               // import { Bootstrap } from 'ember-shell/shell';
+  - ShellService                      // import { ManagerService } from 'ember-shell/shell';
+  - EmberShellComponent               // import { EmberShell } from 'ember-shell/shell';
 
-  - Boostrap
-  - EmberShellComponent
+- shell-app
+  - Application                       // import { Application } from 'ember-shell/app';
+  - AppManager                        // import { ApplicationManager } 'ember-shell/app';
 
-  - shell-app
-    - Application
+  - engine-driver (not sure)
+    - EngineInstance
+    - EngineLoader
+    - EngineAssetsLoader
+    - EnginePersistance
+    - EngineRouter
+    - EngineRegistry
 
-    - engine-driver (not sure)
-      - EngineInstance
-      - EngineLoader
-      - EngineAssetsLoader
-      - EnginePersistance
-      - EngineRouter
-      - EngineRegistry
+- shell-bus
+  - Bus                               // import { Bus } from 'ember-shell/shell-bus';
+  - BusService
+  - BusMessage 
 
-  - shell-bus
-    - UserBus
-    - ShellBus
-    - ServerBus
-    - BusService
-    - BusMessage
+- shell-security
+  - User
+  - Session
+  - Group
+  - Privilege
+  - AuthAdapter
+  - UacService
+  - UacBlockComponent
 
-  - shell-security
-    - User
-    - Session
-    - Group
-    - Privilege
-    - AuthAdapter
-    - UacService
-    - UacBlockComponent
+- shell-store
+  - Store
+  - Package
+  - Registry
+  - UpdateNotifier
 
-  - shell-store
-    - Store
-    - Package
-    - Registry
-    - UpdateNotifier
+- shell-server (fastboot-middlewares)
 
-  - shell-server
+  - ServerBus
+  - Upstreams
+  - Packages
+  - Discoverer
+  - SystemProc
+  - Daemons
 
-    - fastboot-middleware
+- shell-registry
+  - LocalStorage
+  - ServerAdapter
 
-      - ServerBus
-      - Upstreams
-      - Packages
-      - Discoverer
-      - SystemProc
-      - Daemons
+- shell-desktop
+  - DesktopManagerService
 
-  - shell-registry
-    - LocalStorage
-    - ServerAdapter
-
-  - shell-desktop
-    - Panel
-    - PanelComponent
-    - Widget
-    - WidgetComponent
-    - Window
-    - WindowComponent
-    - Workspace
-    - Workspace
-    - LockScreen
-    - LockScreenComponent
-    - DesktopAreaComponent
+  - desktop-appbox
     - AppBoxComponent
 
-    - shell-panel
-      - Indicator
-      - Tasks
-      - Shortcuts
-      - MenuButtonComponent
+  - desktop-lockscreen
+    - LockScreenComponent
 
-  - shell-ui
+  - desktop-workspace
+    - Workspace
+    - WorkspaceComponent
 
-    - ui-elements
-      - Background
-      - Button
-      - Menu
-      - Icon
-      - Label
+  - desktop-window
+    - Window
+    - WindowComponent
+    - AppContainerComponent
+    - StatusBarComponent
+    - TitleBarComponent
 
-    - ui-mixins
-      - Alignable
-      - Animatable
-      - Draggable
-      - Dropbable
-      - Focusable
-      - Positionable
-      - Pressable
-      - Scalable
-      - Sizeable
-      - Styleable
+  - desktop-widget
+    - Widget
+    - WidgetComponent
+
+  - desktop-panel
+    - Panel
+    - PanelComponent
+    - Indicator
+    - TasksComponent
+    - ClockComponent
+    - IndicatorComponent
+    - ShortcutsComponent
+    - MenuButtonComponent
+
+- shell-debug
+  - DebugToolbarComponent
+
+- shell-ui
+
+  - ui-elements
+    - Background
+    - Button
+    - Menu
+    - Icon
+    - Label
+
+  - ui-mixins
+    - Alignable
+    - Animatable
+    - Draggable
+    - Dropbable
+    - Focusable
+    - Positionable
+    - Pressable
+    - Scalable
+    - Sizeable
+    - Styleable
 
 - ember-shell-apps
   - shell-store

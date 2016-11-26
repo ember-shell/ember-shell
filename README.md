@@ -1,11 +1,19 @@
-[![Build Status](https://travis-ci.org/marcemira/ember-shell.svg?branch=master)](https://travis-ci.org/marcemira/ember-shell)
-[![Latest Release](https://img.shields.io/github/release/ember-shell/ember-shell.svg)](https://github.com/marcemira/ember-shell/releases)
+<p align="center">
+  <a href="http://ember-shell.com"><img width="512" src="http://ember-shell.com/ember-shell.png"></a>
+</p>
 
-[![Dependencies](https://img.shields.io/david/marcemira/ember-shell.svg)](https://david-dm.org/marcemira/ember-shell) 
-[![Dev Dependencies](https://img.shields.io/david/dev/marcemira/ember-shell.svg)](https://david-dm.org/marcemira/ember-shell#info=devDependencies)
+<br>
 
-[![Ember Observer Score](https://emberobserver.com/badges/ember-shell.svg)](https://emberobserver.com/addons/ember-shell)
-[![Downloads](https://img.shields.io/npm/dm/ember-shell.svg)](https://www.npmjs.com/package/ember-shell)
+<p align="center">
+  <a href="https://travis-ci.org/marcemira/ember-shell"><img src="https://travis-ci.org/marcemira/ember-shell.svg?branch=master" alt="Build Status"></a>
+  <a href="https://github.com/marcemira/ember-shell/releases"><img src="https://img.shields.io/github/release/ember-shell/ember-shell.svg" alt="Latest Release"></a>
+  <a href="https://david-dm.org/marcemira/ember-shell"><img src="https://img.shields.io/david/marcemira/ember-shell.svg" alt="Dependencies"></a><br>
+  <a href="https://david-dm.org/marcemira/ember-shell#info=devDependencies"><img src="https://img.shields.io/david/dev/marcemira/ember-shell.svg" alt="Dev Dependencies"></a>
+  <a href="https://emberobserver.com/addons/ember-shell"><img src="https://emberobserver.com/badges/ember-shell.svg" alt="Ember Observer Score"></a>
+  <a href="https://www.npmjs.com/package/ember-shell"><img src="https://img.shields.io/npm/dm/ember-shell.svg" alt="Downloads"></a>
+</p>
+
+<br>
 
 # ember-shell
 This Ember addon provides a fully customizable OS-like shell environment and window manager to run your own [ember-engines](https://github.com/dgeb/ember-engines) apps.
@@ -22,9 +30,9 @@ ember serve
 # visit localhost:4200/docs
 ```
 
-### Specs
+### Specs (in-progress)
 
-You can check [here](https://github.com/marcemira/ember-shell/blob/master/specs/specs.md) the current (in-progress) specifications for this project.
+You can check [here](https://github.com/marcemira/ember-shell/blob/master/specs/arch.md) the current (in-progress) specifications for this project.
 
 ### Demo
 The ember-shell demo lives under `tests/dummy`, you can run it by doing:

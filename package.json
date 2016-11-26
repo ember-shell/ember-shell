@@ -3,13 +3,14 @@
   "version": "0.1.2-alpha",
   "description": "An Ember addon that enables you to have a fully customizable OS-like shell, where you can run your own ember apps powered by ember-engines",
   "directories": {
-    "doc": "doc",
+    "doc": "docs",
     "test": "tests"
   },
   "scripts": {
     "build": "ember build",
     "start": "ember server",
-    "test": "ember try:each"
+    "test": "ember try:each",
+    "docs": "ember ember-cli-yuidoc"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
   },
   "author": "Marcelo Mira",
   "license": "MIT",
+  "homepage": "http://ember-shell.com/",
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
     "broccoli-funnel": "^1.0.9",
