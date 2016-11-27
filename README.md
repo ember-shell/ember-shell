@@ -56,7 +56,7 @@ Please make sure that the test pass by running `ember test`.
 Employs [Semantic Versioning 2.0.0](http://semver.org/)
 
 ### Copyright and License
-ember-shell and its source files are Copyright © 2016 [marcemira.com](http://marcemira.com/)
+This addon is unaffiliated with the Ember project. Ember is a trademark of Tilde Inc.
 The software is [MIT Licensed](LICENSE.md)
 
 ### Warranty
