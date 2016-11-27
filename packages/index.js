@@ -8,13 +8,69 @@
  * @type {Object[]} Package object definition
  */
 module.exports = [
-  { name: 'shell-main', module: 'main' },
-  { name: 'shell-app', module: 'app' },
-  { name: 'shell-bus', module: 'bus' },
-  { name: 'shell-debug', module: 'debug' },
-  { name: 'shell-desktop', module: 'desktop' },
-  { name: 'shell-registry', module: 'registry' },
-  { name: 'shell-security', module: 'security' },
-  { name: 'shell-store', module: 'store' },
-  { name: 'shell-ui', module: 'ui' }
+  { 
+    name: 'shell-main', 
+    module: 'main', 
+    externals: [
+      'ember',
+      'ember-shell/app',
+      'ember-shell/desktop'
+    ] 
+  },
+  { 
+    name: 'shell-app', 
+    module: 'app', 
+    externals: [
+      'ember'
+    ]
+  },
+  { 
+    name: 'shell-bus', 
+    module: 'bus', 
+    externals: [
+      'ember'
+    ]
+  },
+  { 
+    name: 'shell-debug', 
+    module: 'debug', 
+    externals: [
+      'ember'
+    ]
+  },
+  { 
+    name: 'shell-desktop', 
+    module: 'desktop', 
+    externals: [
+      'ember'
+    ]
+  },
+  { 
+    name: 'shell-registry', 
+    module: 'registry', 
+    externals: [
+      'ember'
+    ]
+  },
+  { 
+    name: 'shell-security', 
+    module: 'security', 
+    externals: [
+      'ember'
+    ]
+  },
+  { 
+    name: 'shell-store', 
+    module: 'store', 
+    externals: [
+      'ember'
+    ]
+  },
+  { 
+    name: 'shell-ui', 
+    module: 'ui', 
+    externals: [
+      'ember'
+    ]
+  }
 ];

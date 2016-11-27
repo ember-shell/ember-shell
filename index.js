@@ -46,7 +46,7 @@ module.exports = {
           entry: 'index.js',
           dest: pkg.module + '.js',
           format: 'amd',
-          moduleId: pkg.name
+          external: pkg.externals
         },
         annotation: pkg.module
       });
@@ -74,10 +74,12 @@ module.exports = {
   treeForTemplates: this.emptyFunnelTree,
 
   treeForAddonTemplates: function() {
-    return new Funnel(this.packagesPath, { include: [
-      '**/lib/templates/*.hbs',
-      '**/lib/templates/**/*.hbs'
-    ]});
+    return new Funnel(this.packagesPath, { 
+      include: [
+        '**/lib/templates/*.hbs',
+        '**/lib/templates/**/*.hbs'
+      ],
+    });
   },
 
   treeForAddonStyles: function () {
@@ -87,7 +89,11 @@ module.exports = {
 
     var inputTree = new Funnel(stylesPath, { 
       files: ['ember-shell.css'],
-      destDir: 'shell-styles'
+      destDir: 'shell-styles',
+
+      getDestinationPath: function() {
+        return 'shell-styles.css';
+      }
     });
 
     var options = {
