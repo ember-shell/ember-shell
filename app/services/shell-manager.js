@@ -1,1 +1,0 @@
-import { Manager } from 'ember-shell/main';

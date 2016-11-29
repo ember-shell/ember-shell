@@ -4,7 +4,7 @@
  */
 
 import Ember from 'ember';
-import layout from 'ember-shell/main/templates/ember-shell';
+import layout from 'ember-shell/templates/main/ember-shell';
 
 export default Ember.Component.extend({
   layout,
