@@ -37,7 +37,8 @@ module.exports = [
     name: 'shell-debug',
     module: 'debug',
     externals: [
-      'ember'
+      'ember',
+      'ember-shell/templates/debug/debug-toolbar'
     ],
     hasTemplates: true
   },
@@ -46,7 +47,15 @@ module.exports = [
     module: 'desktop',
     externals: [
       'ember',
-      'ember-shell/templates/desktop/desktop-panel'
+      'ember-shell/ui',
+      'ember-variable-styles/mixins/styleable',
+      'ember-shell/templates/desktop/desktop-panel',
+      'ember-shell/templates/desktop/desktop-window',
+      'ember-shell/templates/desktop/desktop-workspace',
+      'ember-shell/templates/desktop/panel/main-menu',
+      'ember-shell/templates/desktop/window/app-container',
+      'ember-shell/templates/desktop/window/status-bar',
+      'ember-shell/templates/desktop/window/title-bar'
     ],
     hasTemplates: true
   },
@@ -75,7 +84,14 @@ module.exports = [
     name: 'shell-ui',
     module: 'ui',
     externals: [
-      'ember'
+      'ember',
+      'ember-shell/ui',
+      'ember-variable-styles/mixins/styleable',
+      'ember-shell/templates/ui/ui-background',
+      'ember-shell/templates/ui/ui-button',
+      'ember-shell/templates/ui/ui-icon',
+      'ember-shell/templates/ui/ui-label',
+      'ember-shell/templates/ui/ui-menu'
     ],
     hasTemplates: true
   }

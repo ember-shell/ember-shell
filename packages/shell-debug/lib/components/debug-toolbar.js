@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from '../../templates/components/shell/debug-toolbar';
+import layout from 'ember-shell/templates/debug/debug-toolbar';
 
 export default Ember.Component.extend({
   layout,

@@ -1,0 +1,1 @@
+export { BackgroundComponent as default } from 'ember-shell/ui';

@@ -1,0 +1,1 @@
+export { MainMenuComponent as default } from 'ember-shell/desktop';

@@ -1,0 +1,1 @@
+export { AppContainerComponent as default } from 'ember-shell/desktop';

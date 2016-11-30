@@ -37,12 +37,12 @@ module.exports = {
     var packages = require(path.join(rootPath, 'packages') + '/index.js');
     var addonApp = [];
 
-    packages.forEach(function(pkg){
-      var pkgLib = path.join(rootPath, 'packages', pkg.name, 'lib');
-      addonApp.push(new WatchedDir(pkgLib));
+    packages.forEach(function(pkg) {
+      var pkgApp = path.join(rootPath, 'packages', pkg.name, 'app');
+      addonApp.push(new WatchedDir(pkgApp));
     });
 
-    var addonAppTree = mergeTrees(addonApp, { overwrite: true });
+    var addonAppTree = mergeTrees(addonApp);
 
     return tree ? mergeTrees([tree, addonAppTree]) : addonAppTree;
   },
@@ -50,15 +50,6 @@ module.exports = {
   treeForAddon: function() {
     this._requireBuildPackages();
 
-    var emberShellTrees = this._buildEmberShellTrees();
-    var stylesTree = this.compileStyles(this._treeFor('addon-styles'));
-
-    return mergeTrees([emberShellTrees, stylesTree], {
-      annotation: 'Addon#treeForAddon(' + this.name + ')'
-    });
-  },
-
-  _buildEmberShellTrees(){
     var packages = require(path.join(this.project.root, 'packages') + '/index.js');
     var rootPath = this.project.root;
 
@@ -80,7 +71,10 @@ module.exports = {
 
       if(pkg.hasTemplates){
         addonHbs.push(new Funnel(pkgTemplates, {
-          include: ['*.hbs'],
+          include: [
+            '*.hbs',
+            '**/*.hbs'
+          ],
           srcDir: '/',
           destDir: 'modules/ember-shell/templates/'+ pkg.module
         }));
@@ -90,7 +84,12 @@ module.exports = {
     var addonJsTree = this.processedAddonJsFiles(mergeTrees(addonJS));
     var addonHbsTree = this.compileTemplates(mergeTrees(addonHbs));
 
-    return mergeTrees([addonHbsTree, addonJsTree]);
+    var emberShellTrees = mergeTrees([addonHbsTree, addonJsTree]);
+    var stylesTree = this.compileStyles(this._treeFor('addon-styles'));
+
+    return mergeTrees([emberShellTrees, stylesTree], {
+      annotation: 'Addon#treeForAddon(' + this.name + ')'
+    });
   },
 
   compileTemplates: function(tree) {

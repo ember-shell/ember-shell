@@ -1,0 +1,1 @@
+export { TitleBarComponent as default } from 'ember-shell/desktop';

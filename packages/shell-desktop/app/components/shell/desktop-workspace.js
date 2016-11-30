@@ -1,0 +1,1 @@
+export { WorkspaceComponent as default } from 'ember-shell/desktop';

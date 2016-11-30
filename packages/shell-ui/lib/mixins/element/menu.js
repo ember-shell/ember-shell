@@ -1,6 +1,8 @@
 import Ember from 'ember';
-import UiSizeableMixin from 'ember-shell/mixins/ui/sizeable';
-import UiPositionableMixin from 'ember-shell/mixins/ui/positionable';
+import {
+  SizeableBehaviour,
+  PositionableBehaviour
+} from 'ember-shell/ui';
 
-export default Ember.Mixin.create(UiPositionableMixin, UiSizeableMixin, {
+export default Ember.Mixin.create(SizeableBehaviour, PositionableBehaviour, {
 });

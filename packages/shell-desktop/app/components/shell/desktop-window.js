@@ -1,0 +1,1 @@
+export { WindowComponent as default } from 'ember-shell/desktop';

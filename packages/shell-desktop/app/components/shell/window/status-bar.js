@@ -1,0 +1,1 @@
+export { StatusBarComponent as default } from 'ember-shell/desktop';

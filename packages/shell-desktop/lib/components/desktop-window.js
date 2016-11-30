@@ -1,8 +1,8 @@
 import Ember from 'ember';
-import layout from '../../templates/components/shell/desktop-window';
-import ElementWindowMixin from 'ember-shell/mixins/element/window';
+import layout from 'ember-shell/templates/desktop/desktop-window';
+import { WindowElement } from 'ember-shell/ui';
 
-export default Ember.Component.extend(ElementWindowMixin, {
+export default Ember.Component.extend(WindowElement, {
   layout,
   tagName: 'shell-window',
   manager: Ember.inject.service('shell-manager'),

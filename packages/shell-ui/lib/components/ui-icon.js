@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from '../../templates/components/shell/ui-icon';
+import layout from 'ember-shell/templates/ui/ui-icon';
 
 export default Ember.Component.extend({
   layout,

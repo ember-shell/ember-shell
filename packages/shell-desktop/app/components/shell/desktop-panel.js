@@ -1,0 +1,1 @@
+export { PanelComponent as default } from 'ember-shell/desktop';

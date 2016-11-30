@@ -1,0 +1,1 @@
+export { ButtonComponent as default } from 'ember-shell/ui';

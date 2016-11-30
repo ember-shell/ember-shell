@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from '../../../templates/components/shell/panel/main-menu';
+import layout from 'ember-shell/templates/desktop/panel/main-menu';
 
 export default Ember.Component.extend({
   layout,
@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   manager: Ember.inject.service('shell-manager'),
 
   actions: {
-    
+
   }
 
 });

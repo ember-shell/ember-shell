@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from '../../templates/components/shell/desktop-workspace';
+import layout from 'ember-shell/templates/desktop/desktop-workspace';
 
 export default Ember.Component.extend({
   layout,

@@ -1,0 +1,1 @@
+export { ManagerService as default } from 'ember-shell/main';
