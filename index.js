@@ -32,13 +32,13 @@ module.exports = {
 
   treeForApp: function() {
     var tree = this._super.treeForApp.apply(this, arguments);
+    var packagesPath = this.packagesPath;
 
-    var rootPath = this.project.root;
-    var packages = require(path.join(rootPath, 'packages') + '/index.js');
+    var packages = require(packagesPath + '/index.js');
     var addonApp = [];
 
     packages.forEach(function(pkg) {
-      var pkgApp = path.join(rootPath, 'packages', pkg.name, 'app');
+      var pkgApp = path.join(packagesPath, pkg.name, 'app');
       addonApp.push(new WatchedDir(pkgApp));
     });
 
@@ -50,14 +50,14 @@ module.exports = {
   treeForAddon: function() {
     this._requireBuildPackages();
 
-    var packages = require(path.join(this.project.root, 'packages') + '/index.js');
-    var rootPath = this.project.root;
+    var packagesPath = this.packagesPath;
+    var packages = require(packagesPath + '/index.js');
 
     var addonJS = [];
     var addonHbs = [];
 
     packages.forEach(function(pkg){
-      var pkgLib = path.join(rootPath, 'packages', pkg.name, 'lib');
+      var pkgLib = path.join(packagesPath, pkg.name, 'lib');
       var pkgTemplates = path.join(pkgLib, 'templates');
 
       addonJS.push(new Rollup(pkgLib, {
@@ -105,10 +105,7 @@ module.exports = {
   },
 
   treeForAddonStyles: function () {
-    var stylesPath = this.isAddon() ?
-        path.join(this.project.root, 'packages', 'shell-styles') :
-        path.join(this.project.nodeModulesPath, this.name, 'packages', 'shell-styles');
-
+    var stylesPath = path.join(this.packagesPath, 'shell-styles');
     var inputTree = new Funnel(stylesPath, {
       files: ['ember-shell.css'],
       srcDir: '/',
