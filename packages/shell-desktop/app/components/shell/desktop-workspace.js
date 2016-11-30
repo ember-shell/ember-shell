@@ -1,1 +1,1 @@
-export { WorkspaceComponent as default } from 'ember-shell/desktop';
+export { default } from 'ember-shell/components/desktop-workspace';

@@ -1,1 +1,1 @@
-export { ButtonComponent as default } from 'ember-shell/ui';
+export { default } from 'ember-shell/components/ui-button';

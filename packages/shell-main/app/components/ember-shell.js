@@ -1,1 +1,1 @@
-export { EmberShellComponent as default } from 'ember-shell/main';
+export { default } from 'ember-shell/components/ember-shell';

@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import { SizeableBehaviour } from 'ember-shell/ui';
+import SizeableMixin from 'ember-shell/mixins/behaviour/sizeable';
 
-export default Ember.Mixin.create(SizeableBehaviour, {
+export default Ember.Mixin.create(SizeableMixin, {
 
   iconCSS: 'background-image: url({{imgUrl}});'
 

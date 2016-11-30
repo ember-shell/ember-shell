@@ -4,9 +4,9 @@
  */
 
 import Ember from 'ember';
-import { Application as App } from 'ember-shell/app';
-import { Panel } from 'ember-shell/desktop';
-import { Workspace } from 'ember-shell/desktop';
+import App from 'ember-shell/system/application';
+import Panel from 'ember-shell/system/panel';
+import Workspace from 'ember-shell/system/workspace';
 
 /**
  * `shell-manager` handles and exposes core functionalities such as shell-apps

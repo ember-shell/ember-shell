@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import layout from 'ember-shell/templates/desktop/desktop-window';
-import { WindowElement } from 'ember-shell/ui';
+import WindowElement from 'ember-shell/mixins/element/window';
 
 export default Ember.Component.extend(WindowElement, {
   layout,

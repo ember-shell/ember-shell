@@ -1,1 +1,1 @@
-export { WindowComponent as default } from 'ember-shell/desktop';
+export { default } from 'ember-shell/components/desktop-window';

@@ -1,1 +1,1 @@
-export { StatusBarComponent as default } from 'ember-shell/desktop';
+export { default } from 'ember-shell/components/window/status-bar';

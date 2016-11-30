@@ -5,7 +5,7 @@ module.exports = {
   normalizeEntityName: function () {},
 
   afterInstall: function() {
-    return Promise.all([    
+    return Promise.all([
       this.addPackagesToProject([
         { name: 'broccoli-funnel', target: '^1.0.9' },
         { name: 'broccoli-merge-trees',target: '^1.1.5' },

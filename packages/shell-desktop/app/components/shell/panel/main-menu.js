@@ -1,1 +1,1 @@
-export { MainMenuComponent as default } from 'ember-shell/desktop';
+export { default } from 'ember-shell/components/panel/main-menu';

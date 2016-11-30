@@ -1,13 +1,12 @@
 /* jshint node: true */
 'use strict';
 
-var path = require('path');
-var Funnel = require('broccoli-funnel');
-var Rollup = require('broccoli-rollup');
-var mergeTrees = require('broccoli-merge-trees');
-var broccoliPostcss = require('broccoli-postcss');
-var { preprocessTemplates} = require('ember-cli-preprocess-registry/preprocessors');
-var { WatchedDir } = require('broccoli-source');
+const path = require('path');
+const Funnel = require('broccoli-funnel');
+const mergeTrees = require('broccoli-merge-trees');
+const broccoliPostcss = require('broccoli-postcss');
+const { preprocessTemplates} = require('ember-cli-preprocess-registry/preprocessors');
+const { WatchedDir } = require('broccoli-source');
 
 module.exports = {
   name: 'ember-shell',
@@ -22,7 +21,7 @@ module.exports = {
     this.treeForMethods['addon-templates'] = 'treeForAddonTemplates';
   },
 
-  isDevelopingAddon: function(){
+  isDevelopingAddon(){
     return true;
   },
 
@@ -30,44 +29,42 @@ module.exports = {
     this._super.included.apply(this, arguments);
   },*/
 
-  treeForApp: function() {
-    var tree = this._super.treeForApp.apply(this, arguments);
-    var packagesPath = this.packagesPath;
+  /**
+   * Adds all the package's app tree files to the main App Tree
+   */
+  treeForApp() {
+    const tree = this._super.treeForApp.apply(this, arguments);
 
-    var packages = require(packagesPath + '/index.js');
-    var addonApp = [];
+    const packages = require(this.packagesPath + '/index.js');
+    const addonApp = [];
 
-    packages.forEach(function(pkg) {
-      var pkgApp = path.join(packagesPath, pkg.name, 'app');
+    packages.forEach( pkg => {
+      const pkgApp = path.join(this.packagesPath, pkg.name, 'app');
       addonApp.push(new WatchedDir(pkgApp));
     });
 
-    var addonAppTree = mergeTrees(addonApp);
+    const addonAppTree = mergeTrees(addonApp);
 
     return tree ? mergeTrees([tree, addonAppTree]) : addonAppTree;
   },
 
-  treeForAddon: function() {
+  /**
+   * Adds all the files and templates related to the addon into
+   * the correspondent tree.
+   */
+  treeForAddon() {
     this._requireBuildPackages();
 
-    var packagesPath = this.packagesPath;
-    var packages = require(packagesPath + '/index.js');
+    const packages = require(this.packagesPath + '/index.js');
 
-    var addonJS = [];
-    var addonHbs = [];
+    const addonJS = [];
+    const addonHbs = [];
 
-    packages.forEach(function(pkg){
-      var pkgLib = path.join(packagesPath, pkg.name, 'lib');
-      var pkgTemplates = path.join(pkgLib, 'templates');
+    packages.forEach(pkg => {
+      const pkgLib = path.join(this.packagesPath, pkg.name, 'lib');
+      const pkgTemplates = path.join(pkgLib, 'templates');
 
-      addonJS.push(new Rollup(pkgLib, {
-        rollup: {
-          entry: 'index.js',
-          dest: pkg.module + '.js',
-          external: pkg.externals
-        },
-        annotation: pkg.module
-      }));
+      addonJS.push(new WatchedDir(pkgLib));
 
       if(pkg.hasTemplates){
         addonHbs.push(new Funnel(pkgTemplates, {
@@ -81,18 +78,23 @@ module.exports = {
       }
     });
 
-    var addonJsTree = this.processedAddonJsFiles(mergeTrees(addonJS));
-    var addonHbsTree = this.compileTemplates(mergeTrees(addonHbs));
+    const addonJsTree = this.processedAddonJsFiles(mergeTrees(addonJS, { overwrite: true }));
+    const addonHbsTree = this.compileTemplates(mergeTrees(addonHbs));
 
-    var emberShellTrees = mergeTrees([addonHbsTree, addonJsTree]);
-    var stylesTree = this.compileStyles(this._treeFor('addon-styles'));
+    const emberShellTrees = mergeTrees([addonHbsTree, addonJsTree]);
+    const stylesTree = this.compileStyles(this._treeFor('addon-styles'));
 
     return mergeTrees([emberShellTrees, stylesTree], {
-      annotation: 'Addon#treeForAddon(' + this.name + ')'
+      annotation: `Addon#treeForAddon(${this.name})`
     });
   },
 
-  compileTemplates: function(tree) {
+  /**
+   * Original function was overwritten due to a hard-coded path for addon's templates
+   * on_treeFor that won't let me customize where to find them 
+   * (https://github.com/ember-cli/ember-cli/blob/master/lib/models/addon.js#L660)
+   */
+  compileTemplates(tree) {
     this._requireBuildPackages();
     return preprocessTemplates(tree, {
       annotation: 'compileTemplates(ember-shell)',
@@ -100,13 +102,19 @@ module.exports = {
     });
   },
 
-  shouldCompileTemplates: function() {
+  /**
+   * Original function was overwritten (same reason as above)
+   */
+  shouldCompileTemplates() {
     return true;
   },
 
-  treeForAddonStyles: function () {
-    var stylesPath = path.join(this.packagesPath, 'shell-styles');
-    var inputTree = new Funnel(stylesPath, {
+  /**
+   * Prepares the custom styles path tree with postcss
+   */
+  treeForAddonStyles() {
+    const stylesPath = path.join(this.packagesPath, 'shell-styles');
+    const inputTree = new Funnel(stylesPath, {
       files: ['ember-shell.css'],
       srcDir: '/',
       destDir: 'ember-shell',
@@ -116,7 +124,7 @@ module.exports = {
       }
     });
 
-    var options = {
+    const options = {
       plugins: [
         { module: require('postcss-import'), options: {
             path: stylesPath,
@@ -137,8 +145,11 @@ module.exports = {
     return broccoliPostcss(inputTree, options);
   },
 
-  isAddon: function () {
-    var keywords = this.project.pkg.keywords;
+  /**
+   * Checks if current instance is meant for an addon or an application
+   */
+  isAddon() {
+    const keywords = this.project.pkg.keywords;
     return (keywords && keywords.indexOf('ember-addon') !== -1);
   }
 

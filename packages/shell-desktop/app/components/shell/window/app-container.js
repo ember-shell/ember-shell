@@ -1,1 +1,1 @@
-export { AppContainerComponent as default } from 'ember-shell/desktop';
+export { default } from 'ember-shell/components/window/app-container';

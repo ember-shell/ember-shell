@@ -1,1 +1,1 @@
-export { DebugToolbar as default } from 'ember-shell/debug';
+export { default } from 'ember-shell/components/debug-toolbar';

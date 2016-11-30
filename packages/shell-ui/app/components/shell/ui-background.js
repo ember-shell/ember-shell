@@ -1,1 +1,1 @@
-export { BackgroundComponent as default } from 'ember-shell/ui';
+export { default } from 'ember-shell/components/ui-background';

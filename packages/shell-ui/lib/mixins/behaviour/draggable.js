@@ -1,8 +1,9 @@
 /* global window */
 import Ember from 'ember';
-import { Draggable, PositionableBehaviour } from 'ember-shell/ui';
+import Draggable from 'ember-shell/system/draggable';
+import PositionableMixin from 'ember-shell/mixins/behaviour/positionable';
 
-export default Ember.Mixin.create(PositionableBehaviour, {
+export default Ember.Mixin.create(PositionableMixin, {
 
   draggableHandleClassName: 'esh-ui-draggable-handle',
   draggUpdateFn: null,
