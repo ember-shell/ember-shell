@@ -110,6 +110,25 @@ module.exports = {
   },
 
   /**
+   * Original function was overwritten to support package's public trees
+   */
+  treeForPublic(tree) {
+    const packages = require(this.packagesPath + '/index.js');
+    const addonPublic = [];
+
+    packages.forEach( pkg => {
+      const pkgPublic = path.join(this.packagesPath, pkg.name, 'public');
+      addonPublic.push(new Funnel(pkgPublic, {
+        destDir: '/'
+      }));
+    });
+
+    const addonPublicTree = mergeTrees(addonPublic);
+
+    return tree ? mergeTrees([tree, addonPublicTree]) : addonPublicTree;
+  },
+
+  /**
    * Prepares the custom styles path tree with postcss
    */
   treeForAddonStyles() {
