@@ -1,0 +1,1 @@
+export { default } from 'ember-shell/components/window/title-bar';

@@ -3,7 +3,7 @@
 import { expect } from 'chai';
 import { beforeEach } from 'mocha';
 import { describeModule, it } from 'ember-mocha';
-import Workspace from 'ember-shell/-private/workspace';
+import Workspace from 'ember-shell/system/workspace';
 
 const TEST_APP_NAME = 'test-app';
 
