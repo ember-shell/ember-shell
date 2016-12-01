@@ -1,10 +1,9 @@
-<!-- <p align="center">
-  <a href="http://ember-shell.com"><img width="512" src="http://ember-shell.com/ember-shell.png"></a>
+<p align="center">
+  <a href="http://ember-shell.com"><img width="100%" src="http://ember-shell.com/esh-desktop.svg"></a>
 </p>
 
 <br>
- -->
-# ember-shell
+
 <p align="left">
   <a href="https://travis-ci.org/marcemira/ember-shell"><img src="https://travis-ci.org/marcemira/ember-shell.svg?branch=master" alt="Build Status"></a>
   <a href="https://github.com/marcemira/ember-shell/releases"><img src="https://img.shields.io/github/release/ember-shell/ember-shell.svg" alt="Latest Release"></a>
@@ -14,6 +13,7 @@
   <a href="https://www.npmjs.com/package/ember-shell"><img src="https://img.shields.io/npm/dm/ember-shell.svg" alt="Downloads"></a>
 </p>
 
+# ember-shell
 This Ember addon provides a fully customizable OS-like shell environment and window manager to run your own [ember-engines](https://github.com/dgeb/ember-engines) apps.
 It consist of a set of core objects, components, mixins, services and blueprints that you can extend, customize and implement as you want.
 
@@ -54,7 +54,7 @@ Please make sure that the test pass by running `ember test`.
 Employs [Semantic Versioning 2.0.0](http://semver.org/)
 
 ### Copyright and License
-This addon is unaffiliated with the Ember project. Ember is a trademark of Tilde Inc.
+ember-shell and its source files are Copyright © 2016 [marcemira.com](http://marcemira.com/)
 The software is [MIT Licensed](LICENSE.md)
 
 ### Warranty
