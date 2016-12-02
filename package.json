@@ -1,6 +1,6 @@
 {
   "name": "ember-shell",
-  "version": "0.1.2-alpha",
+  "version": "0.2.0-alpha",
   "description": "An Ember addon that enables you to have a fully customizable OS-like shell, where you can run your own ember apps powered by ember-engines",
   "directories": {
     "doc": "docs",
