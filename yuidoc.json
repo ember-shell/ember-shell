@@ -5,7 +5,15 @@
   "version": "0.1.2-alpha",
   "options": {
     "paths": [
-      "addon/"
+      "packages/shell-app/lib",
+      "packages/shell-bus/lib",
+      "packages/shell-debug/lib",
+      "packages/shell-desktop/lib",
+      "packages/shell-main/lib",
+      "packages/shell-registry/lib",
+      "packages/shell-security/lib",
+      "packages/shell-store/lib",
+      "packages/shell-ui/lib"
     ],
     "exclude": "vendor",
     "outdir": "docs",
