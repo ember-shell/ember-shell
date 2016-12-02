@@ -3,6 +3,7 @@
 
 const path = require('path');
 const Funnel = require('broccoli-funnel');
+const existsSync = require('exists-sync');
 const mergeTrees = require('ember-cli/lib/broccoli/merge-trees');
 const broccoliPostcss = require('broccoli-postcss');
 const { preprocessTemplates} = require('ember-cli-preprocess-registry/preprocessors');
@@ -40,6 +41,9 @@ module.exports = {
 
     packages.forEach( pkg => {
       const pkgApp = path.join(this.packagesPath, pkg.name, 'app');
+      if (!existsSync(pkgApp)) {
+        return;
+      }
       addonApp.push(new WatchedDir(pkgApp));
     });
 
@@ -63,6 +67,10 @@ module.exports = {
     packages.forEach(pkg => {
       const pkgLib = path.join(this.packagesPath, pkg.name, 'lib');
       const pkgTemplates = path.join(pkgLib, 'templates');
+
+      if (!existsSync(pkgLib)) {
+        return;
+      }
 
       addonJS.push(new WatchedDir(pkgLib));
 
@@ -118,6 +126,9 @@ module.exports = {
 
     packages.forEach( pkg => {
       const pkgPublic = path.join(this.packagesPath, pkg.name, 'public');
+      if (!existsSync(pkgPublic)) {
+        return;
+      }
       addonPublic.push(new Funnel(pkgPublic, {
         destDir: '/'
       }));
