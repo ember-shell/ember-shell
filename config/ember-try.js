@@ -10,6 +10,11 @@ module.exports = {
         resolutions: {
           'ember': 'canary'
         }
+      },
+      npm: {
+        devDependencies: {
+          'ember-source': null
+        }
       }
     }
   ]

@@ -3,7 +3,7 @@
 
 const path = require('path');
 const Funnel = require('broccoli-funnel');
-const mergeTrees = require('broccoli-merge-trees');
+const mergeTrees = require('ember-cli/lib/broccoli/merge-trees');
 const broccoliPostcss = require('broccoli-postcss');
 const { preprocessTemplates} = require('ember-cli-preprocess-registry/preprocessors');
 const { WatchedDir } = require('broccoli-source');
