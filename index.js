@@ -47,9 +47,12 @@ module.exports = {
       addonApp.push(new WatchedDir(pkgApp));
     });
 
-    const addonAppTree = mergeTrees(addonApp);
+    const addonAppTree = mergeTrees(addonApp, { overwrite: true });
+    const excludedAppTree = new Funnel(addonAppTree, {
+      exclude: ['*.gitkeep']
+    });
 
-    return tree ? mergeTrees([tree, addonAppTree]) : addonAppTree;
+    return tree ? mergeTrees([tree, excludedAppTree]) : excludedAppTree;
   },
 
   /**
@@ -80,16 +83,23 @@ module.exports = {
             '*.hbs',
             '**/*.hbs'
           ],
+          exclude: ['*.gitkeep'],
           srcDir: '/',
           destDir: 'modules/ember-shell/templates/'+ pkg.module
         }));
       }
     });
 
-    const addonJsTree = this.processedAddonJsFiles(mergeTrees(addonJS, { overwrite: true }));
+    const addonJsTree = mergeTrees(addonJS, { overwrite: true });
+
+    const excludedJsTree = new Funnel(addonJsTree, {
+      exclude: ['*.gitkeep']
+    });
+
+    const finalAddonJsTree = this.processedAddonJsFiles(excludedJsTree);
     const addonHbsTree = this.compileTemplates(mergeTrees(addonHbs));
 
-    const emberShellTrees = mergeTrees([addonHbsTree, addonJsTree]);
+    const emberShellTrees = mergeTrees([addonHbsTree, finalAddonJsTree]);
     const stylesTree = this.compileStyles(this._treeFor('addon-styles'));
 
     return mergeTrees([emberShellTrees, stylesTree], {
@@ -99,7 +109,7 @@ module.exports = {
 
   /**
    * Original function was overwritten due to a hard-coded path for addon's templates
-   * on_treeFor that won't let me customize where to find them 
+   * on_treeFor that won't let me customize where to find them
    * (https://github.com/ember-cli/ember-cli/blob/master/lib/models/addon.js#L660)
    */
   compileTemplates(tree) {
@@ -130,7 +140,8 @@ module.exports = {
         return;
       }
       addonPublic.push(new Funnel(pkgPublic, {
-        destDir: '/'
+        destDir: '/',
+        exclude: ['.gitkeep'],
       }));
     });
 
