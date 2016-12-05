@@ -51,15 +51,21 @@ export default Ember.Service.extend({
     });
   },
 
-  exec(name){
+  exec(name, options){
     Ember.assert(`The application name should be a non-empty string`, typeof name === 'string' && name.length);
     Ember.assert(`Application "${name}" is not available.`, this.isAppAvailable(name));
     Ember.assert(`Application "${name}" is already running.`, !this.isAppRunning(name));
 
-    let app = App.create({
+    const appOptions = {
       pid: this.incrementProperty('lastPID'),
       name
-    });
+    };
+
+    if(options){
+      Object.assign(appOptions, options);
+    }
+
+    let app = App.create(appOptions);
 
     this.get('apps').addObject(app);
 

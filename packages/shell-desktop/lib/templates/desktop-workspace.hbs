@@ -1,9 +1,7 @@
-{{#unless yield}}
-
-  {{#each apps as |app|}}
-    {{shell/desktop-window app=app}}
-  {{/each}}
-
-{{else}}
-  {{yield}}
-{{/unless}}
+{{#each apps as |app|}}
+  {{#shell/desktop-window app=app as |window|}}
+    {{window.titleBar app=app}}
+    {{window.appContainer app=app}}
+    {{window.statusBar app=app}}
+  {{/shell/desktop-window}}
+{{/each}}

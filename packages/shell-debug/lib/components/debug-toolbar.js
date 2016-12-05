@@ -1,14 +1,38 @@
 import Ember from 'ember';
 import layout from 'ember-shell/templates/debug/debug-toolbar';
+import WindowElement from 'ember-shell/mixins/element/window';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(WindowElement, {
   layout,
-  tagName: 'debug-toolbar',
-  manager: Ember.inject.service('shell-manager'),
+
+  classNames: ['esh-debug-toolbar'],
+
+  init(){
+
+    const manager = this.get('manager');
+
+    this.app = Ember.Object.create({
+      title: "Debug Toolbar",
+      icon: 'theme/app-icons/debug-toolbar.svg'
+    });
+
+    this._super(...arguments);
+
+    const posX = (window.innerWidth - 600) - 50;
+    const posY = (window.innerHeight - 300) - 50;
+
+    this.updateStylesRenderPersist([
+      { declaration: 'sizeable', property: 'size.width', value: 600 },
+      { declaration: 'sizeable', property: 'size.height', value: 300 },
+      { declaration: 'positionable', property: 'position.x', value: posX },
+      { declaration: 'positionable', property: 'position.y', value: posY }
+    ]);
+  },
 
   actions: {
     startApp(appName){
-      this.get('manager').exec(appName);
+      const testIconUrl = '/img/test-icon.svg';
+      this.get('manager').exec(appName, { icon: testIconUrl });
       return false;
     }
 
