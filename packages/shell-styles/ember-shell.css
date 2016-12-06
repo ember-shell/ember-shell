@@ -4,14 +4,14 @@
 */
 
 /* Base Layout */
-@import 'base/layout';
+@import 'base/flex-class';
 @import 'base/media-queries';
 @import 'base/mixins';
 
 /* Components */
 @import 'components/ui-icon';
 @import 'components/debug-toolbar';
-@import 'components/desktop-area';
+@import 'components/shell-desktop';
 @import 'components/desktop-panel';
 @import 'components/desktop-window';
 @import 'components/desktop-workspace';

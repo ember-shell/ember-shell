@@ -2,7 +2,6 @@
   & .tg {
     border-collapse: collapse;
     border-spacing: 0;
-    border-color: #ccc;
     width: 100%;
   }
 
@@ -28,7 +27,7 @@
     border-width: 1px;
     overflow: hidden;
     word-break: normal;
-    border-color: #aabcfe;
+    border-bottom-color: #aabcfe;
     color: #039;
     background-color: #b9c9fe;
   }
@@ -120,6 +119,15 @@
     & input {
       width: 100%;
       border: none;
+      padding: 0 10px;
+      background-color: transparent;
+      color: #464646;
+    }
+
+    & button {
+      border: none;
+      background-color: #FFF;
+      border-left: 1px solid #DDD;
     }
   }
 

@@ -2,6 +2,8 @@
   {{#shell/desktop-window app=app as |window|}}
     {{window.titleBar app=app}}
     {{window.appContainer app=app}}
-    {{window.statusBar app=app}}
+    {{#if app.hasStatusBar }}
+      {{window.statusBar app=app}}
+    {{/if}}
   {{/shell/desktop-window}}
 {{/each}}

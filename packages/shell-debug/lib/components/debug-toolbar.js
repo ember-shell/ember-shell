@@ -13,7 +13,8 @@ export default Ember.Component.extend(WindowElement, {
 
     this.app = Ember.Object.create({
       title: "Debug Toolbar",
-      icon: 'theme/app-icons/debug-toolbar.svg'
+      icon: '/theme/app-icons/debug-toolbar.svg',
+      hasStatusBar: true
     });
 
     this._super(...arguments);
@@ -31,8 +32,12 @@ export default Ember.Component.extend(WindowElement, {
 
   actions: {
     startApp(appName){
-      const testIconUrl = '/img/test-icon.svg';
-      this.get('manager').exec(appName, { icon: testIconUrl });
+      this.get('manager').exec(appName, {
+        title: appName,
+        icon: '/theme/app-icons/test-icon.svg',
+        hasStatusBar: false
+      });
+      this.set('execAppName', '');
       return false;
     }
 

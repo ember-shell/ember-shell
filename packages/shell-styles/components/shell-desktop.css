@@ -5,11 +5,11 @@ shell-desktop {
     height: 100vh;
     top: 0;
     left: 0;
-    background-color: var(--esh-default-background);
     margin: 0;
     padding: 0;
-    font-size: var(--fs-normal);
-    font-family: var(--f-standard);
+    font-family: var(--esh-default-font);
+    font-size: var(--esh-default-font-size);
+    background-color: var(--esh-default-background);
     line-height: 1.4;
     overflow: hidden;
 }

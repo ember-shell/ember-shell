@@ -20,6 +20,11 @@ export default Ember.Object.extend({
   title: null,
   icon: null,
 
+  state: '', // change to a computed property + state machine,
+  memory: '', // ???
+
+  hasStatusBar: false,
+
   close(){
     return new Ember.RSVP.Promise(function(resolve/*, reject*/) {
       resolve(EXIT_OK);

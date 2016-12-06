@@ -1,8 +1,16 @@
 /* Desktop Window Variables */
 shell-window {
-    --background-color: var(--esh-default-background);
-    --window-border-color: var(--esh-grey-lighter);
+    --background-color: transparent;
+    --window-box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    --window-border-color: #DDD;
     --title-font: var(--esh-default-font);
+    --title-font-size: 20px;
+    --title-font-weight: 300;
+    --title-font-color: #464646;
+    --title-background-color: #F6F8F9;
+
+    --window-container-background: var(--esh-default-background);
+    --window-status-bar-background: #F6F8F9;
 }
 
 shell-window {
@@ -12,20 +20,37 @@ shell-window {
 
   & window-title-bar {
     border-bottom: 1px solid var(--window-border-color);
-    min-height: 40px;
-    max-height: 40px;
-    line-height: 40px;
+    background-color: var(--title-background-color);
+    min-height: 52px;
+    max-height: 52px;
+    line-height: 1;
+    user-select: none;
 
     & ui-icon {
-      margin: 0 5px;
+      margin-left: 10px;
     }
 
     & .esh-window-title-bar-title {
       width: 100%;
-      font: var(--title-font) lighter;
-      min-height: 40px;
+      margin-left: 10px;
+      font-family: var(--title-font);
+      font-size: var(--title-font-size);
+      font-weight: var(--title-font-weight);
+      color: var(--title-font-color);
+      min-height: 52px;
     }
   }
+
+  & window-app-container {
+    background: var(--window-container-background);
+  }
+
+  & window-status-bar {
+    max-height: 40px;
+    height: 40px;
+    background-color: var(--window-status-bar-background);
+  }
+
 }
 
 
