@@ -19,7 +19,6 @@ describeComponent(
       //     template content
       //   {{/shell/desktop-panel}}
       // `);
-      // 
       //
 
       this.set('panel', Panel.create());
@@ -27,6 +26,6 @@ describeComponent(
       this.render(hbs`{{shell/desktop-panel panel=panel}}`);
       expect(this.$()).to.have.length(1);
     });
-    
+
   }
 );
