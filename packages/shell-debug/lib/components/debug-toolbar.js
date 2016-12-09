@@ -7,11 +7,14 @@ export default Ember.Component.extend(WindowElement, {
 
   classNames: ['esh-debug-toolbar'],
 
+  execAppName: 'esh-task-manager',
+
   init(){
 
     const manager = this.get('manager');
 
     this.app = Ember.Object.create({
+      name: 'debug-toolbar',
       title: "Debug Toolbar",
       icon: '/theme/app-icons/debug-toolbar.svg',
       hasStatusBar: true
@@ -32,12 +35,16 @@ export default Ember.Component.extend(WindowElement, {
 
   actions: {
     startApp(appName){
+      const manager = this.get('manager');
+
       this.get('manager').exec(appName, {
         title: appName,
         icon: '/theme/app-icons/test-icon.svg',
         hasStatusBar: false
       });
+
       this.set('execAppName', '');
+
       return false;
     }
 

@@ -16,6 +16,7 @@ module.exports = [
   {
     name: 'shell-app',
     module: 'app',
+    hasTemplates: true
   },
   {
     name: 'shell-bus',

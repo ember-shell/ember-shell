@@ -14,7 +14,9 @@ module.exports = {
         { name: 'postcss-cssnext', target: '^2.8.0' },
         { name: 'cssnano', target: '^3.8.0' },
         { name: 'ember-run-raf', target: 'git+https://github.com/runspired/ember-run-raf.git#4e9fa2859dd9eb2129ad6d72fac37ab65a4fc0cd' },
-        { name: 'ember-variable-styles', target: '^0.0.3' }
+        { name: 'ember-variable-styles', target: '^0.0.3' },
+        { name: 'esh-task-manager:', target: '^0.1.0-alpha' },
+        { name: 'esh-test-app:', target: '^0.1.0-alpha' }
       ]),
       /*this.addBowerPackagesToProject([
         { name: 'animation-frame', target: '^0.2.4' }

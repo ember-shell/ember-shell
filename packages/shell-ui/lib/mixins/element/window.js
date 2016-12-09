@@ -1,11 +1,14 @@
 import Ember from 'ember';
-import SizeableMixin from 'ember-shell/mixins/behaviour/sizeable';
 import DraggableMixin from 'ember-shell/mixins/behaviour/draggable';
+import SizeableMixin from 'ember-shell/mixins/behaviour/sizeable';
+import ReSizeableMixin from 'ember-shell/mixins/behaviour/resizeable';
 
-export default Ember.Mixin.create(SizeableMixin, DraggableMixin, {
+export default Ember.Mixin.create(
+  SizeableMixin,
+  DraggableMixin,
+  ReSizeableMixin, {
 
   tagName: 'shell-window',
-
   classNames: ['flex-col'],
 
   manager: Ember.inject.service('shell-manager'),

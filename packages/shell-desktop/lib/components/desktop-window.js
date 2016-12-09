@@ -4,6 +4,11 @@ import WindowElement from 'ember-shell/mixins/element/window';
 
 export default Ember.Component.extend(WindowElement, {
   layout,
+  attributeBindings: ['elementName:id'],
+
+  elementName: Ember.computed.alias('app.elementName'),
+
+  hasFocus: false,
 
   init(){
     this._super(...arguments);
@@ -14,6 +19,6 @@ export default Ember.Component.extend(WindowElement, {
       { declaration: 'positionable', property: 'position.x', value: 50 },
       { declaration: 'positionable', property: 'position.y', value: 100 }
     ]);
-  }
+  },
 
 });

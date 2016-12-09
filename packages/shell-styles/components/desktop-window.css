@@ -41,7 +41,7 @@ shell-window {
     }
   }
 
-  & window-app-container {
+  & .esh-app-container {
     background: var(--window-container-background);
   }
 

@@ -2,7 +2,7 @@
   {{#shell/desktop-window app=app as |window|}}
     {{window.titleBar app=app}}
     {{window.appContainer app=app}}
-    {{#if app.hasStatusBar }}
+    {{#if app.hasStatusBar}}
       {{window.statusBar app=app}}
     {{/if}}
   {{/shell/desktop-window}}

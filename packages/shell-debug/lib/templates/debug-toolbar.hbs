@@ -1,5 +1,5 @@
 {{shell/window/title-bar app=app showIcon=true}}
-{{#shell/window/app-container}}
+{{#shell/app-container app=app}}
   <div class="tg-wrap flex-box flex-one">
     <table id="tg-VYONW" class="tg">
       <thead>
@@ -11,16 +11,16 @@
         </tr>
       </thead>
       {{#each manager.apps as |app|}}
-        <tr>
+        {{#link-to app.name tagName="tr"}}
           <th class="tg-yw4l">{{app.pid}}</th>
           <th class="tg-yw4l">{{app.name}}</th>
           <th class="tg-yw4l">{{app.state}}</th>
           <th class="tg-yw4l">{{app.memory}}</th>
-        </tr>
+        {{/link-to}}
       {{/each}}
     </table>
   </div>
-{{/shell/window/app-container}}
+{{/shell/app-container}}
 {{#shell/window/status-bar classNames="actions"}}
   {{input value=execAppName}}<button {{action 'startApp' execAppName}}>Execute!</button>
 {{/shell/window/status-bar}}

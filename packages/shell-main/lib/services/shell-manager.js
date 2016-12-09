@@ -7,6 +7,7 @@ import Ember from 'ember';
 import App from 'ember-shell/system/application';
 import Panel from 'ember-shell/system/panel';
 import Workspace from 'ember-shell/system/workspace';
+import EngineDriver from 'ember-shell/system/engine-driver';
 
 /**
  * `shell-manager` handles and exposes core functionalities such as shell-apps
@@ -18,12 +19,22 @@ import Workspace from 'ember-shell/system/workspace';
  */
 export default Ember.Service.extend({
 
+  assetLoader: Ember.inject.service(),
+
   init(){
     this._super(...arguments);
 
     this.apps = Ember.A();
     this.panels = Ember.A();
     this.workspaces = Ember.A();
+
+    const assetLoader = this.get('assetLoader');
+    const owner = Ember.getOwner(this);
+
+    this.driver = new EngineDriver({
+      assetLoader,
+      owner
+    });
 
     this.lastPID = 0;
     this.currentWorkspaceNumber = 0;
@@ -34,15 +45,10 @@ export default Ember.Service.extend({
 
   /* Apps */
 
-  appsAvailable: Ember.computed(function(){
-    /*let owner = Ember.getOwner(this);*/
-    return Ember.A();
-  }),
+  appsAvailable: Ember.computed.readOnly('driver.appsAvailable'),
 
-  isAppAvailable(/*name*/){
-    /*let owner = Ember.getOwner(this);
-    return owner.hasRegistration(`engine:${name}`);*/
-    return true;
+  isAppAvailable(name) {
+    return this.get('driver.appsAvailable').includes(name);
   },
 
   isAppRunning(name){
@@ -56,20 +62,25 @@ export default Ember.Service.extend({
     Ember.assert(`Application "${name}" is not available.`, this.isAppAvailable(name));
     Ember.assert(`Application "${name}" is already running.`, !this.isAppRunning(name));
 
-    const appOptions = {
-      pid: this.incrementProperty('lastPID'),
-      name
-    };
+    const newPID = this.incrementProperty('lastPID');
 
-    if(options){
-      Object.assign(appOptions, options);
-    }
+    this.driver.executeEngine(name, newPID).then( (engineInstance) => {
+      const appOptions = {
+        pid: newPID,
+        engineInstance,
+        name
+      };
 
-    let app = App.create(appOptions);
+      if(options){
+        Object.assign(appOptions, options);
+      }
 
-    this.get('apps').addObject(app);
+      const app = App.create(appOptions);
 
-    return app;
+      this.get('apps').addObject(app);
+
+      return app;
+    });
   },
 
   terminate(name, kill){
