@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/marcemira/ember-shell.git"
+    "url": "git+https://github.com/ember-shell/ember-shell.git"
   },
   "engines": {
     "node": ">= 4"
@@ -44,6 +44,7 @@
     "ember-cli-uglify": "^1.2.0",
     "ember-cli-yuidoc": "0.8.7",
     "ember-disable-prototype-extensions": "^1.1.0",
+    "ember-engines": "0.4.0",
     "ember-export-application-global": "^1.0.5",
     "ember-load-initializers": "^0.6.0",
     "ember-resolver": "^2.0.3",
@@ -51,6 +52,8 @@
     "ember-sinon-chai": "0.1.1",
     "ember-source": "^2.11.0-beta.2",
     "ember-variable-styles": "^0.0.3",
+    "esh-task-manager": "^0.1.0-alpha",
+    "esh-test-app": "^0.1.0-alpha",
     "exists-sync": "0.0.4",
     "loader.js": "^4.0.10",
     "postcss-cssnext": "^2.8.0",
