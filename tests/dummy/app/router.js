@@ -7,8 +7,6 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.mount('esh-task-manager');
-  this.mount('esh-test-app');
 });
 
 export default Router;

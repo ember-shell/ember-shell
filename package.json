@@ -48,6 +48,7 @@
     "ember-engines": "0.4.0",
     "ember-export-application-global": "^1.0.5",
     "ember-load-initializers": "^0.6.0",
+    "ember-network": "0.3.1",
     "ember-resolver": "^2.0.3",
     "ember-run-raf": "git+https://github.com/runspired/ember-run-raf.git#4e9fa2859dd9eb2129ad6d72fac37ab65a4fc0cd",
     "ember-sinon-chai": "0.1.1",
@@ -66,7 +67,9 @@
   },
   "keywords": [
     "ember-addon",
-    "ember-shell"
+    "ember-shell",
+    "ember-engines",
+    "ember-shell-app"
   ],
   "ember-addon": {
     "configPath": "tests/dummy/config"
