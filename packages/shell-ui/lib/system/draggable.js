@@ -42,10 +42,10 @@ export default class Draggable {
       return false;
     }
 
-    const $offset = Ember.$(this.target).offset();
-
     this.isDragging = true;
-    document.body.style.cursor = 'move';
+
+    const $offset = Ember.$(this.target).offset();
+    Ember.$('body').addClass('esh-dragging');
 
     const pageX = event.pageX || event.clientX + this.parent.scrollLeft;
     const pageY = event.pageY || event.clientY + this.parent.scrollTop;
@@ -72,7 +72,7 @@ export default class Draggable {
   draggEnd(){
     this.isDragging = false;
     cancelAnimationFrame(this.runraf);
-    document.body.style.cursor = 'auto';
+    Ember.$('body').removeClass('esh-dragging');
 
     window.removeEventListener('mousemove', this.draggMoveHandler, false);
     window.removeEventListener('touchmove', this.draggMoveHandler, false);

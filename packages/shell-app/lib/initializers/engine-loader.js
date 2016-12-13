@@ -11,15 +11,13 @@ const {
  */
 export function initialize(application) {
   application.deferReadiness();
-
   application.engines = {};
 
-  let engineConfigs = fetch('/asset-manifest.json').then(function(response) {
+  fetch('/asset-manifest.json').then(function(response) {
     return response.json();
   }).then( ({ bundles }) => {
 
     for(const engine in bundles){
-
       application.engines[camelize(engine)] = {
         dependencies: {
           services: [
@@ -34,9 +32,7 @@ export function initialize(application) {
     };
 
     application.advanceReadiness();
-
   });
-
 }
 
 export default {

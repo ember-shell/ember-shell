@@ -1,8 +1,8 @@
 {{#if hasBlock}}
   {{yield}}
 {{else}}
-  {{#if showIcon}}
-    {{shell/ui-icon iconUrl=app.icon iconSize="24"}}
+  {{#if application.icon}}
+    {{shell/ui-icon iconUrl=application.icon iconSize="32"}}
   {{/if}}
-  <div class="flex-box flex-center esh-window-title-bar-title esh-ui-draggable-handle">{{app.title}}</div>
+  <div class="flex-box flex-center esh-window-title-bar-title esh-ui-draggable-handle">{{application.title}}</div>
 {{/if}}

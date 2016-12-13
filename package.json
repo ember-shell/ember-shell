@@ -1,6 +1,6 @@
 {
   "name": "ember-shell",
-  "version": "0.2.0-alpha",
+  "version": "0.3.0-alpha",
   "description": "An Ember addon that enables you to have a fully customizable OS-like shell, where you can run your own ember apps powered by ember-engines",
   "directories": {
     "doc": "docs",
@@ -17,7 +17,7 @@
     "url": "git+https://github.com/ember-shell/ember-shell.git"
   },
   "engines": {
-    "node": ">= 4"
+    "node": ">= 7"
   },
   "author": "Marcelo Mira",
   "license": "MIT",
@@ -45,16 +45,16 @@
     "ember-cli-uglify": "^1.2.0",
     "ember-cli-yuidoc": "0.8.7",
     "ember-disable-prototype-extensions": "^1.1.0",
-    "ember-engines": "0.4.0",
+    "ember-engines": "git+https://github.com/ember-engines/ember-engines.git",
     "ember-export-application-global": "^1.0.5",
     "ember-load-initializers": "^0.6.0",
     "ember-network": "0.3.1",
     "ember-resolver": "^2.0.3",
     "ember-run-raf": "git+https://github.com/runspired/ember-run-raf.git#4e9fa2859dd9eb2129ad6d72fac37ab65a4fc0cd",
     "ember-sinon-chai": "0.1.1",
-    "ember-source": "^2.11.0-beta.2",
+    "ember-source": "^2.12.0-alpha.1",
     "ember-variable-styles": "^0.0.3",
-    "esh-task-manager": "^0.1.0-alpha",
+    "esh-task-manager": "^0.2.0-alpha",
     "esh-test-app": "^0.1.0-alpha",
     "exists-sync": "0.0.4",
     "loader.js": "^4.0.10",

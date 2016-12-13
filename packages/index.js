@@ -23,11 +23,6 @@ module.exports = [
     module: 'bus',
   },
   {
-    name: 'shell-debug',
-    module: 'debug',
-    hasTemplates: true
-  },
-  {
     name: 'shell-desktop',
     module: 'desktop',
     hasTemplates: true

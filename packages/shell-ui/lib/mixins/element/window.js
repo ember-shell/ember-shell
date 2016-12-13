@@ -8,8 +8,7 @@ export default Ember.Mixin.create(
   DraggableMixin,
   ReSizeableMixin, {
 
-  tagName: 'shell-window',
-  classNames: ['flex-col'],
+  classNames: ['esh-window','flex-col'],
 
   manager: Ember.inject.service('shell-manager'),
 

@@ -4,21 +4,41 @@ import WindowElement from 'ember-shell/mixins/element/window';
 
 export default Ember.Component.extend(WindowElement, {
   layout,
-  attributeBindings: ['elementName:id'],
-
-  elementName: Ember.computed.alias('app.elementName'),
-
-  hasFocus: false,
 
   init(){
+    this.app.window = this;
+    this.tagName = this.app.name;
+
     this._super(...arguments);
-    this.set('app.window', this);
+
     this.updateStylesRenderPersist([
-      { declaration: 'sizeable', property: 'size.width', value: 320 },
-      { declaration: 'sizeable', property: 'size.height', value: 240 },
+      { declaration: 'sizeable', property: 'size.width', value: 450 },
+      { declaration: 'sizeable', property: 'size.height', value: 300 },
       { declaration: 'positionable', property: 'position.x', value: 50 },
-      { declaration: 'positionable', property: 'position.y', value: 100 }
+      { declaration: 'positionable', property: 'position.y', value: 80 }
     ]);
+  },
+
+  didInsertElement() {
+    this._setupController();
+    this._super(...arguments);
+  },
+
+  _setupController(){
+    const applicationElement = this.element;
+    const engine = this.app.engineInstance;
+    const windowComponent = this;
+    const application = this.app;
+
+    let applicationController = engine.resolveRegistration('controller:application');
+    engine.unregister('controller:application');
+
+    applicationController = applicationController.reopen({
+      applicationElement,
+      application
+    });
+
+    engine.register('controller:application', applicationController);
   },
 
 });

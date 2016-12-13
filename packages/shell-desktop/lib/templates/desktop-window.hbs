@@ -1,5 +1,5 @@
-{{yield (hash
-  titleBar=(component "shell/window/title-bar" window=this)
-  appContainer=(component "shell/app-container" window=this)
-  statusBar=(component "shell/window/status-bar" window=this)
-)}}
+{{#if hasBlock}}
+  {{yield}}
+{{else}}
+  {{outlet app.name}}
+{{/if}}

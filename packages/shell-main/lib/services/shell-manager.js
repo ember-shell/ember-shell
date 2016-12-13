@@ -64,10 +64,16 @@ export default Ember.Service.extend({
 
     const newPID = this.incrementProperty('lastPID');
 
-    this.driver.executeEngine(name, newPID).then( (engineInstance) => {
+    return this.driver.executeEngine(name, newPID).then( (engineInstance) => {
+
+      this._checkApplicationIntegrity(name, engineInstance);
+
       const appOptions = {
         pid: newPID,
         engineInstance,
+        title: engineInstance.title || name,
+        icon: '/theme/app-icons/default.svg',
+        elementId: `${newPID}-${name}`,
         name
       };
 
@@ -77,10 +83,32 @@ export default Ember.Service.extend({
 
       const app = App.create(appOptions);
 
+      let applicationRoute = engineInstance.resolveRegistration('route:application');
+      engineInstance.unregister('route:application');
+
+      applicationRoute = applicationRoute.reopen({
+        renderTemplate() {
+          this._super(...arguments);
+          this.render({
+            outlet: name
+          });
+        }
+      });
+
+      engineInstance.register('route:application', applicationRoute);
+
       this.get('apps').addObject(app);
 
       return app;
     });
+  },
+
+  _checkApplicationIntegrity(name, engineInstance){
+    const hasApplicationRoute = engineInstance.hasRegistration('route:application');
+    const hasApplicationController = engineInstance.hasRegistration('controller:application');
+
+    Ember.assert(`The application ${name} lacks a required application route file`, hasApplicationRoute);
+    Ember.assert(`The application ${name} lacks a required application controller file`, hasApplicationController);
   },
 
   terminate(name, kill){
