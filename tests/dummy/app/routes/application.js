@@ -9,11 +9,8 @@ export default Ember.Route.extend({
 
     Ember.run.scheduleOnce('afterRender', this, () => {
       const manager = this.get('manager');
-      manager.exec('esh-task-manager').then( () => {
-        Ember.run.next(this, () => {
-          this.transitionTo('esh-task-manager');
-        });
-      });
+
+      manager.exec('esh-task-manager');
     });
   }
 
