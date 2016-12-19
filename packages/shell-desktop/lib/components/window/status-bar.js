@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from 'ember-shell/templates/desktop/window/title-bar';
+import layout from 'ember-shell/templates/desktop/window/status-bar';
 
 const StatusBarComponent = Ember.Component.extend({
   layout,

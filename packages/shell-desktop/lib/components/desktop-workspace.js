@@ -7,5 +7,6 @@ export default Ember.Component.extend({
   tagName: 'shell-workspace',
 
   manager: Ember.inject.service('shell-manager'),
-  apps: Ember.computed.alias('manager.apps'),
+  apps: Ember.computed.alias('manager.apps')
+
 });
