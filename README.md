@@ -5,10 +5,10 @@
 <br>
 
 <p align="left">
-  <a href="https://travis-ci.org/marcemira/ember-shell"><img src="https://travis-ci.org/marcemira/ember-shell.svg?branch=master" alt="Build Status"></a>
-  <a href="https://github.com/marcemira/ember-shell/releases"><img src="https://img.shields.io/github/release/ember-shell/ember-shell.svg" alt="Latest Release"></a>
-  <a href="https://david-dm.org/marcemira/ember-shell"><img src="https://img.shields.io/david/marcemira/ember-shell.svg" alt="Dependencies"></a><br>
-  <a href="https://david-dm.org/marcemira/ember-shell#info=devDependencies"><img src="https://img.shields.io/david/dev/marcemira/ember-shell.svg" alt="Dev Dependencies"></a>
+  <a href="https://travis-ci.org/ember-shell/ember-shell"><img src="https://travis-ci.org/ember-shell/ember-shell.svg?branch=master" alt="Build Status"></a>
+  <a href="https://github.com/ember-shell/ember-shell/releases"><img src="https://img.shields.io/github/release/ember-shell/ember-shell.svg" alt="Latest Release"></a>
+  <a href="https://david-dm.org/ember-shell/ember-shell"><img src="https://img.shields.io/david/ember-shell/ember-shell.svg" alt="Dependencies"></a><br>
+  <a href="https://david-dm.org/ember-shell/ember-shell#info=devDependencies"><img src="https://img.shields.io/david/dev/ember-shell/ember-shell.svg" alt="Dev Dependencies"></a>
   <a href="https://emberobserver.com/addons/ember-shell"><img src="https://emberobserver.com/badges/ember-shell.svg" alt="Ember Observer Score"></a>
   <a href="https://www.npmjs.com/package/ember-shell"><img src="https://img.shields.io/npm/dm/ember-shell.svg" alt="Downloads"></a>
 </p>
@@ -30,7 +30,7 @@ ember serve
 
 ### Specs (in-progress)
 
-You can check [here](https://github.com/marcemira/ember-shell/blob/master/specs/arch.md) the current (in-progress) specifications for this project.
+You can check [here](https://github.com/ember-shell/ember-shell/blob/master/specs/arch.md) the current (in-progress) specifications for this project.
 
 ### Demo
 The ember-shell demo lives under `tests/dummy`, you can run it by doing:
