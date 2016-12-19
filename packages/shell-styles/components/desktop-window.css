@@ -1,6 +1,6 @@
 /* Desktop Window Variables */
 .esh-window {
-    --background-color: transparent;
+    --background-color: #FFF;
     --window-box-shadow: 0 0 30px rgba(0,0,0,0.5);
     --window-border-color: #DDD;
     --window-border-radius: 4px;
