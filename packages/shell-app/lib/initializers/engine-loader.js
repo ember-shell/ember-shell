@@ -26,9 +26,9 @@ export function initialize(application) {
         }
       }
 
-      Router.map(function(){
+      /*Router.map(function(){
         this.mount(engine);
-      });
+      });*/
     };
 
     application.advanceReadiness();

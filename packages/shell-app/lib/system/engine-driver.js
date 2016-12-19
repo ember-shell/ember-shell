@@ -1,74 +1,135 @@
 import Ember from 'ember';
 
+/**
+ @module ember-shell
+ @submodule engine-app
+ */
+
 const {
-  A,
+  run,
+  RSVP,
   assert,
-  RSVP
+  isEmpty
 } = Ember;
 
+/**
+ * It enables to controll every aspect of currently available engines,
+ * from asset loading to engine instance initialization and unregistering.
+ *
+ * @class EngineDriver
+ * @param {Object} owner An owner object from the Host Application
+ */
 export default class EngineDriver {
 
-  constructor({ assetLoader, owner }) {
-    this.assetLoader = assetLoader;
+  constructor(owner) {
     this.owner = owner;
+
+    this.host = owner.lookup('application:main');
+    this.assetLoader = owner.lookup('service:asset-loader');
 
     this._enginePromises = {};
     this._engineInstances = {};
+    this._registeredEngines = {};
 
-    this.appsAvailable = this._updateAppsAvailable();
+    this._availableEngines = this._updateAvailableEngines();
   }
 
-  _updateAppsAvailable() {
-    const bundles = this.assetLoader.getManifest().bundles;
-    return this.appsAvailable = Object.keys(bundles);
+  /**
+    Handles the engine's asset loading and returns an engineInstance object
+    ready to be bootead.
+
+    For example:
+
+    ```javascript
+    let engineDriver = new EngineDriver(owner);
+    engineDriver.loadEngine('esh-test-app', 1).then( (engineInstance) => {
+      engineInstance.boot();
+    });
+    ```
+
+    @method loadEngine
+    @public
+  */
+  loadEngine(name, id){
+    return this.loadEngineInstance({ name, id }).then( (engineInstance) => {
+
+      engineInstance.rootElement = name;
+      engineInstance.boot();
+
+      return engineInstance;
+    });
   }
 
-  _engineIsLoaded(name) {
-    return this.owner.hasRegistration('engine:' + name);
+  isEngineAvailable(name) {
+    return this.getAvailableEngines().includes(name);
   }
 
-  _registerEngine(name) {
-    if (!this.owner.hasRegistration('engine:' + name)) {
-      this.owner.register('engine:' + name, window.require(name + '/engine').default);
-    }
+  getAvailableEngines() {
+    return this._updateAvailableEngines();
   }
 
-  _getEngineInstance({ name, instanceId }) {
-    let engineInstances = this._engineInstances;
-    return engineInstances[name] && engineInstances[name][instanceId];
+  getEngineInstance(name, id){
+    return this._engineInstances[name][id];
   }
 
-  _loadEngineInstance({ name, instanceId }) {
+  isRegistered(name) {
+    return this._registeredEngines[name] || false;
+  }
+
+  isInstantiated(name, id){
+    return !isEmpty(this._engineInstances[name][id]);
+  }
+
+  loadEngineInstance({ name, id }) {
     let enginePromises = this._enginePromises;
 
     if (!enginePromises[name]) {
       enginePromises[name] = {};
     }
 
-    let enginePromise = enginePromises[name][instanceId];
+    let enginePromise = enginePromises[name][id];
 
-    // We already have a Promise for this engine instance
     if (enginePromise) {
       return enginePromise;
     }
 
-    if (this._engineIsLoaded(name)) {
-      // The Engine is loaded, but has no Promise
+    if (this.isRegistered(name)) {
       enginePromise = RSVP.resolve();
     } else {
-      // The Engine is not loaded and has no Promise
-      enginePromise = this.assetLoader.loadBundle(name).then(() => this._registerEngine(name));
+      enginePromise = this.assetLoader.loadBundle(name).then( () => {
+        this._registerEngine(name);
+      });
     }
 
-    return enginePromises[name][instanceId] = enginePromise.then(() => {
-      return this._constructEngineInstance({ name, instanceId });
+    return enginePromises[name][id] = enginePromise.then( () => {
+      return this._constructEngineInstance({ name, id });
     });
   }
 
-  _constructEngineInstance({ name, instanceId }) {
+  unloadEngineInstance({name, id}) {
+    if (this.isInstantiated(name, id)) {
+      let engineInstance = this.getEngineInstance(name, id);
+      this.owner.unregister(`engine:${name}`);
+      run(engineInstance, 'destroy');
+    }
+  }
+
+  _updateAvailableEngines() {
+    const bundles = this.assetLoader.getManifest().bundles;
+    return this._availableEngines = Object.keys(bundles);
+  }
+
+  _registerEngine(name) {
+    if (!this.isRegistered(name)) {
+      this.owner.register(`engine:${name}`, window.require(name + '/engine').default);
+      this._registeredEngines[name] = true;
+    }
+  }
+
+  _constructEngineInstance({ name, id }) {
     assert(
-      'You attempted to execute an engine named \'' + name + '\', but it cannot be found.',
-      this.owner.hasRegistration(`engine:${name}`)
+      `You attempted to execute an engine named '${name}', but it cannot be found.`,
+      this.isRegistered(name)
     );
 
     let engineInstances = this._engineInstances;
@@ -79,16 +140,7 @@ export default class EngineDriver {
 
     let engineInstance = this.owner.buildChildEngineInstance(name);
 
-    return engineInstances[name][instanceId] = engineInstance;
-  }
-
-  executeEngine(name, id) {
-    return this._loadEngineInstance({ name, id }).then( (engineInstance) => {
-
-      engineInstance.boot();
-
-      return engineInstance;
-    });
+    return engineInstances[name][id] = engineInstance;
   }
 
 };
