@@ -16,15 +16,11 @@ module.exports = [
   {
     name: 'shell-app',
     module: 'app',
+    hasTemplates: true
   },
   {
     name: 'shell-bus',
     module: 'bus',
-  },
-  {
-    name: 'shell-debug',
-    module: 'debug',
-    hasTemplates: true
   },
   {
     name: 'shell-desktop',

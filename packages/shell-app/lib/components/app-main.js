@@ -1,8 +1,9 @@
 import Ember from 'ember';
-import layout from 'ember-shell/templates/desktop/window/app-container';
+import layout from 'ember-shell/templates/app/app-main';
 
 export default Ember.Component.extend({
   layout,
-  tagName: 'window-app-container',
+
+  tagName: ['app-main'],
   classNames: ['flex-box', 'flex-one']
 });

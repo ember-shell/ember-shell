@@ -7,12 +7,14 @@ export default Ember.Component.extend(WindowElement, {
 
   init(){
     this._super(...arguments);
-    this.set('app.window', this);
+
+    this.app.window = this;
+
     this.updateStylesRenderPersist([
-      { declaration: 'sizeable', property: 'size.width', value: 320 },
-      { declaration: 'sizeable', property: 'size.height', value: 240 },
+      { declaration: 'sizeable', property: 'size.width', value: 450 },
+      { declaration: 'sizeable', property: 'size.height', value: 300 },
       { declaration: 'positionable', property: 'position.x', value: 50 },
-      { declaration: 'positionable', property: 'position.y', value: 100 }
+      { declaration: 'positionable', property: 'position.y', value: 80 }
     ]);
   }
 

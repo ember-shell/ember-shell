@@ -1,8 +1,14 @@
 import Ember from 'ember';
 import layout from 'ember-shell/templates/desktop/window/status-bar';
 
-export default Ember.Component.extend({
+const StatusBarComponent = Ember.Component.extend({
   layout,
-  tagName: 'window-status-bar',
-  classNames: ['flex-box']
+  tagName: 'status-bar',
+  classNames: ['flex-box', 'flex-center-center']
 });
+
+StatusBarComponent.reopenClass({
+  positionalParams: ['application']
+});
+
+export default StatusBarComponent;

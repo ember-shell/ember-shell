@@ -1,4 +1,4 @@
-export default class Draggable {
+export default class Resizeable {
 
   constructor(target, options){
     this.target = target;
@@ -9,7 +9,6 @@ export default class Draggable {
     this.parent = target.parentNode;
 
     this.options = {
-      handlerClass: 'esh-ui-draggable-handle',
       updateFn: () => {},
       startCallback: null,
       endCallback: null,
@@ -20,15 +19,15 @@ export default class Draggable {
       Object.assign(this.options, options);
     }
 
-    this.draggStartHandler = event => {
+    this.draggStartHandler = (event) => {
       this.draggStart(event);
     };
 
-    this.draggEndHandler = event => {
+    this.draggEndHandler = (event) => {
       this.draggEnd(event);
     };
 
-    this.draggMoveHandler = event => {
+    this.draggMoveHandler = (event) => {
       this.draggMove(event);
     };
 
@@ -42,10 +41,10 @@ export default class Draggable {
       return false;
     }
 
-    this.isDragging = true;
-
     const $offset = Ember.$(this.target).offset();
-    Ember.$('body').addClass('esh-dragging');
+
+    this.isDragging = true;
+    document.body.style.cursor = 'move';
 
     const pageX = event.pageX || event.clientX + this.parent.scrollLeft;
     const pageY = event.pageY || event.clientY + this.parent.scrollTop;
@@ -72,7 +71,7 @@ export default class Draggable {
   draggEnd(){
     this.isDragging = false;
     cancelAnimationFrame(this.runraf);
-    Ember.$('body').removeClass('esh-dragging');
+    document.body.style.cursor = 'auto';
 
     window.removeEventListener('mousemove', this.draggMoveHandler, false);
     window.removeEventListener('touchmove', this.draggMoveHandler, false);

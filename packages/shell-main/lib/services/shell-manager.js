@@ -1,29 +1,39 @@
+import Ember from 'ember';
+import Panel from 'ember-shell/system/panel';
+import Workspace from 'ember-shell/system/workspace';
+import { ApplicationManager } from 'ember-shell/system/application';
+
 /**
  * @module ember-shell
  * @submodule shell-manager
  */
 
-import Ember from 'ember';
-import App from 'ember-shell/system/application';
-import Panel from 'ember-shell/system/panel';
-import Workspace from 'ember-shell/system/workspace';
+const {
+  A,
+  assert,
+  Service,
+  getOwner,
+  computed
+} = Ember;
 
 /**
  * `shell-manager` handles and exposes core functionalities such as shell-apps
  *
  * @class ShellManager
  * @namespace ember-shell
- * @extends Ember.Service
+ * @extends Service
  * @public
  */
-export default Ember.Service.extend({
+export default Service.extend({
 
   init(){
     this._super(...arguments);
 
-    this.apps = Ember.A();
-    this.panels = Ember.A();
-    this.workspaces = Ember.A();
+    this.apps = A();
+    this.panels = A();
+    this.workspaces = A();
+
+    this.appManager = new ApplicationManager(getOwner(this));
 
     this.lastPID = 0;
     this.currentWorkspaceNumber = 0;
@@ -34,16 +44,7 @@ export default Ember.Service.extend({
 
   /* Apps */
 
-  appsAvailable: Ember.computed(function(){
-    /*let owner = Ember.getOwner(this);*/
-    return Ember.A();
-  }),
-
-  isAppAvailable(/*name*/){
-    /*let owner = Ember.getOwner(this);
-    return owner.hasRegistration(`engine:${name}`);*/
-    return true;
-  },
+  appsAvailable: computed.readOnly('driver.getAvailableEngines'),
 
   isAppRunning(name){
     return this.get('apps').any( app => {
@@ -52,40 +53,24 @@ export default Ember.Service.extend({
   },
 
   exec(name, options){
-    Ember.assert(`The application name should be a non-empty string`, typeof name === 'string' && name.length);
-    Ember.assert(`Application "${name}" is not available.`, this.isAppAvailable(name));
-    Ember.assert(`Application "${name}" is already running.`, !this.isAppRunning(name));
+    assert(`The application name should be a non-empty string`, typeof name === 'string' && name.length);
+    assert(`Application "${name}" is already running.`, !this.isAppRunning(name));
 
-    const appOptions = {
-      pid: this.incrementProperty('lastPID'),
-      name
-    };
+    let newPID = this.incrementProperty('lastPID');
 
-    if(options){
-      Object.assign(appOptions, options);
-    }
-
-    let app = App.create(appOptions);
-
-    this.get('apps').addObject(app);
-
-    return app;
+    return this.appManager.start(name, newPID, options).then( (app) => {
+      this.get('apps').addObject(app);
+      return app;
+    });
   },
 
   terminate(name, kill){
     let app = this.getAppByName(name);
-    Ember.assert(`Application "${name}" is not running.`, this.get('apps').includes(app));
+    assert(`Application "${name}" is not running.`, this.get('apps').includes(app));
 
-    if(kill){
+    return this.appManager.terminate(name, app.pid, { kill }).then( (exitCode) => {
       this.get('apps').removeObject(app);
-      return -1;
-    }
-
-    return app.close().then( code => {
-      this.get('apps').removeObject(app);
-      return code;
-    }).catch( err => {
-      console.error(err);
+      return exitCode;
     });
   },
 
@@ -94,8 +79,8 @@ export default Ember.Service.extend({
       return app.get('name') === name;
     })[0];
 
-    Ember.assert(`The application name should be a non-empty string`, typeof name === 'string' && name.length);
-    Ember.assert(`Application "${name}" is not running.`, app !== undefined);
+    assert(`The application name should be a non-empty string`, typeof name === 'string' && name.length);
+    assert(`Application "${name}" is not running.`, app !== undefined);
 
     return app;
   },
@@ -111,27 +96,27 @@ export default Ember.Service.extend({
 
   removePanel(panel){
     let panels = this.get('panels');
-    Ember.assert("Can't remove the primary panel", panel.get('isPrimary') === false );
+    assert("Can't remove the primary panel", panel.get('isPrimary') === false );
 
     panels.removeObject(panel);
   },
 
   /* Workspaces */
 
-  currentWorkspace: Ember.computed('workspaces.@each', 'currentWorkspaceNumber', function() {
+  currentWorkspace: computed('workspaces.@each', 'currentWorkspaceNumber', function() {
     return this.get('workspaces').objectAt(this.get('currentWorkspaceNumber') - 1);
   }),
 
   setCurrentWorkspace(workspace){
-    Ember.assert("Not a workspace instance", workspace instanceof Workspace);
-    Ember.assert("Not currently on available workspaces", this.get('workspaces').includes(workspace));
+    assert("Not a workspace instance", workspace instanceof Workspace);
+    assert("Not currently on available workspaces", this.get('workspaces').includes(workspace));
 
     this.set('currentWorkspaceNumber', this.get('workspaces').indexOf(workspace) + 1);
   },
 
   getWorkspaceByNumber(number){
     let workspaces = this.get('workspaces');
-    Ember.assert("Cannot get the workspace", typeof number === 'number' && number >= 1 && number <= workspaces.get('length'));
+    assert("Cannot get the workspace", typeof number === 'number' && number >= 1 && number <= workspaces.get('length'));
     return workspaces.objectAt(number - 1);
   },
 
@@ -149,7 +134,7 @@ export default Ember.Service.extend({
 
   removeWorkspace(workspace){
     let workspaces = this.get('workspaces');
-    Ember.assert("Can't remove the last workspace", workspaces.length > 1);
+    assert("Can't remove the last workspace", workspaces.length > 1);
 
     workspaces.removeObject(workspace);
   },

@@ -1,9 +1,3 @@
 {{#each apps as |app|}}
-  {{#shell/desktop-window app=app as |window|}}
-    {{window.titleBar app=app}}
-    {{window.appContainer app=app}}
-    {{#if app.hasStatusBar }}
-      {{window.statusBar app=app}}
-    {{/if}}
-  {{/shell/desktop-window}}
+  {{shell/desktop-window app=app tagName=app.name}}
 {{/each}}

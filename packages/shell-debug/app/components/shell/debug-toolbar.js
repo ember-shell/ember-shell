@@ -1,1 +1,0 @@
-export { default } from 'ember-shell/components/debug-toolbar';

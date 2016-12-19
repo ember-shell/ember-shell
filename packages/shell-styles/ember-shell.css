@@ -3,10 +3,11 @@
 @submodule shell-styles
 */
 
-/* Base Layout */
+/* System Base */
 @import 'base/flex-class';
 @import 'base/media-queries';
 @import 'base/mixins';
+@import 'base/system';
 
 /* Components */
 @import 'components/ui-icon';

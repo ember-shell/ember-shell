@@ -13,6 +13,5 @@ describeComponent(
       this.render(hbs`{{shell/desktop-area}}`);
       expect(this.$()).to.have.length(1);
     });
-    
   }
 );

@@ -1,0 +1,4 @@
+body.esh-dragging {
+  cursor: move;
+  user-select: none;
+}

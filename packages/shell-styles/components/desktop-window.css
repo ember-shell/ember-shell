@@ -1,24 +1,39 @@
 /* Desktop Window Variables */
-shell-window {
-    --background-color: transparent;
+.esh-window {
+    --background-color: #FFF;
     --window-box-shadow: 0 0 30px rgba(0,0,0,0.5);
     --window-border-color: #DDD;
+    --window-border-radius: 4px;
     --title-font: var(--esh-default-font);
     --title-font-size: 20px;
     --title-font-weight: 300;
     --title-font-color: #464646;
     --title-background-color: #F6F8F9;
 
+    --resize-margin: 32px;
+
     --window-container-background: var(--esh-default-background);
     --window-status-bar-background: #F6F8F9;
 }
 
-shell-window {
+.esh-window {
   background-color: var(--background-color);
   box-shadow: 0 0 30px 2px rgba(0, 0, 0, .25);
   border: 1px solid var(--window-border-color);
+  border-radius: var(--window-border-radius);
 
-  & window-title-bar {
+  &::before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: -16px;
+    top: -16px;
+    width: calc(100% + var(--resize-margin));
+    height: calc(100% + var(--resize-margin));
+    z-index: -1;
+  }
+
+  & title-bar {
     border-bottom: 1px solid var(--window-border-color);
     background-color: var(--title-background-color);
     min-height: 52px;
@@ -41,11 +56,11 @@ shell-window {
     }
   }
 
-  & window-app-container {
+  & .esh-app-container {
     background: var(--window-container-background);
   }
 
-  & window-status-bar {
+  & status-bar {
     max-height: 40px;
     height: 40px;
     background-color: var(--window-status-bar-background);
