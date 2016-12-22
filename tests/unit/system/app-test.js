@@ -1,22 +1,15 @@
 /* jshint expr:true */
-import { expect } from 'chai';
+//import { expect } from 'chai';
 import { it } from 'ember-mocha';
-import { describe, beforeEach } from 'mocha';
-import App from 'ember-shell/system/application';
+import { describe, /*beforeEach*/ } from 'mocha';
+//import App from 'ember-shell/system/application';
 
 describe('EmberShellApp', function() {
-    
-    beforeEach(function() {
+
+    /*beforeEach(function() {
       this.asApp = App.create();
-    });
+    });*/
 
-    it('should have a name property', function() {
-      expect(this.asApp.get('name')).to.be.null;
-    });
+    it.skip('nothing to test here, just yet', function(){});
 
-    it('should have a title property', function() {
-      expect(this.asApp.get('title')).to.be.null;
-    });
-
-  }
-);
+});
