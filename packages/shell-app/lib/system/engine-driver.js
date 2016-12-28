@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 /**
  @module ember-shell
- @submodule engine-app
+ @submodule shell-app
  */
 
 const {

@@ -7,6 +7,7 @@ import EngineDriver from 'ember-shell/system/engine-driver';
  */
 
 const {
+  A,
   run,
   RSVP,
   Route,
@@ -33,31 +34,69 @@ const Application = Ember.Object.extend();
 export class ApplicationManager {
 
   constructor(owner) {
+    this.apps = A();
     this.owner = owner;
     this.driver = new EngineDriver(owner);
+
+    this.lastPID = 0;
 
     this._terminatePromises = {};
   }
 
-  start(name, pid, options) {
+  /**
+   * Initializes an Ember-shell application
+   *
+   * Example:
+   * ```javascript
+   * let appManager = new ApplicationManager(owner);
+   *
+   * appManager.start('esh-test-app').then( (app) => {
+   *   //The applications has booted and you have the instance
+   * });
+   * ```
+   *
+   * @param  {String} name    Full application name
+   * @param  {Object} options An set of options to initialize an application
+   * @return {Promise}        A promise that resolves an application instance
+   * @method start
+   * @public
+   */
+  start(name, options) {
+    assert(`The application name should be a non-empty string`, typeof name === 'string' && name.length);
+
     const driver = this.driver;
 
     assert(`Application "${name}" is not available.`, driver.isEngineAvailable(name));
 
+    this.lastPID++;
+    let pid = this.lastPID;
+
     return driver.loadEngine(name, pid).then( (engineInstance) => {
+
+      const {
+        title,
+        icon,
+        multipleInstances
+      } = engineInstance.base;
 
       const intialConfig = {
         pid,
         name,
         state: '',
         engineInstance,
-        title: engineInstance.base.title ? engineInstance.base.title : name, // Use a manifest instad
-        icon: engineInstance.base.icon ? engineInstance.base.icon : DEFAULT_ICON, // Use a manifest instad
-        elementId: `${pid}-${name}`
+        elementId: `${pid}-${name}`,
+        // TODO: Use a separated manifest :
+        multipleInstances: multipleInstances !== undefined ? multipleInstances : true,
+        title: title !== undefined ? title : name,
+        icon: icon !== undefined ? icon : DEFAULT_ICON
       };
 
       if(options){
         Object.assign(intialConfig, options);
+      }
+
+      if(intialConfig.multipleInstances === false){
+        assert(`Application "${name}" doesn't allow multiple instances.`, !this.isAppRunning(name));
       }
 
       let application = Application.create(intialConfig);
@@ -66,12 +105,37 @@ export class ApplicationManager {
         this._bootstrap(engineInstance, application, name);
       });
 
+      this.apps.addObject(application);
+
       return application;
     });
   }
 
+  /**
+   * Terminates an Ember-shell application instance by name,
+   *
+   * Example:
+   * ```javascript
+   * let appManager = new ApplicationManager(owner);
+   *
+   * appManager.terminate('esh-test-app', 2).then( (exitCode) => {
+   *   //The applications has been terminated and you have the exitCode
+   * });
+   * ```
+   *
+   * @param  {String} name    Application name
+   * @param  {Number} pid     Process Id (application id)
+   * @param  {Object} options Options for thermination
+   * @return {Promise}        A promise that resolves an exit code
+   * @method terminate
+   * @public
+   */
   terminate(name, pid, options) {
     const driver = this.driver;
+
+    let app = this.byName(name);
+
+    assert(`Application "${name}" is not running.`, this.apps.includes(app));
     assert(`Application "${name}" is not instantiated.`, driver.isInstantiated(name, pid));
 
     let terminatePromises = this._terminatePromises;
@@ -93,7 +157,26 @@ export class ApplicationManager {
       enginePromise = RSVP.resolve();
     }
 
+    this.apps.removeObject(app);
+
     return enginePromise;
+  }
+
+  byName(name){
+    let app = this.apps.filter( app => {
+      return app.get('name') === name;
+    })[0];
+
+    assert(`The application name should be a non-empty string`, typeof name === 'string' && name.length);
+    assert(`Application "${name}" is not running.`, app !== undefined);
+
+    return app;
+  }
+
+  isAppRunning(name){
+    return this.apps.any( app => {
+      return app.get('name') === name;
+    });
   }
 
   _bootstrap(engineInstance, application, name){
@@ -103,7 +186,7 @@ export class ApplicationManager {
   }
 
   _bootstrapAdk(engineInstance, application, name){
-    let applicationRoot = Ember.$(`${name}`)[0];
+    let applicationRoot = Ember.$(`${name}[data-app-id="${application.elementId}"]`)[0];
 
     let engineApplicationController = engineInstance.resolveRegistration('controller:application');
 
