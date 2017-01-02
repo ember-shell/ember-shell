@@ -5,6 +5,9 @@ import WindowElement from 'ember-shell/mixins/element/window';
 export default Ember.Component.extend(WindowElement, {
   layout,
 
+  attributeBindings: ['appId:data-app-id'],
+  appId: Ember.computed.readOnly('app.elementId'),
+
   init(){
     this._super(...arguments);
 
