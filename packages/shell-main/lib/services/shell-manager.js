@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import Workspace from 'ember-shell/system/workspace';
 import { PanelManager } from 'ember-shell/system/panel';
 import { WorkspaceManager } from 'ember-shell/system/workspace';
 import { ApplicationManager } from 'ember-shell/system/application';
