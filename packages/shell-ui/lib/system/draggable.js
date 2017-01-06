@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 export default class Draggable {
 
   constructor(target, options){
@@ -38,17 +40,21 @@ export default class Draggable {
 
   draggStart(event){
 
-    if(event.target.className.indexOf(this.options.handlerClass) === -1 || event.button !== 0){
+    const isTouch = event.sourceCapabilities.firesTouchEvents;
+    const isOnHandler = event.target.classList.contains(this.options.handlerClass);
+    const inputDevice = isTouch ? event.targetTouches[0] : event;
+
+    if(!isOnHandler || (!isTouch && event.button !== 0)){
       return false;
     }
 
     this.isDragging = true;
 
-    const $offset = Ember.$(this.target).offset();
-    Ember.$('body').addClass('esh-dragging');
+    const $offset = $(this.target).offset();
+    $('body').addClass('esh-dragging');
 
-    const pageX = event.pageX || event.clientX + this.parent.scrollLeft;
-    const pageY = event.pageY || event.clientY + this.parent.scrollTop;
+    const pageX = inputDevice.pageX || inputDevice.clientX + this.parent.scrollLeft;
+    const pageY = inputDevice.pageY || inputDevice.clientY + this.parent.scrollTop;
 
     this.offset.x = pageX - $offset.left;
     this.offset.y = pageY - $offset.top;
@@ -72,7 +78,7 @@ export default class Draggable {
   draggEnd(){
     this.isDragging = false;
     cancelAnimationFrame(this.runraf);
-    Ember.$('body').removeClass('esh-dragging');
+    $('body').removeClass('esh-dragging');
 
     window.removeEventListener('mousemove', this.draggMoveHandler, false);
     window.removeEventListener('touchmove', this.draggMoveHandler, false);
@@ -87,11 +93,13 @@ export default class Draggable {
 
   draggMove(event){
     if (this.isDragging) {
+      const isTouch = event.sourceCapabilities.firesTouchEvents;
+      const inputDevice = isTouch ? event.targetTouches[0] : event;
 
       let posX, posY;
 
-      const pageX = event.pageX || event.clientX + this.parent.scrollLeft;
-      const pageY = event.pageY || event.clientY + this.parent.scrollTop;
+      const pageX = inputDevice.pageX || inputDevice.clientX + this.parent.scrollLeft;
+      const pageY = inputDevice.pageY || inputDevice.clientY + this.parent.scrollTop;
 
       if (pageX - this.offset.x < 0) {
         posX = 0;
