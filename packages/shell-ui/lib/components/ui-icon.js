@@ -13,6 +13,8 @@ export default Ember.Component.extend(IconElement, {
       this.updateStylesRenderPersist([
         { declaration: 'sizeable', property: 'size.width', value: this.iconSize },
         { declaration: 'sizeable', property: 'size.height', value: this.iconSize },
+        { declaration: 'sizeable', property: 'size.widthUnit', value: 'px' },
+        { declaration: 'sizeable', property: 'size.heightUnit', value: 'px' },
       ]);
     }
 

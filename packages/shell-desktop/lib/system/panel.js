@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import PanelItemMixin from 'ember-shell/mixins/element/panel-item';
 
 /**
  @module ember-shell
@@ -6,7 +7,8 @@ import Ember from 'ember';
  */
 
 const {
-  A
+  A,
+  assert
 } = Ember;
 
 /**
@@ -14,17 +16,24 @@ const {
  *
  * @class Panel
  */
-const Panel = Ember.Object.extend({});
+const Panel = Ember.Object.extend({
+  init(){
+    this._super(...arguments);
+    this.items = A();
+  }
+});
 
 /**
  * Panel Manager Class
  *
  * @class  PanelManager
+ * @param {Object} owner Should be the host application
  */
 export class PanelManager {
 
-  constructor() {
+  constructor(owner) {
     this.panels = A();
+    this.owner = owner;
     this._setupPrimaryPanel();
   }
 
@@ -71,15 +80,65 @@ export class PanelManager {
     panels.removeObject(panel);
   }
 
+  insertItem(panel, itemName){
+    assert("Panel instance is not registered", this.panels.includes(panel));
+
+    let registeredPath = this._hasRegisteredPath(itemName);
+    let checkPanelItem = this._checkPanelItem(itemName);
+
+    assert("The given Item is not registered", registeredPath);
+    assert(`${itemName} is not a PanelItem`, checkPanelItem.isPanelItem);
+
+    if(!checkPanelItem.component.get('allowMultiple')) {
+      let alreadyThere = panel.items.any((item) => item.name === itemName);
+      assert(`${itemName} can only be inserted once`, !alreadyThere);
+    }
+
+    let panelItem = {
+      name: itemName,
+      path: `${registeredPath}${itemName}`
+    };
+
+    panel.items.addObject(panelItem);
+
+    return panelItem;
+  }
+
+  _hasRegisteredPath(itemName){
+    if(this.owner.hasRegistration(`component:${itemName}`)){
+      return "";
+    } else if(this.owner.hasRegistration(`component:shell/panel/${itemName}`)){
+      return "shell/panel/";
+    }
+
+    return false;
+  }
+
+  _checkPanelItem(itemName){
+    let component;
+
+    if(this.owner.hasRegistration(`component:${itemName}`)){
+      component = this.owner.lookup(`component:${itemName}`);
+    } else if(this.owner.hasRegistration(`component:shell/panel/${itemName}`)){
+      component = this.owner.lookup(`component:shell/panel/${itemName}`);
+    }
+
+    return {
+      isPanelItem: PanelItemMixin.detect(component) || false,
+      component
+    };
+  }
+
   /**
    * Setups the primary panel
    * @method _setupPrimaryPanel
    * @private
    */
   _setupPrimaryPanel() {
-    this.addPanel({
+    let panel = this.addPanel({
       isPrimary: true
     });
+    this.insertItem(panel, 'menu-button');
   }
 
 }

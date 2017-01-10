@@ -10,12 +10,13 @@
 @import 'base/system';
 
 /* Components */
-@import 'components/ui-icon';
-@import 'components/debug-toolbar';
-@import 'components/shell-desktop';
-@import 'components/desktop-panel';
-@import 'components/desktop-window';
-@import 'components/desktop-workspace';
+@import 'components/ui/ui-icon';
+@import 'components/ui/ui-grid';
+@import 'components/main/ember-shell';
+@import 'components/desktop/desktop-panel';
+@import 'components/desktop/desktop-window';
+@import 'components/desktop/desktop-workspace';
+@import 'components/desktop/panel/menu-button';
 
 /* Base Theme */
 @import 'themes/clean-shell-vars';

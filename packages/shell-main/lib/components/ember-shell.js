@@ -21,6 +21,6 @@ import layout from 'ember-shell/templates/main/ember-shell';
  */
 export default Ember.Component.extend({
   layout,
-  tagName: 'shell-desktop',
+  tagName: 'ember-shell',
   manager: Ember.inject.service('shell-manager')
 });

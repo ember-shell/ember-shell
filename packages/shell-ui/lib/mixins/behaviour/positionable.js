@@ -1,11 +1,17 @@
 import Ember from 'ember';
 import Styleable from 'ember-variable-styles/mixins/styleable';
 
-const defaults = { x: 0, y: 0,  z: 'auto' };
+const defaults = {
+  x: 0,
+  xUnit: 'px',
+  y: 0,
+  yUnit: 'px',
+  z: 'auto'
+};
 
 export default Ember.Mixin.create(Styleable, {
 
-  positionableCSS: 'transform: translate({{position.x}}px, {{position.y}}px); z-index: {{position.z}};',
+  positionableCSS: 'transform: translate({{position.x}}{{position.xUnit}}, {{position.y}}{{position.yUnit}}); z-index: {{position.z}};',
   classNames: ['esh-ui-positionable'],
 
   position: Ember.Object.create(defaults),

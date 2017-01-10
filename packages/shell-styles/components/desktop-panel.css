@@ -1,7 +1,0 @@
-shell-panel {
-  display: block;
-  position: absolute;
-  width: 100vw;
-  height: 30px;
-  background-color: rgba(0,0,0,.50);
-}

@@ -30,6 +30,7 @@ const Application = Ember.Object.extend();
  * Application Manager Class
  *
  * @class  ApplicationManager
+ * @param {Object} owner Should be the host application
  */
 export class ApplicationManager {
 
