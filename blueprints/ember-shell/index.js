@@ -23,7 +23,8 @@ module.exports = {
           { name: 'ember-run-raf', target: '~1.1.2' },
           { name: 'ember-variable-styles', target: '^0.0.3' },
           { name: 'esh-task-manager', target: '^0.4.1-alpha' },
-          { name: 'esh-test-app', target: '^0.4.1-alpha' }
+          { name: 'esh-test-app', target: '^0.4.1-alpha' },
+          { name: 'ember-cli-moment-shim', target: '3.0.1' }
         ]
       }),
 

@@ -1,3 +1,5 @@
 shell-panel {
-  background-color: rgba(0,0,0,.50);
+  background-color: rgba(30,30,30,.60);
+  box-sizing: border-box;
+  padding: 0 15px;
 }

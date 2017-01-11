@@ -17,6 +17,8 @@
 @import 'components/desktop/desktop-window';
 @import 'components/desktop/desktop-workspace';
 @import 'components/desktop/panel/menu-button';
+@import 'components/desktop/panel/clock-date';
+@import 'components/desktop/panel/status-menu';
 
 /* Base Theme */
 @import 'themes/clean-shell-vars';

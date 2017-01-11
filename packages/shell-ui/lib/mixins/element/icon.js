@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import SizeableMixin from 'ember-shell/mixins/behaviour/sizeable';
+import SizeableMixin from 'ember-shell/mixins/behavior/sizeable';
 
 const defaultIconSize = { width: 32, height: 32 };
 

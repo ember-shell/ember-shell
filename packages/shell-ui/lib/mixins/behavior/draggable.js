@@ -1,9 +1,11 @@
 /* global window */
 import Ember from 'ember';
 import Draggable from 'ember-shell/system/draggable';
-import PositionableMixin from 'ember-shell/mixins/behaviour/positionable';
+import PositionableMixin from 'ember-shell/mixins/behavior/positionable';
 
 export default Ember.Mixin.create(PositionableMixin, {
+
+  manager: Ember.inject.service('shell-manager'),
 
   draggableHandleClassName: 'esh-ui-draggable-handle',
   draggUpdateFn: null,
@@ -11,13 +13,21 @@ export default Ember.Mixin.create(PositionableMixin, {
   didInsertElement(){
     const target = this.$()[0];
     const updateFn = this.get('draggUpdateFn') ? this.get('draggUpdateFn') : (x, y) => {
+      //target.style["transform"] = `translate(${x}px, ${y}px)`;
       this.updateStylesRender([
         {declaration: 'positionable', property: 'position.x', value: x},
         {declaration: 'positionable', property: 'position.y', value: y},
       ]);
     };
 
+    let limits = { top: 0, right: 0, bottom: 0, left: 0 };
+
+    this.get('manager.panels').forEach((panel) => {
+      limits[panel.get('position')] = parseInt(panel.component.element.style["height"]);
+    });
+
     const options = {
+      limits,
       updateFn,
       handlerClass: this.get('draggableHandleClassName'),
       startCallback: this.get('draggStartCallback') ? this.get('draggStartCallback').bind(this) : null,

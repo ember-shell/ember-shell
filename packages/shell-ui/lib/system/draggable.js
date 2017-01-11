@@ -13,13 +13,19 @@ export default class Draggable {
     this.options = {
       handlerClass: 'esh-ui-draggable-handle',
       updateFn: () => {},
+      limits: {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0
+      },
       startCallback: null,
       endCallback: null,
       moveCallback: null
     };
 
     if(options){
-      Object.assign(this.options, options);
+      Ember.assign(this.options, options);
     }
 
     this.draggStartHandler = event => {
@@ -100,17 +106,18 @@ export default class Draggable {
 
       const pageX = inputDevice.pageX || inputDevice.clientX + this.parent.scrollLeft;
       const pageY = inputDevice.pageY || inputDevice.clientY + this.parent.scrollTop;
+      const limits = this.options.limits;
 
-      if (pageX - this.offset.x < 0) {
-        posX = 0;
+      if (pageX - this.offset.x < limits.left) {
+        posX = limits.left;
       } else if (pageX - this.offset.x > this.offset.r) {
         posX = this.offset.r;
       } else {
         posX = pageX - this.offset.x;
       }
 
-      if (pageY - this.offset.y < 0) {
-        posY = 0;
+      if (pageY - this.offset.y < limits.top) {
+        posY = limits.top;
       } else if (pageY - this.offset.y > this.offset.b) {
         posY = this.offset.b;
       } else {

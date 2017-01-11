@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import DraggableMixin from 'ember-shell/mixins/behaviour/draggable';
-import SizeableMixin from 'ember-shell/mixins/behaviour/sizeable';
-import ReSizeableMixin from 'ember-shell/mixins/behaviour/resizeable';
+import DraggableMixin from 'ember-shell/mixins/behavior/draggable';
+import SizeableMixin from 'ember-shell/mixins/behavior/sizeable';
+import ReSizeableMixin from 'ember-shell/mixins/behavior/resizeable';
 
 export default Ember.Mixin.create(
   SizeableMixin,

@@ -1,3 +1,5 @@
-panel-item.esh-panel-main-menu {
+panel-item.esh-panel-menu-button {
   display: block;
+  width: 22px;
+  height: 16px;
 }

@@ -1,6 +1,6 @@
 import Ember from 'ember';
-import SizeableMixin from 'ember-shell/mixins/behaviour/sizeable';
-import PressableMixin from 'ember-shell/mixins/behaviour/pressable';
+import SizeableMixin from 'ember-shell/mixins/behavior/sizeable';
+import PressableMixin from 'ember-shell/mixins/behavior/pressable';
 
 export default Ember.Mixin.create(SizeableMixin, PressableMixin, {
 

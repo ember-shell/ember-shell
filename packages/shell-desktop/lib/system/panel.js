@@ -136,9 +136,13 @@ export class PanelManager {
    */
   _setupPrimaryPanel() {
     let panel = this.addPanel({
-      isPrimary: true
+      isPrimary: true,
+      position: "top"
     });
+
     this.insertItem(panel, 'menu-button');
+    this.insertItem(panel, 'clock-date');
+    //this.insertItem(panel, 'status-menu');
   }
 
 }
