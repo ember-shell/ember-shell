@@ -7,17 +7,20 @@ export default Ember.Component.extend(PanelItemMixin, {
   layout,
   classNames: ['esh-panel-clock-date'],
 
-  timeDate: null,
-
-  didInsertElement(){
+  init(){
     this._super(...arguments);
 
+    this.timeInterval =  setInterval(() => this.updateTime(), 1000);
     this.updateTime();
-    setInterval(() => this.updateTime(), 1000);
   },
 
   updateTime(){
     this.set('timeDate', moment().format('ddd MMM H:mm:ss'));
+  },
+
+  didDestroyElement() {
+    this._super(...arguments);
+    clearInterval(this.timeInterval);
   }
 
 });
