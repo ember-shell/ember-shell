@@ -2,13 +2,13 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import Ember from 'ember';
-import AnimatableMixin from 'ember-shell/mixins/behaviour/animatable';
+import DraggableMixin from 'ember-shell/mixins/behavior/draggable';
 
-describe('AnimatableMixin', function() {
+describe('DraggableMixin', function() {
   // Replace this with your real tests.
   it('works', function() {
-    let UiAnimatableObject = Ember.Object.extend(AnimatableMixin);
-    let subject = UiAnimatableObject.create();
+    let UiDraggableObject = Ember.Object.extend(DraggableMixin);
+    let subject = UiDraggableObject.create();
     expect(subject).to.be.ok;
   });
 });

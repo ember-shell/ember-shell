@@ -2,7 +2,7 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import Ember from 'ember';
-import AlignableMixin from 'ember-shell/mixins/behaviour/alignable';
+import AlignableMixin from 'ember-shell/mixins/behavior/alignable';
 
 describe('AlignableMixin', function() {
   // Replace this with your real tests.

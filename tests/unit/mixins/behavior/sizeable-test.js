@@ -2,7 +2,7 @@
 import { expect } from 'chai';
 import { describe, beforeEach, it } from 'mocha';
 import Ember from 'ember';
-import SizeableMixin from 'ember-shell/mixins/behaviour/sizeable';
+import SizeableMixin from 'ember-shell/mixins/behavior/sizeable';
 import Styleable from 'ember-variable-styles/mixins/styleable';
 
 describe('SizeableMixin', function() {

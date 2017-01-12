@@ -2,13 +2,13 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import Ember from 'ember';
-import FocusableMixin from 'ember-shell/mixins/behaviour/focusable';
+import PressableMixin from 'ember-shell/mixins/behavior/pressable';
 
-describe('FocusableMixin', function() {
+describe('UiPressableMixin', function() {
   // Replace this with your real tests.
   it('works', function() {
-    let UiFocusableObject = Ember.Object.extend(FocusableMixin);
-    let subject = UiFocusableObject.create();
+    let UiPressableObject = Ember.Object.extend(PressableMixin);
+    let subject = UiPressableObject.create();
     expect(subject).to.be.ok;
   });
 });

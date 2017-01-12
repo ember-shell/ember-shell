@@ -5,7 +5,6 @@ import {
   it
 } from 'ember-mocha';
 import {
-  default as Panel,
   PanelManager
 } from 'ember-shell/system/panel';
 import { expect } from 'chai';
@@ -37,7 +36,7 @@ describeComponent(
       this.set('panel', primaryPanel);
       this.render(hbs`{{shell/desktop-panel panel=panel}}`);
 
-      expect(this.$('.esh-panel-item').length).to.be.ok;
+      expect(this.$('panel-item').length).to.be.ok;
     });
 
   }

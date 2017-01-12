@@ -2,7 +2,7 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import Ember from 'ember';
-import DropdownableMixin from 'ember-shell/mixins/behaviour/dropdownable';
+import DropdownableMixin from 'ember-shell/mixins/behavior/dropdownable';
 
 describe('DropdownableMixin', function() {
   // Replace this with your real tests.

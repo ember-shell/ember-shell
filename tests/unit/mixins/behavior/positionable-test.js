@@ -2,7 +2,7 @@
 import { expect } from 'chai';
 import { describe, beforeEach, it } from 'mocha';
 import Ember from 'ember';
-import PositionableMixin from 'ember-shell/mixins/behaviour/positionable';
+import PositionableMixin from 'ember-shell/mixins/behavior/positionable';
 import Styleable from 'ember-variable-styles/mixins/styleable';
 
 describe('PositionableMixin', function() {
