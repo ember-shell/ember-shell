@@ -16,7 +16,7 @@ export default class Resizeable {
     };
 
     if(options){
-      Object.assign(this.options, options);
+      Ember.assign(this.options, options);
     }
 
     this.draggStartHandler = (event) => {

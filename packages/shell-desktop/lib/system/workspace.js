@@ -56,7 +56,7 @@ export class WorkspaceManager {
       position: nextLength
     };
 
-    Object.assign(createOptions, options);
+    Ember.assign(createOptions, options);
 
     let workspace = Workspace.create(createOptions);
 

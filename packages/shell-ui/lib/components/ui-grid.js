@@ -23,7 +23,7 @@ const UiGridComponent = Ember.Component.extend(GridElement, {
   init(){
     this._super(...arguments);
 
-    Object.assign(this, defaults);
+    Ember.assign(this, defaults);
 
     this.updateStylesRenderPersist([
       { declaration: 'sizeable', property: 'size.width', value: 100 },

@@ -84,7 +84,7 @@ describeComponent(
       it('should allow to insert a panel item into a panel', function() {
         let panelItem = panelManager.insertItem(panelInstance, 'test-item');
 
-        expect(panelInstance.items.contains(panelItem)).to.be.true;
+        expect(panelInstance.items.includes(panelItem)).to.be.true;
       });
 
     });

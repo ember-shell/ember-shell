@@ -93,7 +93,7 @@ export class ApplicationManager {
       };
 
       if(options){
-        Object.assign(intialConfig, options);
+        Ember.assign(intialConfig, options);
       }
 
       if(intialConfig.multipleInstances === false){
