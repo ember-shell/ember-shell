@@ -5,5 +5,22 @@ import PanelElement from 'ember-shell/mixins/element/panel';
 export default Ember.Component.extend(PanelElement, {
   layout,
   tagName: 'shell-panel',
-  manager: Ember.inject.service('shell-manager')
+
+  init() {
+    this._super(...arguments);
+
+    this.panel.component = this;
+
+    this.updateStylesRenderPersist([
+      { declaration: 'sizeable', property: 'size.width', value: 100 },
+      { declaration: 'sizeable', property: 'size.height', value: 36 },
+      { declaration: 'sizeable', property: 'size.widthUnit', value: '%' },
+      { declaration: 'sizeable', property: 'size.heightUnit', value: 'px' },
+      { declaration: 'positionable', property: 'position.x', value: 0 },
+      { declaration: 'positionable', property: 'position.y', value: 0 }
+    ]);
+  },
+
+  items: Ember.computed.readOnly('panel.items'),
+
 });

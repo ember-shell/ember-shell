@@ -29,7 +29,7 @@ export default Service.extend({
     this._super(...arguments);
 
     this.appManager = new ApplicationManager(getOwner(this));
-    this.panelManager = new PanelManager();
+    this.panelManager = new PanelManager(getOwner(this));
     this.workspaceManager = new WorkspaceManager();
   },
 
@@ -64,6 +64,12 @@ export default Service.extend({
   currentWorkspace: computed('workspaceManager.workspaces.@each', 'workspaceManager.currentWorkspaceNumber', function() {
     return this.get('workspaceManager.workspaces').objectAt(this.get('workspaceManager.currentWorkspaceNumber') - 1);
   }),
+
+  /**
+   * @property {Object} config Stores the merged default with environment confis.
+   * @public
+   */
+  config: {},
 
   /**
    * Executes an Ember-shell application

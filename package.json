@@ -1,6 +1,6 @@
 {
   "name": "ember-shell",
-  "version": "0.4.1-alpha",
+  "version": "0.4.2-alpha",
   "description": "An Ember addon that enables you to have a fully customizable OS-like shell, where you can run your own ember apps powered by ember-engines",
   "directories": {
     "doc": "docs",
@@ -41,6 +41,7 @@
     "ember-cli-jshint": "^2.0.1",
     "ember-cli-mocha": "^0.10.4",
     "ember-cli-mocha-reporter": "git+https://github.com/lolmaus/ember-cli-mocha-reporter.git#b98c2694724a6b80b9fb2244a05a46ff8ffd71bd",
+    "ember-cli-moment-shim": "3.0.1",
     "ember-cli-preprocess-registry": "^3.0.0",
     "ember-cli-release": "^0.2.9",
     "ember-cli-sri": "^2.1.0",
@@ -57,8 +58,8 @@
     "ember-sinon-chai": "0.1.1",
     "ember-source": "2.11.0-beta.2",
     "ember-variable-styles": "^0.0.3",
-    "esh-task-manager": "^0.4.0-alpha",
-    "esh-test-app": "^0.4.0-alpha",
+    "esh-task-manager": "^0.4.1-alpha.1",
+    "esh-test-app": "^0.4.1-alpha.1",
     "exists-sync": "0.0.4",
     "loader.js": "^4.0.10",
     "postcss-cssnext": "^2.8.0",

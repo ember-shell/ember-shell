@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 export default class Draggable {
 
   constructor(target, options){
@@ -11,13 +13,19 @@ export default class Draggable {
     this.options = {
       handlerClass: 'esh-ui-draggable-handle',
       updateFn: () => {},
+      limits: {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0
+      },
       startCallback: null,
       endCallback: null,
       moveCallback: null
     };
 
     if(options){
-      Object.assign(this.options, options);
+      Ember.assign(this.options, options);
     }
 
     this.draggStartHandler = event => {
@@ -38,17 +46,21 @@ export default class Draggable {
 
   draggStart(event){
 
-    if(event.target.className.indexOf(this.options.handlerClass) === -1 || event.button !== 0){
+    const isTouch = event.sourceCapabilities.firesTouchEvents;
+    const isOnHandler = event.target.classList.contains(this.options.handlerClass);
+    const inputDevice = isTouch ? event.targetTouches[0] : event;
+
+    if(!isOnHandler || (!isTouch && event.button !== 0)){
       return false;
     }
 
     this.isDragging = true;
 
-    const $offset = Ember.$(this.target).offset();
-    Ember.$('body').addClass('esh-dragging');
+    const $offset = $(this.target).offset();
+    $('body').addClass('esh-dragging');
 
-    const pageX = event.pageX || event.clientX + this.parent.scrollLeft;
-    const pageY = event.pageY || event.clientY + this.parent.scrollTop;
+    const pageX = inputDevice.pageX || inputDevice.clientX + this.parent.scrollLeft;
+    const pageY = inputDevice.pageY || inputDevice.clientY + this.parent.scrollTop;
 
     this.offset.x = pageX - $offset.left;
     this.offset.y = pageY - $offset.top;
@@ -72,7 +84,7 @@ export default class Draggable {
   draggEnd(){
     this.isDragging = false;
     cancelAnimationFrame(this.runraf);
-    Ember.$('body').removeClass('esh-dragging');
+    $('body').removeClass('esh-dragging');
 
     window.removeEventListener('mousemove', this.draggMoveHandler, false);
     window.removeEventListener('touchmove', this.draggMoveHandler, false);
@@ -87,22 +99,25 @@ export default class Draggable {
 
   draggMove(event){
     if (this.isDragging) {
+      const isTouch = event.sourceCapabilities.firesTouchEvents;
+      const inputDevice = isTouch ? event.targetTouches[0] : event;
 
       let posX, posY;
 
-      const pageX = event.pageX || event.clientX + this.parent.scrollLeft;
-      const pageY = event.pageY || event.clientY + this.parent.scrollTop;
+      const pageX = inputDevice.pageX || inputDevice.clientX + this.parent.scrollLeft;
+      const pageY = inputDevice.pageY || inputDevice.clientY + this.parent.scrollTop;
+      const limits = this.options.limits;
 
-      if (pageX - this.offset.x < 0) {
-        posX = 0;
+      if (pageX - this.offset.x < limits.left) {
+        posX = limits.left;
       } else if (pageX - this.offset.x > this.offset.r) {
         posX = this.offset.r;
       } else {
         posX = pageX - this.offset.x;
       }
 
-      if (pageY - this.offset.y < 0) {
-        posY = 0;
+      if (pageY - this.offset.y < limits.top) {
+        posY = limits.top;
       } else if (pageY - this.offset.y > this.offset.b) {
         posY = this.offset.b;
       } else {

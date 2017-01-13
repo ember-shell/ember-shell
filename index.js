@@ -128,26 +128,16 @@ module.exports = {
   },
 
   /**
-   * Original function was overwritten to support package's public trees
+   * Support for shell-theme public tree
    */
   treeForPublic(tree) {
-    const packages = require(this.packagesPath + '/index.js');
-    const addonPublic = [];
-
-    packages.forEach( pkg => {
-      const pkgPublic = path.join(this.packagesPath, pkg.name, 'public');
-      if (!existsSync(pkgPublic)) {
-        return;
-      }
-      addonPublic.push(new Funnel(pkgPublic, {
-        destDir: '/',
-        exclude: ['.gitkeep'],
-      }));
+    const themesPath = path.join(this.packagesPath, 'shell-themes');
+    const shellThemeTree = new Funnel(themesPath, {
+      destDir: 'themes',
+      exclude: ['.gitkeep'],
     });
 
-    const addonPublicTree = mergeTrees(addonPublic);
-
-    return tree ? mergeTrees([tree, addonPublicTree]) : addonPublicTree;
+    return tree ? mergeTrees([tree, shellThemeTree]) : shellThemeTree;
   },
 
   /**

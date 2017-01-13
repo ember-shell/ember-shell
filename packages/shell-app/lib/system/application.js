@@ -30,6 +30,7 @@ const Application = Ember.Object.extend();
  * Application Manager Class
  *
  * @class  ApplicationManager
+ * @param {Object} owner Should be the host application
  */
 export class ApplicationManager {
 
@@ -92,7 +93,7 @@ export class ApplicationManager {
       };
 
       if(options){
-        Object.assign(intialConfig, options);
+        Ember.assign(intialConfig, options);
       }
 
       if(intialConfig.multipleInstances === false){

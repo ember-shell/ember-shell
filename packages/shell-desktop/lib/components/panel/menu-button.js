@@ -1,13 +1,8 @@
 import Ember from 'ember';
-import layout from 'ember-shell/templates/desktop/panel/main-menu';
+import layout from 'ember-shell/templates/desktop/panel/menu-button';
+import PanelItemMixin from 'ember-shell/mixins/element/panel-item';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(PanelItemMixin, {
   layout,
-  classNames: ['esh-panel-main-menu'],
-  manager: Ember.inject.service('shell-manager'),
-
-  actions: {
-
-  }
-
+  classNames: ['esh-panel-menu-button'],
 });

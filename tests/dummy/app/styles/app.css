@@ -6,7 +6,7 @@ body, body > .ember-view {
   left: 0;
   top: 0;
 }
-shell-desktop {
+ember-shell {
   background-image: url("/img/default-background.png");
   /*background-image: url("/img/ember-shell-big.png");*/
   background-repeat: no-repeat;

@@ -115,7 +115,10 @@ export default class EngineDriver {
   }
 
   _updateAvailableEngines() {
-    const bundles = this.assetLoader.getManifest().bundles;
+    let bundles = {};
+    if(this.assetLoader.__manifest){
+      bundles = this.assetLoader.getManifest().bundles;
+    }
     return this._availableEngines = Object.keys(bundles);
   }
 
