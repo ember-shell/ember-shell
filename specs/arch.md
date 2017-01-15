@@ -2,27 +2,20 @@
 
 #### Packages
 
-- ember-shell
-  - BoostrapInitializer               // import { Bootstrap } from 'ember-shell/shell';
-  - ShellService                      // import { ManagerService } from 'ember-shell/shell';
-  - EmberShellComponent               // import { EmberShell } from 'ember-shell/shell';
+- ember-main
+  - EmberShellComponent
+  - ShellManagerService
+  - EmberShellInitializer
 
 - shell-app
-  - Application                       // import { Application } from 'ember-shell/app';
-  - AppManager                        // import { ApplicationManager } 'ember-shell/app';
-
-  - engine-driver (not sure)
-    - EngineInstance
-    - EngineLoader
-    - EngineAssetsLoader
-    - EnginePersistance
-    - EngineRouter
-    - EngineRegistry
+  - Application
+  - ApplicationManager
+  - EngineDriver
+  - EnginePersistance (localStorage cache)
 
 - shell-bus
-  - Bus                               // import { Bus } from 'ember-shell/shell-bus';
+  - Bus
   - BusService
-  - BusMessage 
 
 - shell-security
   - User
@@ -40,7 +33,6 @@
   - UpdateNotifier
 
 - shell-server (fastboot-middlewares)
-
   - ServerBus
   - Upstreams
   - Packages
@@ -49,12 +41,10 @@
   - Daemons
 
 - shell-registry
-  - LocalStorage
+  - ShellRegisty (on IndexDB)
   - ServerAdapter
 
 - shell-desktop
-  - DesktopManagerService
-
   - desktop-appbox
     - AppBoxComponent
 
@@ -79,15 +69,12 @@
   - desktop-panel
     - Panel
     - PanelComponent
-    - Indicator
-    - TasksComponent
-    - ClockComponent
-    - IndicatorComponent
-    - ShortcutsComponent
-    - MenuButtonComponent
-
-- shell-debug
-  - DebugToolbarComponent
+    - PanelItems
+      - MenuButtonComponent
+      - DateClockComponent
+      - StatusMenuComponent
+      - CurrentAppsComponent
+      - ShortCutsComponent
 
 - shell-ui
 
@@ -97,24 +84,33 @@
     - Menu
     - Icon
     - Label
+    - Menu
+    - PanelItem
+    - Panel
+    - Widget
+    - Window
+    - Workspace
 
   - ui-mixins
     - Alignable
     - Animatable
     - Draggable
-    - Dropbable
+    - Dropdownbable
     - Focusable
     - Positionable
     - Pressable
+    - Resizeable
     - Scalable
     - Sizeable
     - Styleable
 
 - ember-shell-apps
-  - shell-store
-  - shell-settings
-  - shell-calendar
-  - shell-tweaks
-  - shell-themer
-  - shell-calculator
-  - shell-code
+  - esh-store
+  - esh-settings
+  - esh-calendar
+  - esh-tweaks
+  - esh-themer
+  - esh-calculator
+  - esh-task-manager
+  - esh-code
+  - esh-tour
