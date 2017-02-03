@@ -11,7 +11,8 @@ import { ApplicationManager } from 'ember-shell/system/application';
 const {
   Service,
   getOwner,
-  computed
+  computed,
+  inject
 } = Ember;
 
 /**
@@ -24,14 +25,6 @@ const {
  * @public
  */
 export default Service.extend({
-
-  init(){
-    this._super(...arguments);
-
-    this.appManager = new ApplicationManager(getOwner(this));
-    this.panelManager = new PanelManager(getOwner(this));
-    this.workspaceManager = new WorkspaceManager();
-  },
 
   /**
    * @property {[Object]} apps Returns currently running applications
@@ -70,6 +63,18 @@ export default Service.extend({
    * @public
    */
   config: {},
+
+  /**
+   * Bootups ember-shell by initializing the core manager classes
+   *
+   * @method boot
+   * @private
+   */
+  boot() {
+    this.appManager = new ApplicationManager(getOwner(this));
+    this.panelManager = new PanelManager(getOwner(this));
+    this.workspaceManager = new WorkspaceManager();
+  },
 
   /**
    * Executes an Ember-shell application
@@ -114,6 +119,6 @@ export default Service.extend({
    */
   terminate(name, pid, options){
     return this.appManager.terminate(name, pid, options);
-  },
+  }
 
 });

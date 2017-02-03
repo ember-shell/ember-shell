@@ -20,10 +20,7 @@ export default Ember.Mixin.create(PositionableMixin, {
       ]);
     };
 
-    let limits = { top: 0, right: 0, bottom: 0, left: 0 };
-
     const options = {
-      limits,
       updateFn,
       handlerClass: this.get('draggableHandleClassName'),
       startCallback: this.get('draggStartCallback') ? this.get('draggStartCallback').bind(this) : null,
@@ -32,11 +29,9 @@ export default Ember.Mixin.create(PositionableMixin, {
     };
 
     Ember.run.next(this, () => {
-      this.get('manager.panels').forEach((panel) => {
-        if(panel.component){
-          limits[panel.get('position')] = parseInt(panel.component.element.style["height"]);
-        }
-      });
+      let limits = this.get('manager.panelManager').calculateAreaLimits();
+
+      options["limits"] = limits;
 
       this.set('_draggable', new Draggable(target, options));
     });

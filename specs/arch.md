@@ -16,6 +16,7 @@
 - shell-bus
   - Bus
   - BusService
+  - BusMixin
 
 - shell-security
   - User

@@ -1,6 +1,12 @@
+<shell-workspaces>
 {{#each manager.workspaces as |ws|}}
-  {{shell/desktop-workspace workspace=ws}}
+  {{shell/desktop-workspace workspace=ws showAppBox=showAppBox}}
 {{/each}}
+</shell-workspaces>
+
+{{#if showAppBox}}
+  {{shell/desktop-appbox}}
+{{/if}}
 
 {{#each manager.panels as |panel|}}
   {{shell/desktop-panel panel=panel}}

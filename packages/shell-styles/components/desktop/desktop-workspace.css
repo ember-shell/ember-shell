@@ -1,6 +1,20 @@
+shell-workspaces {
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
 shell-workspace {
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
+}
+
+shell-workspace.appbox-mode {
+  transform: scale(0.75);
+  opacity: 0.75;
 }

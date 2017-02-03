@@ -16,6 +16,7 @@
 @import 'components/desktop/desktop-panel';
 @import 'components/desktop/desktop-window';
 @import 'components/desktop/desktop-workspace';
+@import 'components/desktop/desktop-appbox';
 @import 'components/desktop/panel/menu-button';
 @import 'components/desktop/panel/clock-date';
 @import 'components/desktop/panel/status-menu';

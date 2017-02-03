@@ -6,6 +6,7 @@ export default Ember.Component.extend(WindowElement, {
   layout,
   workspace: null,
   tagName: 'shell-workspace',
+  classNameBindings: ['showAppBox:appbox-mode'],
 
   manager: Ember.inject.service('shell-manager'),
   apps: Ember.computed.alias('manager.apps')

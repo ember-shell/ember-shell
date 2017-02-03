@@ -11,6 +11,10 @@ const {
   assert
 } = Ember;
 
+const defaultOptions = {
+  thickness: 36
+};
+
 /**
  * An Ember-shell Panel
  *
@@ -55,7 +59,7 @@ export class PanelManager {
    * @public
    */
   addPanel(options){
-    options = options ? options : {};
+    options = options ? options : defaultOptions;
     let panel = Panel.create(options);
     this.panels.addObject(panel);
     return panel;
@@ -143,6 +147,18 @@ export class PanelManager {
     this.insertItem(panel, 'menu-button');
     this.insertItem(panel, 'clock-date');
     //this.insertItem(panel, 'status-menu');
+  }
+
+  calculateAreaLimits() {
+    let limits = { top: 0, right: 0, bottom: 0, left: 0 };
+
+    this.panels.forEach((panel) => {
+      if(panel.component){
+        limits[panel.get('position')] = parseInt(panel.component.element.style["height"]);
+      }
+    });
+
+    return limits;
   }
 
 }
