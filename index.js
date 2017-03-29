@@ -1,4 +1,4 @@
-/* jshint node: true */
+/* eslint-env node */
 'use strict';
 
 const path = require('path');
@@ -8,6 +8,21 @@ const mergeTrees = require('ember-cli/lib/broccoli/merge-trees');
 const broccoliPostcss = require('broccoli-postcss');
 const { preprocessTemplates} = require('ember-cli-preprocess-registry/preprocessors');
 const { WatchedDir } = require('broccoli-source');
+const defaultsDeep = require('ember-cli-lodash-subset').defaultsDeep;
+
+let DEFAULT_BABEL_CONFIG = {
+  modules: 'amdStrict',
+  moduleIds: true,
+  resolveModuleSource: require('amd-name-resolver').moduleResolve,
+};
+
+const processModulesOnly = (tree) => {
+  let options = defaultsDeep({}, DEFAULT_BABEL_CONFIG);
+  options.whitelist = ['es6.modules'];
+
+  const Babel = require('broccoli-babel-transpiler');
+  return new Babel(tree, options);
+}
 
 module.exports = {
   name: 'ember-shell',
@@ -114,10 +129,19 @@ module.exports = {
    */
   compileTemplates(tree) {
     this._requireBuildPackages();
-    return preprocessTemplates(tree, {
-      annotation: 'compileTemplates(ember-shell)',
-      registry: this.registry
-    });
+
+    if (this.shouldCompileTemplates()) {
+      let preprocessedTemplateTree = this._addonPreprocessTree('template', this._addonTemplateFiles(tree));
+
+      let processedTemplateTree = preprocessTemplates(preprocessedTemplateTree, {
+        annotation: 'compileTemplates(ember-shell)',
+        registry: this.registry,
+      });
+
+      let postprocessedTemplateTree = this._addonPostprocessTree('template', processedTemplateTree);
+
+      return processModulesOnly(processedTemplateTree, 'Babel: Modules for Templates');
+    }
   },
 
   /**
